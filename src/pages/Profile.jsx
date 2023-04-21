@@ -114,9 +114,7 @@ function Profile() {
     <div className='profile'>
       <header className='profileHeader'>
         <p className='pageHeader'>My Profile</p>
-        <button type='button' className='logOut' onClick={onLogout}>
-          Logout
-        </button>
+       
       </header>
 
       <main>
@@ -134,11 +132,11 @@ function Profile() {
         </div>
 
         <div className='profileCard'>
-          <form>
+          <form className='space-y-1'>
             <input
               type='text'
               id='name'
-              className={!changeDetails ? 'profileName' : 'profileNameActive'}
+              className={!changeDetails ? 'profileName' : 'p-1 bg-slate-400 rounded w-full'}
               disabled={!changeDetails}
               value={name}
               onChange={onChange}
@@ -146,7 +144,7 @@ function Profile() {
             <input
               type='email'
               id='email'
-              className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
+              className={!changeDetails ? 'profileEmail' : 'p-1 bg-slate-400 rounded w-full'}
               disabled={!changeDetails}
               value={email}
               onChange={onChange}
@@ -154,16 +152,24 @@ function Profile() {
           </form>
         </div>
 
-        <Link to='/create-listing' className='createListing'>
-          <img src={homeIcon} alt='home' />
-          <p>Sell or rent your products</p>
+        <Link to='/create-listing' className='bg-white rounded-full p-3 flex w-max m-3'>
+          
+          <p>rent your products</p>
           <img src={arrowRight} alt='arrow right' />
         </Link>
+        {
+          auth.currentUser.uid == 'QPaLnxFym0THZQcXOO27VmedDLF2' && (<Link to='/adminPanel' className='bg-white rounded-full p-3 flex w-max m-3'>
+          
+          <p>Admin panel</p>
+         
+        </Link>)
+        }
+        
 
         {!loading && listings?.length > 0 && (
           <>
-            <p className='listingText'>Your Listings</p>
-            <ul className='listingsList'>
+            <p className='text-[16px] md:text-[35px] my-3 font-semibold md:px-16 px-3'>Your Listings</p>
+            <div className=' grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3'>
               {listings.map((listing) => (
                 <Listingitem 
                   key={listing.id}
@@ -174,7 +180,7 @@ function Profile() {
                   onList={() => onList(listing.id)}
                 />
               ))}
-            </ul>
+            </div>
           </>
         )}
       </main>

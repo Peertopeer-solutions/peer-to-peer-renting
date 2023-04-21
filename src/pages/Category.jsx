@@ -100,8 +100,9 @@ function Category() {
     } catch (error) {
       toast.error('Could not fetch listings')
     }
-
   }
+  
+  console.log("listings",listings)
 
   return (
     <div className='category'>
@@ -116,7 +117,7 @@ function Category() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:p-3'>
+            <div className=' grid grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-16'>
               {listings.map((listing) =>   listing.data.listingEnabled && (<Listingitem
                   listing={listing.data}
                   id={listing.id}

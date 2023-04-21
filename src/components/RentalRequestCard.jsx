@@ -41,8 +41,8 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
   const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
   const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
   return (
-    <div className='flex flex-col items-center  w-full '>
-      <div className='w-full   rounded-lg shadow-md lg:max-w-sm bg-white p-3'>
+    <div className='flex flex-col items-center w-full '>
+      <div className='w-full rounded-lg shadow-md lg:max-w-sm bg-white md:p-3'>
         <div className='flex justify-between items-center'>
         <img
                 className="object-contain w-16 md:w-[100px] ml-1"
@@ -78,7 +78,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
        
 
          { toogleDetails && 
-          <div className=" w-auto bg-grey relative bottom-12 md:bottom-16" >
+          <div className=" w-auto bg-grey relative bottom-9 md:bottom-16 rounded" >
           <div className=" flex-col  justify-center items-center  shadow-md lg:max-w-sm bg-gray-100 p-3">
         <div className='flex-col justify-center items-center'>
           <img

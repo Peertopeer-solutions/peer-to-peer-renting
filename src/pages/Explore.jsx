@@ -129,13 +129,13 @@ const Explore = () => {
             
           
             <div>
-            <p className="px-3 text-[50px] font-semibold">Categories</p>
+            <p className="text-[25px] md:text-[35px] m-3 md:px-16  font-semibold">Categories</p>
 
-              <div className='grid gap-[16px] md:place-items-center grid-cols-2 md:grid-cols-4 mt-3 p-3 md:px-16' >
+              <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-3 md:px-16' >
              {categories.map((data)=>(
-               <div className='md:w-[250px] bg-white drop-shadow-lg rounded-lg '>
+               <div className='w-full bg-white drop-shadow-lg rounded-lg '>
                   <Link  to = {`category/${data.name}`}  > 
-                <div key={data.name} className='mx-auto md:w-[250px] border rounded-full'>
+                <div key={data.name} className='mx-auto w-full border rounded-full'>
                 <div className='flex item-center'>  
                 <img src={data.image} alt="" className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 "/>
 
@@ -158,9 +158,9 @@ const Explore = () => {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-          <h1 className='text-[50px] mt-3 font-semibold px-3'>Trending products</h1>
-          <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:p-3">
-          {listings.map((listing) =>   listing.data.listingEnabled && (
+          <h1 className= 'text-[25px] md:text-[35px] my-3 font-semibold md:px-16 px-3 '>Trending products</h1>
+          <div className=" grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3 ">
+          {listings.map((listing) =>  listing.data.listingEnabled && (
              
               <Listingitem
                   listing={listing.data}

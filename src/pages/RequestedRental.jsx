@@ -69,12 +69,12 @@ const RequestedRental = () => {
   }, []);
   
   return (
-    <div className='mt-5 flex-row mx-auto container md:m-auto-x justify-center items-center'>
+    <div className='mt-5 w-full flex-row mx-auto container md:m-auto-x justify-center items-center'>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (
         rentalRequests.map((request) => (
-          <div className='w-full px-6 md:m-3' key={request.id}>
+          <div className='w-full  md:m-3' key={request.id}>
             <RentalRequestCard
               request = {request}
               id = {request.id}

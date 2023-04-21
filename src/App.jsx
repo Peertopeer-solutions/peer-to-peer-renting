@@ -17,6 +17,7 @@ import EditListing from "./pages/EditListing"
 import RequestedRental from "./pages/RequestedRental"
 import Userverification from "./pages/Userverification"
 import RentalRequests from "./pages/RentalRequests"
+import OrderPage from "./pages/OrderPage"
 
 function App() {
   
@@ -32,7 +33,7 @@ function App() {
           <Route path='/offers' element={<Offers/>} />
           <Route path='/category/:categoryName' element={<Category/>} />
           <Route path='/profile' element={<Privateroute/>}>
-            <Route path='/profile' element={<Profile/>} />
+          <Route path='/profile' element={<Profile/>} />
           </Route>
           <Route path='/signin' element={<Signin/>} />
           <Route path='/sign-up' element={<Signup/>} />
@@ -44,7 +45,8 @@ function App() {
           <Route path='/requestedItems' element={<RequestedRental/>} /> 
           <Route path='/rentalRequests' element={<RentalRequests/>} /> 
           <Route path='/verification' element={<Userverification/>} /> 
-          <Route path='/order/:requestId' element={<Userverification/>} /> 
+          <Route path='/order/:requestId' element={<OrderPage/>} /> 
+          <Route path='/orderDetails/:orderId' element={<OrderPage/>} /> 
 
         </Routes>
         </div>
