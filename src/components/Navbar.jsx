@@ -107,7 +107,7 @@ const Navbar = () => {
         
 
         <div className="hidden md:flex space-x-12 items-center">
-          <Link className="hover:text-white hover:bg-orange " to="/howitworks">How it works</Link>
+          <Link className="hover:text-white hover:bg-orange 500 " to="/howitworks">How it should works</Link>
           <Link className="hover:text-white hover:bg-orange " to='/create-listing' >List item</Link>
           <Link className="hover:text-white hover:bg-orange "  to="/rentalRequests">Requests</Link>
           <div  className= "rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white"  onClick={handleToogle}>
