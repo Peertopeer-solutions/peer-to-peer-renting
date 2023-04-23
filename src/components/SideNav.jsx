@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase.config'
 
+
 const SideNav = () => {
+  const navigate = useNavigate();
   const onLogout = () => {
     auth.signOut()
-    navigate('/signin')
+    navigate("/")
   }
   return (
     
@@ -16,8 +18,7 @@ const SideNav = () => {
            <Link to=''>How it works </Link>
            <Link className='text-blue-600' to="/requestedItems">Requested items</Link>
            <Link className='text-blue-600' to="/rentalRequests">Requests</Link>
-           <Link className="text-red-500" to="/login">Login</Link>
-           <button onClick={onLogout} className="border border-black" to="/singup">SignOut</button>
+           <button onClick={onLogout} className="border border-black">SignOut</button>
            
          </div>
          
