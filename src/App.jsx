@@ -18,17 +18,21 @@ import RequestedRental from "./pages/RequestedRental"
 import Userverification from "./pages/Userverification"
 import RentalRequests from "./pages/RentalRequests"
 import OrderPage from "./pages/OrderPage"
+import AdminPanel from "./pages/AdminPanel"
+import { useState } from "react"
+import OrderConfirmation from "./pages/OrderConfirmation"
 
 function App() {
-  
+
 
   return (
     <>
       <Router>
-                <Navbar/>
+                
+          <Navbar/>
 
-        <div className="absolute top-16 w-full">
-           <Routes>
+        <div className="mt-16 w-full">
+          <Routes>
           <Route path='/' element={<Explore/>} />
           <Route path='/offers' element={<Offers/>} />
           <Route path='/category/:categoryName' element={<Category/>} />
@@ -45,8 +49,9 @@ function App() {
           <Route path='/requestedItems' element={<RequestedRental/>} /> 
           <Route path='/rentalRequests' element={<RentalRequests/>} /> 
           <Route path='/verification' element={<Userverification/>} /> 
-          <Route path='/order/:requestId' element={<OrderPage/>} /> 
-          <Route path='/orderDetails/:orderId' element={<OrderPage/>} /> 
+          <Route path='/order/:requestId/:productId' element={<OrderPage/>} /> 
+          <Route path='/orderConfirmation/:orderId' element={<OrderConfirmation/>} />
+          <Route path='/adminPanel/' element={<AdminPanel/>} /> 
 
         </Routes>
         </div>

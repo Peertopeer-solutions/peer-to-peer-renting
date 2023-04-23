@@ -52,7 +52,6 @@ const RentalRequests = () => {
     
 
     fetchRentalRequests();
-    console.log(fetchRentalRequests)
   }, [fetchRentalRequests]);
 
   
@@ -95,18 +94,17 @@ const RentalRequests = () => {
       console.error('Error denying rental request:', error);
     }
   };
-  console.log("requests",rentalRequests)
 
  
   return (
-    <div className='mt-5 flex-row w-auto container mx-auto items-center justify-center '>
-    <p className='font-semibold container mx-auto text-center uppercase text-[40px] md:text-[50px] px-3 m-1 text-blue-600 '>Requests</p>
+    <div className='mx-1 '>
+    <p className='font-semibold container mx-auto text-center uppercase text-[30px] md:text-[50px] px-3 m-1 text-blue-600 '>Requests</p>
     <p className='font-medium   text-center uppercase text-[15px] md:text-[25px] px-3 mx-3 text-blue-600 '>Please accept or deny a request within 24 hours of requet made</p>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (
         rentalRequests.map((request) => (
-          <div className='w-ful md:m-3' key={request.id}>
+          <div className='w-full md:m-3 mt-3' key={request.id}>
             <RentalRequestCard
               request = {request}
               id = {request.id}

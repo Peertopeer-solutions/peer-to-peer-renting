@@ -9,6 +9,7 @@ import { db } from '../firebase.config'
 
 const RequestedRental = () => {
   const auth = getAuth();
+
   const [rentalRequests, setRentalRequests] = useState(null)
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null);
@@ -22,13 +23,10 @@ const RequestedRental = () => {
 
     const rentalRequestsRef = collection(db, 'rentalRequest')
                       
-
     const q = query(
       rentalRequestsRef,
       where('userId', '==', auth.currentUser.uid),
       orderBy('timestamp', 'desc')
-
-
 
     );
 
@@ -69,15 +67,18 @@ const RequestedRental = () => {
   }, []);
   
   return (
-    <div className='mt-5 w-full flex-row mx-auto container md:m-auto-x justify-center items-center'>
+    <div className=''>
+      <p className='font-semibold container mx-auto text-center uppercase text-[30px] md:text-[50px] px-3 m-1 text-blue-600'>Your requests</p>
+      <p className='font-medium text-center bg-white rounded-full text-[15px] md:text-[25px] px-3 mx-3 text-blue-600 '>You can see the items you have requested for renting</p>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (
+
         rentalRequests.map((request) => (
-          <div className='w-full  md:m-3' key={request.id}>
+          <div className=' md:m-3 mt-3 ' key={request.id}>
             <RentalRequestCard
               request = {request}
-              id = {request.id}
+              
               rentals = {request.data}
             />
             

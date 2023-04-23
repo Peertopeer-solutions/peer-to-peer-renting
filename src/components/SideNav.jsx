@@ -5,7 +5,7 @@ import { auth } from '../firebase.config'
 const SideNav = () => {
   const onLogout = () => {
     auth.signOut()
-    navigate('/')
+    navigate('/signin')
   }
   return (
     

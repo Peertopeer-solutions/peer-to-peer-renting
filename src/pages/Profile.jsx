@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { getAuth, updateProfile } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, updateProfile } from 'firebase/auth'
 import {
   updateDoc,
   doc,
@@ -17,11 +17,14 @@ import { toast } from 'react-toastify'
 import Listingitem from '../components/Listingitem'
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
 import homeIcon from '../assets/svg/homeIcon.svg'
+import Orders from '../components/Orders'
 
 function Profile() {
   const auth = getAuth()
   const [loading, setLoading] = useState(true)
   const [listings, setListings] = useState(null)
+  const [orders, setOrders] = useState(null)
+  const [user, setUser] = useState(null)
   const [changeDetails, setChangeDetails] = useState(false)
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
@@ -32,33 +35,57 @@ function Profile() {
 
   const navigate = useNavigate()
 
+
   useEffect(() => {
-    const fetchUserListings = async () => {
+    const fetchData = async () => {
       const listingsRef = collection(db, 'listings')
-
-      const q = query(
+      const ordersRef = collection(db, 'orders')
+  
+      const listingsQuery = query(
         listingsRef,
-        where('userRef', '==', auth.currentUser.uid),
-        
+        where('userRef', '==', auth.currentUser.uid)
       )
-
-      const querySnap = await getDocs(q)
-      let listings = []
-
-      querySnap.forEach((doc) => {
-        return listings.push({
-          id: doc.id,
-          data: doc.data(),
-        })
-      })
-
-      setListings(listings)
+  
+      const ordersQuery = query(
+        ordersRef,
+        where('userRef', '==', auth.currentUser.uid)
+      )
+  
+      const [listingsQuerySnap, ordersQuerySnap] = await Promise.all([
+        getDocs(listingsQuery),
+        getDocs(ordersQuery)
+      ])
+  
+     
+      const listing = listingsQuerySnap.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      }))
+  
+      const orders = ordersQuerySnap.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      }))
+    
+      setListings(listing)
+      setOrders(orders)
       setLoading(false)
     }
+  
+    setLoading(true)
+    fetchData()
+   
+  }, [user])
 
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
 
-    fetchUserListings()
-  }, [auth.currentUser.uid])
+    return () => {
+      unsubscribe();
+    };
+  })
 
   const onLogout = () => {
     auth.signOut()
@@ -165,14 +192,14 @@ function Profile() {
         </Link>)
         }
         
+            <p className='text-[16px] md:text-[35px] my-3 font-semibold  px-3'>Your Listings</p>
 
-        {!loading && listings?.length > 0 && (
+        {!loading && listings?.length > 0 ? (
           <>
-            <p className='text-[16px] md:text-[35px] my-3 font-semibold md:px-16 px-3'>Your Listings</p>
-            <div className=' grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3'>
-              {listings.map((listing) => (
+            <div className=' grid grid-cols-2 place-items-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-2 md:p-3  px-3'>
+              { listings?.map((listing) => (
                 <Listingitem 
-                  key={listing.id}
+                  keyId={listing.id}
                   listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
@@ -181,8 +208,31 @@ function Profile() {
                 />
               ))}
             </div>
+            
           </>
-        )}
+        ):(<p className='my-3   px-3'>no listings</p>)}
+        
+        <p className='text-[16px] md:text-[35px] my-3 font-semibold  px-3'>Your orders</p>
+
+        {
+          !loading && orders?.length > 0 ?(
+
+            <div>
+              { orders?.map((order)=>(
+                  <Orders
+                  orderId = {order.id}
+                  order = {order.data}
+                  
+                  />
+              ))
+              }
+            </div>
+          ):
+          (
+            <p className='my-3   px-3'>No orders</p>
+          )
+        }
+
       </main>
     </div>
   )

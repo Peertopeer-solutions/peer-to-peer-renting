@@ -67,15 +67,13 @@ function OrderPage() {
     const formDataCopy = {
       ...formData,
       requestId: params.requestId,
+      productId: params.productId,
       timestamp: serverTimestamp(),
     }
-
-    
-
     const docRef = await addDoc(collection(db, "orders"), formDataCopy);
     setLoading(false);
-    toast.success("Listing saved");
-    navigate(`/orderDetails/${docRef.id}`);
+    toast.success("Order created");
+    navigate(`/orderConfirmation/${docRef.id}`);
   }
 
   const onMutate = (e) => {
@@ -102,7 +100,7 @@ function OrderPage() {
      
 
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-3 ' >
+      <div className='w-full   ' >
         
       <div className='mx-2 my-3 md:m-6'>
         <header>
@@ -112,7 +110,7 @@ function OrderPage() {
      
           <label className='block m-3'>Name:</label>
           <input
-            className='mx-3 p-2 rounded'
+            className='mx-3  p-2 rounded  bg-gray-200 '
             placeholder='Full name'
             type='text'
             id='name'
@@ -123,11 +121,11 @@ function OrderPage() {
           />
           <label className='block m-3'>Phone:</label>
           <input
-            className='mx-3 p-2 rounded'
+            className='mx-3 p-2 rounded bg-gray-200'
             placeholder='+9196xxxxx908'
             type='text'
             id='phone'
-            value={name}
+            value={phone}
             onChange={onMutate}
           />
          
@@ -135,7 +133,7 @@ function OrderPage() {
         
           <label className='block m-3'>Address line 1:</label>
           <input
-            className='mx-3 p-2 rounded w-full md:w-[60%]'
+            className='mx-3 p-2 rounded w-full md:w-[60%] bg-gray-200'
             type='text' 
             id='address1'
             placeholder='street, building and house no.'
@@ -149,7 +147,7 @@ function OrderPage() {
           
           <label className='block m-3'>Address line 2: </label>
           <input
-            className='mx-3  w-full md:w-[60%] rounded p-2'            
+            className='mx-3  w-full md:w-[60%] rounded p-2 bg-gray-200'            
             type='text'
             id='address2'
             value={address2}
@@ -161,23 +159,22 @@ function OrderPage() {
        
           <label className='block m-3'> How to reach : </label>
           <textarea
-            className='mx-3  w-full md:w-[60%] rounded p-2'            
+            className='mx-3  w-full md:w-[60%] rounded p-2 bg-gray-200'            
             type='text'
-            id='address2'
+            id='addressInstruction'
             value={addressInstruction}
             placeholder = "Address instruction"
             onChange={onMutate}
             minLength='10'
-            required
+            
           />
           <label className='block m-3'>Pincode:</label>
           <input 
-          className='mx-3 p-2 rounded'
+          className='mx-3 p-2 rounded bg-gray-200'
           type="text" 
           id='pincode'
           value={pincode}
-          pattern="[0-9]{6}" 
-          maxlength="6"
+          
           onChange={onMutate}
           />
 
@@ -188,13 +185,10 @@ function OrderPage() {
           <label htmlFor="agree"> I agree to <b>terms and conditions</b></label>
         </div>
 
-          <button disabled={!agree} type='submit' className='bg-blue-500 rounded p-3 mx-3'>
-            Create Listing
+          <button disabled={!agree} type='submit' onClick={onSubmit} className='bg-blue-500 rounded p-3 mx-3'>
+            Make order
           </button>
         </form>
-        </div>
-        <div>
-          this is order detail part
         </div>
         
       </div>

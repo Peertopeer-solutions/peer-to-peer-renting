@@ -11,10 +11,9 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 
-function ListingItem({ listing, id, onEdit, onDelete, onList, keyId }) {
+function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
   const [formData, setFormData] = useState({ ...listing })
-  const [isEnabled, setIsEnabled] = useState(listing.listingEnabled)
-
+  const [isEnabled, setIsEnabled] = useState(listing?.listingEnabled)
   const handleClick = async () => {
     const docRef = doc(db, 'listings', id)
     if (formData.listingEnabled === true) {
@@ -38,8 +37,8 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId }) {
 
   })
   return (
-    <Link className="w-full " to={`/category/${listing.type}/${id}`}>
-      <div div key={keyId} >
+    <Link className=" w-full" to={`/category/${listing.type}/${id}`}>
+      <div className='w-full ' key={keyId} >
 
         <div className=" bg-white drop-shadow-md rounded-lg">
 
@@ -49,7 +48,7 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId }) {
           </div>
 
 
-          <img className=" w-[100%] h-24 md:h-44 object-scale-down rounded-tl-lg rounded-tr-lg"
+          <img className=" w-[100%] h-24 md:h-34 object-scale-down rounded-tl-lg rounded-tr-lg"
             src={listing.imgUrls[0]}
             alt={listing.title}
           />
@@ -87,14 +86,16 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId }) {
               <div className='space-y-1'>
                 {onDelete && (
                   <DeleteIcon
-                    className=' '
+                    className='ml-3'
                     fill='rgb(231, 76,60)'
                     onClick={() => onDelete(listing.id, listing.name)}
                   />
                 )}
-                {onEdit && <EditIcon className='' onClick={() => onEdit(id)} />}
+                {onEdit && <EditIcon className=' ml-3' onClick={() => onEdit(id)} />}
               </div>
 
+          
+              
 
             </div>
           </div>
