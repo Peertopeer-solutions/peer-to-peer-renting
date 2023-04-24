@@ -39,7 +39,7 @@ const Signin = () => {
         
     }
   return (
-    <div className='pageContainer'>
+    <div className='border m-2 border-red-600 p-6'>
         <header>
             <p className='pageHeader'>Welcome Back!</p>
         </header>

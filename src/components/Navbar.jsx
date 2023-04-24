@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
-
 import { ReactComponent as OfferIcon } from "../assets/svg/localOfferIcon.svg";
 import { ReactComponent as ExploreIcon } from "../assets/svg/exploreIcon.svg";
 import { ReactComponent as PersonOutlineIcon } from "../assets/svg/personOutlineIcon.svg";
-// import ()
+import Hamburger from 'hamburger-react'
+
 import { Link } from "react-router-dom";
 import SideNav from "./SideNav";
 
@@ -47,6 +47,10 @@ const Navbar = () => {
         console.log("state = definitely signed out");
       }
     });
+
+    return ()=>{
+        unsubscribe()
+    }
   }, []);
 
   const handleToogle = () => {
@@ -126,7 +130,7 @@ const Navbar = () => {
                 onClick={handleToogle}
               >
                 <img
-                  className="rounded-full ring-2 ring-black w-8 h-8"
+                  className="rounded-full"
                   src={image}
                   alt=""
                 />
@@ -134,15 +138,25 @@ const Navbar = () => {
               {toogleNav && <SideNav />}
             </div>
           ) : (!user &&
-            (<div>
+              
+            (<>
+              <div className=" space-x-3 hidden md:flex">
               <Link
-                className="hover:text-white hover:bg-orange "
+                className=" hover:text-orange-500 p-1 mx-1 "
                 to="/howitworks"
               >
                 How it works
               </Link>
-              <Link to="/signin">Sign-In</Link>
-            </div>)
+              <Link to="/signin" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
+            </div>
+            <div className= "flex md:hidden" oncl>
+            <Hamburger toggled={toogleNav} toggle={setToogleNav} />
+              {
+                toogleNav && <SideNav/>
+              }
+            </div>
+            </>
+            )
           )}
         </div>
       </nav>
