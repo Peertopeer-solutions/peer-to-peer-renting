@@ -40,12 +40,14 @@ const OAuth = () => {
     }
 
   return (
-    <div className='socialLogin'>
-        <p>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with</p>
-        <button className="socialIconDiv" onClick={onGoogleClick}>
-            <img className='socialIconImg' src={googleIcon} alt='google'/> 
-        </button>
-    </div>
+   
+        <button className="ring-1 ring-black shadow-md flex items-center gap-2 p-3 rounded  " onClick={onGoogleClick}>
+                    <p className='text-[18px]'>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with</p>
+
+            <img className='h-[22px] w-[22px] ' src={googleIcon} alt='google'/> 
+        
+</button>
+  
   )
 }
 

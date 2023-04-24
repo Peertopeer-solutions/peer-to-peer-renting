@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     collection,
@@ -10,8 +10,8 @@ import {
     orderBy,
     limit,
     startAfter,
-  } from 'firebase/firestore'
-  import { db } from '../firebase.config'
+} from 'firebase/firestore'
+import { db } from '../firebase.config'
 const OrderConfirmation = () => {
 
     const [orderDetails, SetOrderDetails] = useState()
@@ -20,9 +20,9 @@ const OrderConfirmation = () => {
     // const order = location.state.order
     // const product = location.state.product
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        const fetchOrder = async()=>{
+        const fetchOrder = async () => {
             const Orderef = collection(db, 'orders')
             const OrderDocRef = doc(Orderef, params.orderId)
             const OrderDocSnap = await getDoc(OrderDocRef)
@@ -31,12 +31,12 @@ const OrderConfirmation = () => {
 
         fetchOrder()
         console.log(orderDetails)
-    
-    },[params.orderId])
 
-    
-  return (
-    <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
+    }, [params.orderId])
+
+
+    return (
+        <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             <div className="flex justify-start item-start space-y-2 flex-col ">
                 <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">Order #13432</h1>
                 <p className="text-base font-medium leading-6 text-gray-600">21st Mart 2021 at 10:34 PM</p>
@@ -190,7 +190,7 @@ const OrderConfirmation = () => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default OrderConfirmation

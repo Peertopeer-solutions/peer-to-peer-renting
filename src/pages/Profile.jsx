@@ -138,32 +138,22 @@ function Profile() {
   const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`)
 
   return (
-    <div className='profile'>
-      <header className='profileHeader'>
-        <p className='pageHeader'>My Profile</p>
+    <div className=' m-3 p-1'>
+      <header className=''>
+        <p className='text-[16px] md:text-[35px] my-3 font-semibold  px-3'>My Profile</p>
        
       </header>
 
       <main>
-        <div className='profileDetailsHeader'>
-          <p className='profileDetailsText'>Personal Details</p>
-          <p
-            className='changePersonalDetails'
-            onClick={() => {
-              changeDetails && onSubmit()
-              setChangeDetails((prevState) => !prevState)
-            }}
-          >
-            {changeDetails ? 'done' : 'change'}
-          </p>
-        </div>
+          <p className='text-[16px] md:text-[35px] my-3 font-semibold  px-3  '>Personal Details</p>
+          
 
-        <div className='profileCard'>
-          <form className='space-y-1'>
+        <div className='my-3 p-3 bg-white shadow-2xl flex flex-col jsutify-start space-y-3 w-full md:w-max rounded-sm '>
+          <form className='space-y-2'>
             <input
               type='text'
               id='name'
-              className={!changeDetails ? 'profileName' : 'p-1 bg-slate-400 rounded w-full'}
+              className={!changeDetails ? 'profileName' : 'p-2 ring-1 ring-black  rounded  w-full'}
               disabled={!changeDetails}
               value={name}
               onChange={onChange}
@@ -171,26 +161,40 @@ function Profile() {
             <input
               type='email'
               id='email'
-              className={!changeDetails ? 'profileEmail' : 'p-1 bg-slate-400 rounded w-full'}
+              className={!changeDetails ? 'profileEmail' : 'p-2 ring-1 ring-black rounded w-full'}
               disabled={!changeDetails}
               value={email}
               onChange={onChange}
             />
           </form>
-        </div>
-
-        <Link to='/create-listing' className='bg-white rounded-full p-3 flex w-max m-3'>
+          <Link to='/create-listing' className='bg-white rounded-full p-3 flex w-max  ring-2 ring-blue-700'>
           
           <p>rent your products</p>
           <img src={arrowRight} alt='arrow right' />
         </Link>
         {
-          auth.currentUser.uid == 'QPaLnxFym0THZQcXOO27VmedDLF2' && (<Link to='/adminPanel' className='bg-white rounded-full p-3 flex w-max m-3'>
+          auth.currentUser.uid == 'QPaLnxFym0THZQcXOO27VmedDLF2' && (<Link to='/adminPanel' className='bg-white rounded-full p-3 flex w-max ring-2 ring-blue-700'>
           
           <p>Admin panel</p>
-         
+          <img src={arrowRight} alt='arrow right' />
+
         </Link>)
         }
+        <div className='flex items-center justify-between'>
+                  <p >Verification status : <span className='text-yellow-500 font-semibold'>PENDING</span></p>
+                  <p
+            className='text-[18px] md:text-[35px]'
+            onClick={() => {
+              changeDetails && onSubmit()
+              setChangeDetails((prevState) => !prevState)
+            }}
+          >
+            {changeDetails ? 'done' : 'Edit'}
+          </p>
+        </div>
+        </div>
+
+       
         
             <p className='text-[16px] md:text-[35px] my-3 font-semibold  px-3'>Your Listings</p>
 

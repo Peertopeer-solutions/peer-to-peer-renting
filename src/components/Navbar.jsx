@@ -89,7 +89,7 @@ const Navbar = () => {
 
     // </nav>
     <div>
-      <nav className=" w-[100%] fixed top-0 mx-auto p-4 bg-white h-16 z-10 borde ">
+      <nav className=" w-[100%] fixed top-0 mx-auto p-4 bg-white h-16 z-10 ">
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="pt-2">
@@ -100,12 +100,7 @@ const Navbar = () => {
           {user ? (
             <div>
               <div className="hidden md:flex space-x-12 items-center">
-                <Link
-                  className="hover:text-white hover:bg-orange "
-                  to="/howitworks"
-                >
-                  How it works
-                </Link>
+             
                 <Link
                   className="hover:text-white hover:bg-orange "
                   to="/create-listing"

@@ -78,7 +78,6 @@ const RequestedRental = () => {
           <div className=' md:m-3 mt-3 ' key={request.id}>
             <RentalRequestCard
               request = {request}
-              
               rentals = {request.data}
             />
             
