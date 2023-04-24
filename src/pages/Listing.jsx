@@ -25,6 +25,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const Listing = () => {
   const [listing, setListing] = useState({});
+  const [user , setUser] = useState();
   const [requestStatus, setRequeststatus] = useState(false);
 
   const [loading, setLoading] = useState(true);
@@ -40,6 +41,7 @@ const Listing = () => {
 
   useEffect(() => {
     const checkExistingRequest = async () => {
+      setUser(auth.currentUser)
       const rentalRequestsRef = collection(db, "rentalRequest");
       if (auth && auth.currentUser) {
         console.log("usr exists");
