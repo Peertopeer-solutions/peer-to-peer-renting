@@ -23,7 +23,7 @@ const Orders = ({order,orderId}) => {
 
   const handleOrderConfirmation = () =>{
 
-    navigate(`/orderConfirmation/${orderId}`,{state:{order:order,product:product,rental:rentals}})
+    navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals}})
 
   }
   

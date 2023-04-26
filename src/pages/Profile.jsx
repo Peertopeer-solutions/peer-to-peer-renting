@@ -31,6 +31,8 @@ function Profile() {
     email: auth.currentUser.email,
   })
 
+  const [Admin, SetAdmin] = useState()
+
   const { name, email } = formData
 
   const navigate = useNavigate()
@@ -137,6 +139,7 @@ function Profile() {
 
   const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`)
 
+
   return (
     <div className=' m-3 p-1'>
       <header className=''>
@@ -175,8 +178,7 @@ function Profile() {
         {
           auth.currentUser.uid == 'QPaLnxFym0THZQcXOO27VmedDLF2' && (<Link to='/adminPanel' className='bg-white rounded-full p-3 flex w-max ring-2 ring-blue-700'>
           
-          <p>Admin panel</p>
-          <img src={arrowRight} alt='arrow right' />
+          Admin
 
         </Link>)
         }
