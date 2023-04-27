@@ -116,8 +116,8 @@ const Explore = () => {
               <img src="" alt="ICON" />
             </div>
             <div>
-            <h1>Location</h1>
-            <p>Location Details</p>
+            <h1 className='text-xl'>Gandhinagar</h1>
+            <p>Daiict</p>
             </div>
             
             </div>

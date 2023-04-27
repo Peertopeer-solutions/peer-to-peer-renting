@@ -1,16 +1,16 @@
 import { collection, doc, getDoc, query, where } from 'firebase/firestore'
 import React, { useState, useEffect, useCallback } from 'react'
 import { db } from '../firebase.config'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const Orders = ({order,orderId}) => {
   const [product, setProduct] = useState(null)
   const [Loading, setLoading] = useState(true)
   const [rentals, setRentals] = useState(null)
+  const [orderDetails, SetOrderDetails] = useState(null)
   const navigate = useNavigate()
   const [toogleDetails, setToogleDetails] = useState(false)
-
   const handleToogle = () =>{
     if (!toogleDetails){
       setToogleDetails(true)
@@ -23,7 +23,7 @@ const Orders = ({order,orderId}) => {
 
   const handleOrderConfirmation = () =>{
 
-    navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals}})
+    navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals,orders:orderDetails}})
 
   }
   
@@ -57,6 +57,7 @@ const Orders = ({order,orderId}) => {
     
       setProduct(productDocSnap.data())
       setRentals(requestDocSnap.data())
+      SetOrderDetails(order)
       setLoading(false)
     }
   
@@ -65,7 +66,7 @@ const Orders = ({order,orderId}) => {
    
 
   }, [])
-  console.log('rentals',rentals, product)
+  console.log('rentals',rentals, product,orde)
 
 if(Loading){
   return (
