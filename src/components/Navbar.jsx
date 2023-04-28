@@ -8,17 +8,18 @@ import Hamburger from 'hamburger-react'
 
 import { Link } from "react-router-dom";
 import SideNav from "./SideNav";
+import Spinner from "./Spinner";
 
 const Navbar = () => {
   const auth = getAuth();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const [toogleNav, setToogleNav] = useState();
-  const [formData, setFormData] = useState({
-    image: " ",
-  });
-  const { image } = formData;
+  // const [formData, setFormData] = useState({
+  //   image: " ",
+  // });
+  // const { image } = formData;
 
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
@@ -34,18 +35,7 @@ const Navbar = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
-      console.log(!user)
-      if (user) {
-        setFormData({
-          image: auth.currentUser.photoURL,
-        });
-      } else {
-        setFormData({
-          image: "",
-        });
-
-        console.log("state = definitely signed out");
-      }
+          
     });
 
     return ()=>{
@@ -58,7 +48,14 @@ const Navbar = () => {
       setToogleNav(false);
     } else setToogleNav(true);
   };
-
+  if(!user){
+    return(
+      <div>
+        <Spinner/>
+      </div>
+    )
+  }
+  console.log('user',user.photoURL)
   return (
     // <nav className='navbar'>
     //     <nav className='navbarNav'>
@@ -117,7 +114,7 @@ const Navbar = () => {
                   className="rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white"
                   onClick={handleToogle}
                 >
-                  <img className="rounded-full w-8 h-8" src={image} alt="" />
+                  <img className="rounded-full w-8 h-8" src={user.photoURL} alt="" />
                 </div>
               </div>
               <div
@@ -126,7 +123,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={image}
+                  src={user.photoURL}
                   alt=""
                 />
               </div>
@@ -144,7 +141,7 @@ const Navbar = () => {
               </Link>
               <Link to="/signin" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
             </div>
-            <div className= "flex md:hidden" oncl>
+            <div className= "flex md:hidden" >
             <Hamburger toggled={toogleNav} toggle={setToogleNav} />
               {
                 toogleNav && <SideNav/>

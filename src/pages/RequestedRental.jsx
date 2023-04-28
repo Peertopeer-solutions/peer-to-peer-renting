@@ -33,7 +33,7 @@ const RequestedRental = () => {
     try {
       const querySnapshot = await getDocs(q);
       let rentals = [];
-      console.log(querySnapshot);
+      console.log('querysnap',querySnapshot);
       querySnapshot.forEach((doc)=>{
          rentals.push({
           id: doc.id,
@@ -66,6 +66,7 @@ const RequestedRental = () => {
     };
   }, []);
   
+  console.log('user',user)
   return (
     <div className=''>
       <p className='font-semibold container mx-auto text-center uppercase text-[30px] md:text-[50px] px-3 m-1 text-blue-600'>Your requests</p>

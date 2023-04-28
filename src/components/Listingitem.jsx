@@ -37,8 +37,8 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
 
   })
   return (
-    <Link className=" w-full" to={`/category/${listing.type}/${id}`}>
       <div className='w-full ' key={keyId} >
+    <Link className=" w-full" to={`/category/${listing.type}/${id}`}>
 
         <div className=" bg-white drop-shadow-md rounded-lg">
 
@@ -101,9 +101,9 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
           </div>
         </div>
 
+    </Link>
 
       </div>
-    </Link>
 
     // <li className='categoryListing'>
     //   <Link

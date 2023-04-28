@@ -1,40 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import {
-    collection,
-    getDocs,
-    getDoc,
-    doc,
-    query,
-    where,
-    orderBy,
-    limit,
-    startAfter,
-} from 'firebase/firestore'
+
 import { auth, db } from '../firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'
+import Spinner from '../components/Spinner'
 const OrderConfirmation = () => {
 
-    const [orderDetails, SetOrderDetails] = useState()
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(false)
-    const params = useParams()
     const location = useLocation();
-    const [formData, setFormData] = useState({
-        address1: '',
-        email: '',
-      })
-    
+    const product =  location.state.product
+    const request =  location.state.rental
+    const order =  location.state.orders
+   
+        useEffect(()=>{
+            setLoading(true)
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user);
+            setLoading(false)
+            });
+        
+            return () => {
+            unsubscribe();
+            };
+        },[])
+        
 
-    const product = location.state.product
-    const request = location.state.rental
-    const order = location.state.order
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.id]: e.target.value,
-        }))
-      }
     // const order = location.state.order
     // const product = location.state.product
     // useEffect(() => {
@@ -64,17 +55,8 @@ const OrderConfirmation = () => {
        
     //   }, [user])
     
-      useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-          setUser(user);
-        });
-    
-        return () => {
-          unsubscribe();
-        };
-      })
-    
-      console.log(product,request,order,user)
+  
+      
     //   const Reqid = request.id
     //   const str = JSON.stringify(Reqid)
     //   const uniqueRequestId = str.slice(-5,-1);
@@ -83,6 +65,13 @@ const OrderConfirmation = () => {
     const date = new Date(order.timestamp?.seconds * 1000).toLocaleString('en-US', options);
     const startDate =  new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
     const endDate =  new Date(request.endDate?.seconds * 1000).toLocaleString('en-US', options);
+    if(!user){
+        return (
+            <div>
+                <Spinner/>
+            </div>
+        )
+    }
    
     return (
         <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">

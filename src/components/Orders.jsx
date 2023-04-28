@@ -66,7 +66,8 @@ const Orders = ({order,orderId}) => {
    
 
   }, [])
-  console.log('rentals',rentals, product,orde)
+  
+  console.log(orderDetails)
 
 if(Loading){
   return (
