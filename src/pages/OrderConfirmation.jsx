@@ -4,86 +4,121 @@ import { useLocation, useParams } from 'react-router-dom'
 import { auth, db } from '../firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'
 import Spinner from '../components/Spinner'
+// import Razorpay from 'razorpay'
+// import { loadScript, Razorpay } from 'razorpay';
 const OrderConfirmation = () => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(false)
     const location = useLocation();
-    const product =  location.state.product
-    const request =  location.state.rental
-    const order =  location.state.orders
-   
-        useEffect(()=>{
-            setLoading(true)
-            const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const product = location.state.product
+    const request = location.state.rental
+    const order = location.state.order
+    const [payment, setPayment] = useState(null);
+
+    // useEffect(() => {
+    //     const script = loadScript('https://checkout.razorpay.com/v1/checkout.js');
+    //     script.onload = () => {
+    //         const options = {
+    //             key: 'SHOjQ40ZGFaRqtpZTIT21DtN',
+    //             amount: product.price * 100,
+    //             currency: 'INR',
+    //             name: 'Your Company Name',
+    //             description: 'Product description',
+    //             image: 'https://your-company-logo-url.png',
+    //             order_id: 'YOUR_ORDER_ID',
+    //             handler: function (response) {
+    //                 console.log(response);
+    //                 // handle successful payment
+    //             },
+    //             prefill: {
+    //                 name: user.displayName,
+    //                 email: user.email,
+    //                 contact: '+919876543210'
+    //             }
+    //         };
+    //         const rzp = new Razorpay(options);
+    //         setPayment(rzp);
+    //     };
+    // }, []);
+
+    // const handlePayment = () => {
+    //     payment.open();
+    // };
+
+    useEffect(() => {
+        setLoading(true)
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false)
-            });
-        
-            return () => {
+        });
+
+        return () => {
             unsubscribe();
-            };
-        },[])
-        
+        };
+    }, [])
+
 
     // const order = location.state.order
     // const product = location.state.product
     // useEffect(() => {
     //     const fetchData = async () => {
-        
+
     //     const ordersRef = collection(db, 'orders')
-      
-        
-    
+
+
+
     //       const ordersQuery = query(
     //         ordersRef,
     //         where('userRef', '==', auth.currentUser.uid)
     //       )
-      
-      
+
+
     //       const orders = ordersQuery.docs.map(doc => ({
     //         id: doc.id,
     //         data: doc.data()
     //       }))
-        
+
     //       SetOrderDetails(orders)
     //       setLoading(false)
     //     }
-      
+
     //     setLoading(true)
     //     fetchData()
-       
+
     //   }, [user])
-    
-  
-      
-    //   const Reqid = request.id
-    //   const str = JSON.stringify(Reqid)
-    //   const uniqueRequestId = str.slice(-5,-1);
+
+    const handlePayment = () =>{
+        console.log('hello')
+    }
+
+    const Reqid = order.id
+    const str = JSON.stringify(Reqid)
+    const uniqueOrderId = str.slice(-5, -1);
     const options = { dateStyle: 'long' };
 
-    const date = new Date(order.timestamp?.seconds * 1000).toLocaleString('en-US', options);
-    const startDate =  new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
-    const endDate =  new Date(request.endDate?.seconds * 1000).toLocaleString('en-US', options);
-    if(!user){
+    const date = new Date(order.data.timestamp?.seconds * 1000).toLocaleString('en-US', options);
+    const startDate = new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
+    const endDate = new Date(request.endDate?.seconds * 1000).toLocaleString('en-US', options);
+    if (!user) {
         return (
             <div>
-                <Spinner/>
+                <Spinner />
             </div>
         )
     }
-   
+
     return (
         <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             <div className="flex justify-start item-start space-y-2 flex-col ">
-                <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">Order #13432</h1>
+                <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800 uppercase">Order #{uniqueOrderId}</h1>
                 <p className="text-base font-medium leading-6 text-gray-600">{date}</p>
             </div>
             <div className='mt-3'>
-            <h1 className='text-red-500'> Please confirm order by clicking on this link</h1>
-            <h1 className=' text-blue-700'>Payment link</h1>
+                <h1 className='text-red-500'> Please confirm order by clicking on this link</h1>
+                <button className='' onClick={handlePayment}>Make payment</button>
             </div>
-            
+
             <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                 <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                     <div className="flex flex-col justify-start items-start bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
@@ -103,19 +138,19 @@ const OrderConfirmation = () => {
                                         <p className="text-sm leading-none text-gray-800">
                                             <span className="text-gray-300">Rental End: </span> {endDate}
                                         </p>
-                                      
+
                                     </div>
                                 </div>
                                 <div className="flex justify-between space-x-8 items-start w-full">
-                                    <p className='text-yellow-500'>Payment pending</p>
+                                    <p >Payment <span className='text-yellow-500'>Pending</span></p>
                                     <p className="text-base xl:text-lg leading-6">
-                                        Rs {(product.regularPrice)*(request.rentalPeriod)} <span className="text-red-300 line-through"> $45.00</span>
+                                        Rs {(product.regularPrice) * (request.rentalPeriod)} <span className="text-red-300 line-through"> $45.00</span>
                                     </p>
-                                    
+
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
                         <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   ">
@@ -123,7 +158,7 @@ const OrderConfirmation = () => {
                             <div className="flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
                                 <div className="flex justify-between  w-full">
                                     <p className="text-base leading-4 text-gray-800">Subtotal</p>
-                                    <p className="text-base leading-4 text-gray-600">Rs {(product.regularPrice)*(request.rentalPeriod)}</p>
+                                    <p className="text-base leading-4 text-gray-600">Rs {(product.regularPrice) * (request.rentalPeriod)}</p>
                                 </div>
                                 <div className="flex justify-between items-center w-full">
                                     {/* <p className="text-base leading-4 text-gray-800">
@@ -133,12 +168,12 @@ const OrderConfirmation = () => {
                                 </div>
                                 <div className="flex justify-between items-center w-full">
                                     <p className="text-base leading-4 text-gray-800">Security deposit</p>
-                                    <p className="text-base leading-4 text-gray-600">{((product.regularPrice)*(request.rentalPeriod))/2}</p>
+                                    <p className="text-base leading-4 text-gray-600">{((product.regularPrice) * (request.rentalPeriod)) / 2}</p>
                                 </div>
                             </div>
                             <div className="flex justify-between items-center w-full">
                                 <p className="text-base font-semibold leading-4 text-gray-800">Total</p>
-                                <p className="text-base font-semibold leading-4 text-gray-600">{((product.regularPrice)*(request.rentalPeriod))/2+((product.regularPrice)*(request.rentalPeriod))}</p>
+                                <p className="text-base font-semibold leading-4 text-gray-600">{((product.regularPrice) * (request.rentalPeriod)) / 2 + ((product.regularPrice) * (request.rentalPeriod))}</p>
                             </div>
                         </div>
                         {/* <div className="flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   ">

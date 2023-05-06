@@ -21,7 +21,8 @@ function OrderPage() {
     address1: '',
     address2: '',
     addressInstruction :'',
-    pincode:''
+    pincode:'',
+    PaymentLink:''
   
   })
 
@@ -73,7 +74,7 @@ function OrderPage() {
     const docRef = await addDoc(collection(db, "orders"), formDataCopy);
     setLoading(false);
     toast.success("Order created");
-    navigate(`/orderConfirmation/${docRef.id}`);
+    navigate(`/profile`);
   }
 
   const onMutate = (e) => {

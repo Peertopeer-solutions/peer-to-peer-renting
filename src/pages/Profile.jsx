@@ -226,8 +226,7 @@ function Profile() {
             <div>
               { orders?.map((order)=>(
                   <Orders
-                  orderId = {order.id}
-                  order = {order.data}
+                  orderArr = {order}
                   
                   />
               ))

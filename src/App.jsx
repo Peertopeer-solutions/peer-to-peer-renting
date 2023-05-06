@@ -18,9 +18,8 @@ import RequestedRental from "./pages/RequestedRental"
 import Userverification from "./pages/Userverification"
 import RentalRequests from "./pages/RentalRequests"
 import OrderPage from "./pages/OrderPage"
-import AdminPanel from "./pages/AdminPanel"
-import { useState } from "react"
 import OrderConfirmation from "./pages/OrderConfirmation"
+import AdminDashBoard from "./pages/AdminDashBoard"
 
 function App() {
 
@@ -51,7 +50,7 @@ function App() {
           <Route path='/verification' element={<Userverification/>} /> 
           <Route path='/order/:requestId/:productId' element={<OrderPage/>} /> 
           <Route path='/orderConfirmation/:orderId' element={<OrderConfirmation/>} />
-          <Route path='/adminPanel/' element={<AdminPanel/>} /> 
+          <Route path='/adminPanel/*' element={<AdminDashBoard/>} /> 
 
         </Routes>
         </div>

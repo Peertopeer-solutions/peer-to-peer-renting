@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth";
 import { getMessaging } from "firebase/messaging";
 
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCEaLiRKPJMkB6MPhq6r42KTQiD1puNEbs",
   authDomain: "awesome-renting.firebaseapp.com",
   projectId: "awesome-renting",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app)
 export const db = getFirestore(app) 
 export const messaging = getMessaging(app);

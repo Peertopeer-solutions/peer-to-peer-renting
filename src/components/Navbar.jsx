@@ -48,14 +48,7 @@ const Navbar = () => {
       setToogleNav(false);
     } else setToogleNav(true);
   };
-  if(!user){
-    return(
-      <div>
-        <Spinner/>
-      </div>
-    )
-  }
-  console.log('user',user.photoURL)
+  
   return (
     // <nav className='navbar'>
     //     <nav className='navbarNav'>
@@ -123,8 +116,8 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={user.photoURL}
-                  alt=""
+                  src={user?.photoURL}
+                  alt="No image"
                 />
               </div>
               {toogleNav && <SideNav />}

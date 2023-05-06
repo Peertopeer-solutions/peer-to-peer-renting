@@ -4,11 +4,13 @@ import { db } from '../firebase.config'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-const Orders = ({order,orderId}) => {
+const Orders = ({orderArr}) => {
   const [product, setProduct] = useState(null)
   const [Loading, setLoading] = useState(true)
   const [rentals, setRentals] = useState(null)
-  const [orderDetails, SetOrderDetails] = useState(null)
+  const [orderDetails, SetOrderDetails] = useState()
+  const order = orderArr.data
+  const orderId = orderArr.id
   const navigate = useNavigate()
   const [toogleDetails, setToogleDetails] = useState(false)
   const handleToogle = () =>{
@@ -23,7 +25,7 @@ const Orders = ({order,orderId}) => {
 
   const handleOrderConfirmation = () =>{
 
-    navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals,orders:orderDetails}})
+    navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals,order:orderDetails,}})
 
   }
   
@@ -57,7 +59,7 @@ const Orders = ({order,orderId}) => {
     
       setProduct(productDocSnap.data())
       setRentals(requestDocSnap.data())
-      SetOrderDetails(order)
+      SetOrderDetails(orderArr)
       setLoading(false)
     }
   
