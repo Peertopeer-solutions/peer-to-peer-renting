@@ -66,7 +66,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
             {rentals.status}
           </p>
           {
-            rentals.status === "approved" && !handleAccept ? <Link to={`/order/${request.id}/${rentals.productId}`} className='p-2 text-[15px] md:text-sm truncate'>Complete order</Link> : <p className='invisible p-2 text-[10px] md:text-sm'>Something</p>
+            rentals.status === "approved" && !handleAccept ? <Link to={`/order/${request.id}/${rentals.productId}`} className='p-1 text-white font-light text-[15px] md:text-sm truncate bodrer-1 bg-blue-700 m-1 rounded-2xl'>Complete order</Link> : <p className='invisible p-2 text-[10px] md:text-sm'>Something</p>
           
           }
           </div>

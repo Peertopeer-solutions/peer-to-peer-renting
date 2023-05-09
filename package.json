@@ -28,6 +28,7 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^9.1.1",
     "redux-persist": "^6.0.0",
+    "stripe": "^12.4.0",
     "swiper": "^6.8.4",
     "uuid": "^9.0.0",
     "vite-plugin-svgr": "^2.4.0"

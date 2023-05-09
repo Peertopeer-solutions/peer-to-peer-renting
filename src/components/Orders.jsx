@@ -86,7 +86,7 @@ if(Loading){
   const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
   return (
     <div>
-        <div className='flex flex-col '>
+        <div className='flex flex-col m-1'>
       <div className='w-full rounded-lg shadow-md lg:max-w-sm bg-white md:p-3'>
         <div className='flex justify-between'>
         <img

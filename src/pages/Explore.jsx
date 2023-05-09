@@ -107,6 +107,7 @@ const Explore = () => {
         toast.error('Could not fetch listings')
       }
     }
+    console.log(window.location.origin)
   return (
     <div className="mx-1 mt-10">
         <header className='mx-1 px-3'>

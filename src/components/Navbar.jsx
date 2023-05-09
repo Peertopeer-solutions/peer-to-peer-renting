@@ -16,10 +16,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [toogleNav, setToogleNav] = useState();
-  // const [formData, setFormData] = useState({
-  //   image: " ",
-  // });
-  // const { image } = formData;
+  const [ProfileImage, setProfileImage] = useState(null);
+
 
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
@@ -35,6 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
+      setProfileImage(user.photoURL)
           
     });
 
@@ -107,7 +106,7 @@ const Navbar = () => {
                   className="rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white"
                   onClick={handleToogle}
                 >
-                  <img className="rounded-full w-8 h-8" src={user.photoURL} alt="" />
+                  <img className="rounded-full w-8 h-8" src={ProfileImage} alt="" />
                 </div>
               </div>
               <div
@@ -116,7 +115,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={user?.photoURL}
+                  src={ProfileImage}
                   alt="No image"
                 />
               </div>

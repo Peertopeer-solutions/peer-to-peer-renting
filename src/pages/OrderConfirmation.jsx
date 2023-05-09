@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
-import { auth, db } from '../firebase.config'
+import { auth, db, functions } from '../firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'
 import Spinner from '../components/Spinner'
-// import Razorpay from 'razorpay'
-// import { loadScript, Razorpay } from 'razorpay';
+import Stripe from 'stripe'
+import { httpsCallable } from 'firebase/functions'
+import { loadStripe } from '@stripe/stripe-js';
+
 const OrderConfirmation = () => {
 
     const [user, setUser] = useState(null)
@@ -14,48 +16,57 @@ const OrderConfirmation = () => {
     const product = location.state.product
     const request = location.state.rental
     const order = location.state.order
-    const [payment, setPayment] = useState(null);
+    const [sessionId, setSessionId] = useState('')
+    const [stripe, setStripe] = useState(null);
 
-    // useEffect(() => {
-    //     const script = loadScript('https://checkout.razorpay.com/v1/checkout.js');
-    //     script.onload = () => {
-    //         const options = {
-    //             key: 'SHOjQ40ZGFaRqtpZTIT21DtN',
-    //             amount: product.price * 100,
-    //             currency: 'INR',
-    //             name: 'Your Company Name',
-    //             description: 'Product description',
-    //             image: 'https://your-company-logo-url.png',
-    //             order_id: 'YOUR_ORDER_ID',
-    //             handler: function (response) {
-    //                 console.log(response);
-    //                 // handle successful payment
-    //             },
-    //             prefill: {
-    //                 name: user.displayName,
-    //                 email: user.email,
-    //                 contact: '+919876543210'
-    //             }
-    //         };
-    //         const rzp = new Razorpay(options);
-    //         setPayment(rzp);
-    //     };
-    // }, []);
-
-    // const handlePayment = () => {
-    //     payment.open();
-    // };
+    const stripePublishableKey = 'pk_test_51IdIGxSGDQdSXagEB1lpJvTj9VtOCRbNXswtm30dAKh1Lj0uwVw1tQHYzvt1f6GhWGgqPRKdO35ZZG80PctbCHUS00d7BLFyA3'
 
     useEffect(() => {
+
         setLoading(true)
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false)
         });
+        const loadStripeAndSet = async () => {
+            const stripe = await loadStripe(stripePublishableKey);
+            setStripe(stripe);
+        };
+        loadStripeAndSet();
+        const createStripeCheckout =  () => {
+            const lineItems = [{
+                quantity: 1,
+                price_data: {
+                    currency: "inr",
+                    unit_amount: (((product?.regularPrice) * (request?.rentalPeriod)) / 2 + ((product?.regularPrice) * (request?.rentalPeriod))) * 100, // 10000 = 100 USD
+                    product_data: {
+                        name: product?.title,
+                    },
+                },
+            }]
+            fetch('https://us-central1-awesome-renting.cloudfunctions.net/createStripeCheckout', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(lineItems),
+            })  .then(response => response.json())
+                .then(data => {
+
+                    setSessionId(data.id);
+
+                })
+                .catch(error => {
+                    console.error('Error creating Stripe checkout session:', error);
+                });
+        }
+
+        createStripeCheckout();
 
         return () => {
             unsubscribe();
         };
+
     }, [])
 
 
@@ -88,8 +99,12 @@ const OrderConfirmation = () => {
 
     //   }, [user])
 
-    const handlePayment = () =>{
-        console.log('hello')
+    const handlePayment = async () => {
+        if (!stripe) {
+            console.error('Stripe.js has not finished loading yet.');
+            return;
+        }
+        await stripe.redirectToCheckout({ sessionId: sessionId });
     }
 
     const Reqid = order.id
@@ -100,7 +115,7 @@ const OrderConfirmation = () => {
     const date = new Date(order.data.timestamp?.seconds * 1000).toLocaleString('en-US', options);
     const startDate = new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
     const endDate = new Date(request.endDate?.seconds * 1000).toLocaleString('en-US', options);
-    if (!user) {
+    if (!user ) {
         return (
             <div>
                 <Spinner />
