@@ -82,7 +82,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="pt-2">
-              <img src="LOGO" alt="different logo" />
+              <img src="LOGO" alt="different" />
             </div>
           </Link>
 
