@@ -28,6 +28,11 @@ const Orders = ({orderArr}) => {
     navigate(`/orderConfirmation/${orderId}`,{state:{product:product,rental:rentals,order:orderDetails,}})
 
   }
+  const handleFeedback = () =>{
+
+    navigate(`/feedback/${orderId}`,{state:{product:product,productId:(order.productId),rental:rentals,order:orderDetails,}})
+
+  }
   
   // const fetchProduct = async () => {
   
@@ -98,12 +103,12 @@ if(Loading){
             <p className='text-[15px] font-medium md:text-lg uppercase p-2'><span className='font-bold'>Order:</span> #{uniqueRequestId}</p>
             <p className='text-[15px] md:text-sm p-2'>{date}</p>
           </div>
-          <div className='flex flex-col items-end justify-center'>
+          <div className='flex flex-col items-end justify-end'>
           
           
             
             <button onClick={handleOrderConfirmation} className='p-2 text-[15px] md:text-sm truncate text-blue-700'>Your order</button>
-          
+            <button onClick={handleFeedback} >Feedback</button>
           </div>
         </div>
       </div>

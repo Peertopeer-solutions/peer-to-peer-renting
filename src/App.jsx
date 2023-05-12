@@ -20,6 +20,7 @@ import RentalRequests from "./pages/RentalRequests"
 import OrderPage from "./pages/OrderPage"
 import OrderConfirmation from "./pages/OrderConfirmation"
 import AdminDashBoard from "./pages/AdminDashBoard"
+import FeedbackForm from "./pages/FeedbackForm"
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
           <Route path='/order/:requestId/:productId' element={<OrderPage/>} /> 
           <Route path='/orderConfirmation/:orderId' element={<OrderConfirmation/>} />
           <Route path='/adminPanel/*' element={<AdminDashBoard/>} /> 
+          <Route path='/feedback/:orderId' element={<FeedbackForm/>}/>
+
 
         </Routes>
         </div>
