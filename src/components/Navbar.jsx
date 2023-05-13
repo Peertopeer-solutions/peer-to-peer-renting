@@ -27,18 +27,18 @@ const Navbar = () => {
 
   useEffect(() => {
     setToogleNav(false);
-    
+
   }, [navigate]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user)
       setProfileImage(user.photoURL)
-          
+
     });
 
-    return ()=>{
-        unsubscribe()
+    return () => {
+      unsubscribe()
     }
   }, []);
 
@@ -47,7 +47,7 @@ const Navbar = () => {
       setToogleNav(false);
     } else setToogleNav(true);
   };
-  
+
   return (
     // <nav className='navbar'>
     //     <nav className='navbarNav'>
@@ -89,7 +89,7 @@ const Navbar = () => {
           {user ? (
             <div>
               <div className="hidden md:flex space-x-12 items-center">
-             
+
                 <Link
                   className="hover:text-white hover:bg-orange "
                   to="/create-listing"
@@ -122,23 +122,23 @@ const Navbar = () => {
               {toogleNav && <SideNav />}
             </div>
           ) : (!user &&
-              
+
             (<>
               <div className=" space-x-3 hidden md:flex">
-              <Link
-                className=" hover:text-orange-500 p-1 mx-1 "
-                to="/howitworks"
-              >
-                How it works
-              </Link>
-              <Link to="/signin" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
-            </div>
-            <div className= "flex md:hidden" >
-            <Hamburger toggled={toogleNav} toggle={setToogleNav} />
-              {
-                toogleNav && <SideNav/>
-              }
-            </div>
+                <Link
+                  className=" hover:text-orange-500 p-1 mx-1 "
+                  to="/howitworks"
+                >
+                  How it works
+                </Link>
+                <Link to="/signin" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
+              </div>
+              <div className="flex md:hidden" >
+                <Hamburger toggled={toogleNav} toggle={setToogleNav} />
+                {
+                  toogleNav && <SideNav />
+                }
+              </div>
             </>
             )
           )}
