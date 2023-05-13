@@ -111,14 +111,14 @@ const Explore = () => {
   return (
     <div className="mx-1 mt-10">
         <header className='mx-1 px-3'>
-            <p>Explore</p>
-            <div className='flex items-center gap-2 text-[10px] mt-3'>
+
+            <div className='flex items-center gap-1 text-[10px] mt-3'>
             <div>
-              <img src="" alt="ICON" />
+              <img className='h-9' src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="ICON" />
             </div>
-            <div>
+            <div className='flex items-start flex-col'>
             <h1 className='text-xl'>Gandhinagar</h1>
-            <p>Daiict</p>
+            <p className='text-[16px]'>Daiict road, infocity...</p>
             </div>
             
             </div>

@@ -82,7 +82,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="pt-2">
-              <img src="LOGO" alt="logo" />
+              <img className="absolute top-0 h-16" src='https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' alt="logo" />
             </div>
           </Link>
 

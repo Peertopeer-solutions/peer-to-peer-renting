@@ -107,9 +107,11 @@ function Category() {
   return (
     <div className='category'>
       <header>
-        <p className='pageHeader'>
-          {params.categoryName}
-        </p>
+      <h1 className= 'text-[25px] md:text-[35px] my-3 font-semibold md:px-16 px-3 '>{params.categoryName} equipment in Gandhinagar</h1>
+
+
+          
+
       </header>
 
       {loading ? (
@@ -117,7 +119,7 @@ function Category() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <div className=' grid grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-16'>
+            <div className=' grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3'>
               {listings.map((listing) =>   listing.data.listingEnabled && (<Listingitem
                   listing={listing.data}
                   id={listing.id}
