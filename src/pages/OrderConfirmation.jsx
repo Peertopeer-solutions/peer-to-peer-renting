@@ -122,7 +122,7 @@ const OrderConfirmation = () => {
             </div>
         )
     }
-
+    console.log(order.address1)
     return (
         <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             <div className="flex justify-start item-start space-y-2 flex-col ">
