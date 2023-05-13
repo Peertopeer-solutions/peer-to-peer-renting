@@ -18,12 +18,12 @@ function Category() {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
-  const [loadMore , setLoadMore] = useState(false)
+  const [loadMore, setLoadMore] = useState(false)
 
 
   const params = useParams()
 
-  
+
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -34,7 +34,7 @@ function Category() {
         const q = query(
           listingsRef,
           where('category', '==', params.categoryName),
-         
+
         )
 
         // Execute query
@@ -60,7 +60,7 @@ function Category() {
     }
 
     fetchListings()
-    if(listings?.length > 9){
+    if (listings?.length > 9) {
       setLoadMore(true)
     }
   }, [params.categoryName])
@@ -101,18 +101,31 @@ function Category() {
       toast.error('Could not fetch listings')
     }
   }
-  
-  console.log("listings",listings)
+
+  console.log("listings", listings)
 
   return (
     <div className='category'>
-      <header>
-      <h1 className= 'text-[25px] md:text-[35px] my-3 font-semibold md:px-16 px-3 '>{params.categoryName} equipment in Gandhinagar</h1>
+      <header className='m-3 flex-col items-start '>
+
+        <div className='flex items-center gap-1 text-[10px] mb-3'>
+          <div>
+            <img className='h-9' src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="ICON" />
+          </div>
+          <div className='flex items-start flex-col'>
+            <h1 className='text-xl'>Gandhinagar</h1>
+            <p className='text-[16px]'>Daiict road, infocity...</p>
+          </div>
+        </div>
+        <div className=' bg-slate-50 p-3 rounded-xl w-full md:w-max shadow-lg'>
+        <h1 className= 'text-[25px] md:text-[35px] my-3 font-bold text-blue-700 '>Rent {params.categoryName} equipment in Gandhinagar</h1>
+        <p className='tex-[16px] font-light'>Hire photography equipments from fellow photographer in Gandhinagar, over 50% cheaper than traditional rental houses  </p>
+        </div>
 
 
-          
 
       </header>
+
 
       {loading ? (
         <Spinner />
@@ -120,12 +133,12 @@ function Category() {
         <>
           <main>
             <div className=' grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3'>
-              {listings.map((listing) =>   listing.data.listingEnabled && (<Listingitem
-                  listing={listing.data}
-                  id={listing.id}
-                  key={listing.id}
-                />)
-)}
+              {listings.map((listing) => listing.data.listingEnabled && (<Listingitem
+                listing={listing.data}
+                id={listing.id}
+                key={listing.id}
+              />)
+              )}
             </div>
           </main>
 
