@@ -1,5 +1,4 @@
 
-This is a basic starter template for building a React application using Vite. Vite is a fast and lightweight build tool that provides an instant development server with hot module replacement (HMR) and blazing fast bundling.
 
 ## Prerequisites
 
