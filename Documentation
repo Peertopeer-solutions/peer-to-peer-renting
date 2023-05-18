@@ -1,0 +1,150 @@
+# Peer-to-Peer Rental Application Documentation
+
+Welcome to the documentation for the Peer-to-Peer Rental Application. This documentation will guide you through the various features and functionalities of the application. The Peer-to-Peer Rental Application allows users to list products for renting, send rental requests, manage listings, and handle payments. Users can sign up or log in using Google OAuth for a seamless authentication experience.
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+3. [User Authentication](#user-authentication)
+   - [Login/Signup with Google OAuth](#login-signup-with-google-oauth)
+4. [Listing Products](#listing-products)
+   - [Creating a Listing](#creating-a-listing)
+   - [Updating a Listing](#updating-a-listing)
+   - [Deleting a Listing](#deleting-a-listing)
+5. [Rental Requests](#rental-requests)
+   - [Sending a Rental Request](#sending-a-rental-request)
+   - [Accepting/Rejecting a Rental Request](#acceptingrejecting-a-rental-request)
+6. [Payments](#payments)
+   - [Payment Due](#payment-due)
+   - [Order Confirmation](#order-confirmation)
+7. [Age Group](#age-group)
+   - [Targeted Age Group](#targeted-age-group)
+8. [Additional Resources](#additional-resources)
+9. [Feedback and Support](#feedback-and-support)
+
+## Introduction
+
+The Peer-to-Peer Rental Application enables users to rent products from other users within a peer-to-peer network. It facilitates the process of listing products, sending rental requests, managing listings, and handling payments. By leveraging Google OAuth, users can easily sign up or log in to the application.
+
+## Getting Started
+
+### Prerequisites
+
+Before getting started with the Peer-to-Peer Rental Application, ensure that you have the following prerequisites:
+
+- Web browser with internet access
+- Google account (for Google OAuth authentication)
+
+### Installation
+
+The Peer-to-Peer Rental Application is a web-based application and does not require any installation. Simply open your preferred web browser and navigate to the application's URL to access it.
+
+## User Authentication
+
+### Login/Signup with Google OAuth
+
+To use the Peer-to-Peer Rental Application, you need to log in or sign up using your Google account. Follow these steps to authenticate with Google OAuth:
+
+1. Visit the application's login/signup page.
+2. Click on the "Login with Google" button.
+3. You will be redirected to the Google login page.
+4. Enter your Google account credentials.
+5. Grant necessary permissions to the application when prompted.
+6. You will be redirected back to the application and logged in successfully.
+
+## Listing Products
+
+### Creating a Listing
+
+To list a product for renting, follow these steps:
+
+1. Log in to the application using your Google account.
+2. Navigate to your profile page.
+3. Look for the "Create Listing" button and click on it.
+4. Fill in the required details for the product, such as title, description, category, rental price, etc.
+5. Upload relevant images of the product.
+6. Click on the "Create" button to list the product.
+
+### Updating a Listing
+
+If you want to update the details of a product you have listed, follow these steps:
+
+1. Log in to the application using your Google account.
+2. Go to your profile page.
+3. Find the listing you want to update.
+4. Click on the "Edit" button or link associated with the listing.
+5
+
+. Modify the necessary details of the product.
+6. Save the changes by clicking on the "Update" button.
+
+### Deleting a Listing
+
+If you wish to remove a product listing, follow these steps:
+
+1. Log in to the application using your Google account.
+2. Visit your profile page.
+3. Locate the listing you want to delete.
+4. Click on the "Delete" button or link associated with the listing.
+5. Confirm the deletion when prompted.
+
+## Rental Requests
+
+### Sending a Rental Request
+
+To send a rental request for a product, follow these steps:
+
+1. Log in to the application using your Google account.
+2. Browse through the available listings.
+3. Select a product you want to rent.
+4. Click on the "Rent Now" or "Send Rental Request" button.
+5. Provide any necessary information or dates related to the rental.
+6. Submit the rental request.
+
+### Accepting/Rejecting a Rental Request
+
+As a product owner, you can accept or reject rental requests sent by users. Follow these steps to manage rental requests:
+
+1. Log in to the application using your Google account.
+2. Access your profile page.
+3. Look for the "Rental Requests" or "Manage Requests" section.
+4. Review the pending rental requests.
+5. Accept or reject requests based on your preferences.
+6. Provide appropriate responses or instructions to the user.
+
+## Payments
+
+### Payment Due
+
+When a rental request is accepted, users will receive a notification about the payment due. To make the payment, follow these steps:
+
+1. Log in to the application using your Google account.
+2. Access your profile page.
+3. Look for the "Payment Due" section or notifications.
+4. Click on the payment link or button.
+5. Follow the provided instructions to complete the payment.
+
+### Order Confirmation
+
+After making the payment, users will receive an order confirmation. The order confirmation typically includes details about the rental period, pickup/delivery instructions, and any additional terms or agreements.
+
+## Age Group
+
+### Targeted Age Group
+
+The Peer-to-Peer Rental Application is primarily targeted towards users between the ages of 18 and 30. The application is designed to cater to the preferences and needs of this specific age group.
+
+## Additional Resources
+
+For additional information and support, refer to the following resources:
+
+- [Application Website](https://www.example.com)
+- [FAQs](https://www.example.com/faq)
+- [Contact Us](https://www.example.com/contact)
+
+## Feedback and Support
+
+We value your feedback and are committed to continuously improving the Peer-to-Peer Rental Application and its documentation. If you have any questions, suggestions, or encounter any issues, please reach out to our support team at [support@example.com](mailto:support@example.com). We are here to assist you and provide the best possible user experience.
