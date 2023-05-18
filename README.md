@@ -64,5 +64,4 @@ The `dist` directory is automatically generated when you run the build command a
 - [Vite Documentation](https://vitejs.dev/) - Official documentation for Vite.
 - [React Documentation](https://reactjs.org/docs/getting-started.html) - Official documentation for React.
 
-## License
 
