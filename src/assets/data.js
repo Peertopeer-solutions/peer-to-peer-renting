@@ -4,7 +4,7 @@ export const categories = [
     image: 'https://images.unsplash.com/photo-1431068799455-80bae0caf685?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG9ncmFwaHklMjBlcXVpcG1lbnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
   },
   {
-    name: 'Camping and trekking ',
+    name: 'Camping and trekking',
     image: 'https://www.realsimple.com/thmb/dSAT-lEgjkriQKuiltbTTfHescg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/camping-supplies-checklist-2000-df20795b170c4d5792702431b60f0d03.jpg',
   },
   {

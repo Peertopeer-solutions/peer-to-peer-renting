@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import {categories} from '../assets/data'
+import { categories } from '../assets/data'
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -19,179 +19,189 @@ import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import Listingitem from '../components/Listingitem'
+import Cta from '../components/Cta'
 
 
 const Explore = () => {
-    const [listings, setListings] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [lastFetchedListing, setLastFetchedListing] = useState(null)
-    const [loadMore , setLoadMore] = useState(false)
-  
-  
-  
-    const params = useParams()
-  
-    useEffect(() => {
-      const fetchListings = async () => {
-        try {
-          // Get reference
-          const listingsRef = collection(db, 'listings')
-  
-          // Create a query
-          const q = query(
-            listingsRef,
-            orderBy('timestamp', 'desc'),
-            limit(10)
-          )
-  
-          // Execute query
-          const querySnap = await getDocs(q)
-  
-          const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-          setLastFetchedListing(lastVisible)
-  
-          const listings = []
-  
-          querySnap.forEach((doc) => {
-            return listings.push({
-              id: doc.id,
-              data: doc.data(),
-            })
-          })
-  
-          setListings(listings)
-          setLoading(false)
-        } catch (error) {
-          toast.error('Could not fetch listings')
-        }
-      }  
-      fetchListings()
-      if(listings?.length > 9){
-        setLoadMore(true)
-      }
-    }, [])
-  
-    // Pagination / Load More
-    const onFetchMoreListings = async () => {
+  const [listings, setListings] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [lastFetchedListing, setLastFetchedListing] = useState(null)
+  const [loadMore, setLoadMore] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0);
+
+
+
+  const params = useParams()
+
+  useEffect(() => {
+    const fetchListings = async () => {
       try {
         // Get reference
         const listingsRef = collection(db, 'listings')
-  
+
         // Create a query
         const q = query(
           listingsRef,
-          where('type', '==', params.categoryName),
           orderBy('timestamp', 'desc'),
-          startAfter(lastFetchedListing),
           limit(10)
         )
-  
+
         // Execute query
         const querySnap = await getDocs(q)
-  
+
         const lastVisible = querySnap.docs[querySnap.docs.length - 1]
         setLastFetchedListing(lastVisible)
-  
+
         const listings = []
-  
+
         querySnap.forEach((doc) => {
           return listings.push({
             id: doc.id,
             data: doc.data(),
           })
         })
-  
-        setListings((prevState) => [...prevState, ...listings])
+
+        setListings(listings)
         setLoading(false)
       } catch (error) {
         toast.error('Could not fetch listings')
       }
     }
-    console.log(window.location.origin)
-  return (
-    <div className="mx-1 mt-10">
-        <header className='mx-1 px-3'>
+    fetchListings()
+    if (listings?.length > 4) {
+      setLoadMore(true)
+    }
 
-            <div className='flex items-center gap-1 text-[10px] mt-3'>
-            <div>
-              <img className='h-9' src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="ICON" />
-            </div>
-            <div className='flex items-start flex-col'>
-            <h1 className='text-xl'>Gandhinagar</h1>
-            <p className='text-[16px]'>Daiict road, infocity...</p>
-            </div>
-            
-            </div>
-            
-        </header>
+  }, [])
+
+  // Pagination / Load More
+  const onFetchMoreListings = async () => {
+    try {
+      // Get reference
+      const listingsRef = collection(db, 'listings')
+
+      // Create a query
+      const q = query(
+        listingsRef,
+        orderBy('timestamp', 'desc'),
+        startAfter(lastFetchedListing),
+        limit(10)
+      )
+
+      // Execute query
+      const querySnap = await getDocs(q)
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+      setLastFetchedListing(lastVisible)
+
+      const listings = []
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        })
+      })
+
+      setListings((prevState) => [...prevState, ...listings])
+      setLoading(false)
+    } catch (error) {
+      toast.error('Could not fetch listings')
+    }
+  }
+  console.log("last", lastFetchedListing)
+
+  return (
+    <>
+
+      <div className=" bg-gray-50">
+
 
         <main className='flex flex-col'>
-            {/* <Slider/> */}
-            
-          
-            <div>
-            <p className="text-[25px] md:text-[35px] m-3 md:px-16  font-semibold">Categories</p>
+          {/* <Slider/> */}
+
+
+          <div>
+            <div className='md:m-7 mt-12 mb-12'>
+              <p className="text-2xl text-gray-800 md:text-[35px] m-3 mb-5 md:px-16 uppercase">Categories</p>
 
               <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-3 md:px-16' >
-             {categories.map((data)=>(
-               <div className='w-full bg-white drop-shadow-lg rounded-lg '>
-                  <Link  to = {`category/${data.name}`}  > 
-                <div key={data.name} className='mx-auto w-full border rounded-full'>
-                <div className='flex item-center'>  
-                <img src={data.image} alt="" className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 "/>
+                {categories.map((data) => (
+                  <div className='w-full bg-white drop-shadow-lg rounded-lg '>
+                    <Link to={`category/${data.name}`}  >
+                      <div key={data.name} className='mx-auto w-full border rounded-full'>
+                        <div className='flex item-center'>
+                          <img src={data.image} alt="" className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 " />
 
-                </div>
-                <div className='rounded-lg h-12 flex   items-center bg-white'>
-                <p className="text-[16px] w-[100%] p-1 text-center ">{data.name}</p>
+                        </div>
+                        <div className='rounded-lg h-12 flex   items-center bg-white'>
+                          <p className="text-[16px] w-[100%] p-1 text-center ">{data.name}</p>
 
-                </div>
+                        </div>
 
-                </div>
-      </Link>
-               </div>
-                
-       
-                
-  ))}
+                      </div>
+                    </Link>
+                  </div>
+
+
+
+                ))}
               </div>
-            {loading ? (
-        <Spinner />
-      ) : listings && listings.length > 0 ? (
-        <>
-          <main>
-          <h1 className= 'text-[25px] md:text-[35px] my-3 font-semibold md:px-16 px-3 '>Trending products</h1>
-          <div className=" grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3 ">
-          {listings.map((listing) =>  listing.data.listingEnabled && (
-             
-              <Listingitem
-                  listing={listing.data}
-                  id={listing.id}
-                  keyId={listing.id}
-                />
-           
-             
-              )
-)}
-            
-    </div>
-            
-          </main>
-
-          <br />
-          <br />
-          {loadMore && lastFetchedListing && (
-            <p className='loadMore' onClick={onFetchMoreListings}>
-              Load More
-            </p>
-          )}
-        </>
-      ) : (
-        <p>No listings for </p>
-      )}
             </div>
-           
+
+           <div className='md:m-7 mt-12 mb-12'>
+           {loading ? (
+              <Spinner />
+            ) : listings && listings.length > 0 ? (
+              <>
+                <main className=''>
+
+                  <h1 className='text-2xl text-gray-800 md:text-[35px] m-3 mb-5 mt-5  uppercase md:px-16 '>Trending products</h1>
+                  <div className=''>
+                    <div className="grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3">
+                      {listings.map((listing,) => listing.data.listingEnabled && (
+
+                        <Listingitem
+                          listing={listing.data}
+                          id={listing.id}
+                          keyId={listing.id}
+
+                        />
+
+
+
+
+                      )
+                      )}
+                      {loadMore && lastFetchedListing && (
+                        <div className=''>
+                          <p className='text-black' onClick={onFetchMoreListings}>
+                          Load More
+                        </p>
+                        </div>
+                        
+                      )}
+                    </div>
+                    </div>
+
+
+
+                </main>
+
+                <br />
+                <br />
+
+              </>
+            ) : (
+              <p>No more listing</p>
+            )}
+           </div>
+          </div>
+
         </main>
-    </div>
+      </div>
+    </>
+
   )
 }
 

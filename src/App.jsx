@@ -21,6 +21,12 @@ import OrderPage from "./pages/OrderPage"
 import OrderConfirmation from "./pages/OrderConfirmation"
 import AdminDashBoard from "./pages/AdminDashBoard"
 import FeedbackForm from "./pages/FeedbackForm"
+import Footer from "./components/Footer"
+import Home from "./pages/Home"
+import PrivcayPolicy from "./pages/PrivcayPolicy"
+import TermsAndConditions from "./pages/TermsAndConditions"
+import ShippingPolicy from "./pages/ShippingPolicy"
+import DamagePolicy from "./pages/DamagePolicy"
 
 function App() {
 
@@ -33,7 +39,7 @@ function App() {
 
         <div className="mt-16 w-full">
           <Routes>
-          <Route path='/' element={<Explore/>} />
+          <Route path='/' element={<Home/>} />
           <Route path='/offers' element={<Offers/>} />
           <Route path='/category/:categoryName' element={<Category/>} />
           <Route path='/profile' element={<Privateroute/>}>
@@ -53,11 +59,16 @@ function App() {
           <Route path='/orderConfirmation/:orderId' element={<OrderConfirmation/>} />
           <Route path='/adminPanel/*' element={<AdminDashBoard/>} /> 
           <Route path='/feedback/:orderId' element={<FeedbackForm/>}/>
+          <Route path='/feedback/:orderId' element={<FeedbackForm/>}/>
+          <Route path='/privacy-policy' element={<PrivcayPolicy/>}/>
+          <Route path='/terms-and-conditions' element={<TermsAndConditions/>}/>
 
+          <Route path='/shipping-policy' element={<ShippingPolicy/>}/>
+          <Route path='/damage-policy' element={<DamagePolicy/>}/>
 
         </Routes>
         </div>
-       
+       <Footer/>
       </Router>
       <ToastContainer/>
     </>

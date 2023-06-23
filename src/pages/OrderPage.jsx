@@ -101,7 +101,7 @@ function OrderPage() {
      
 
 
-      <div className='w-full   ' >
+      <div className='w-full ' >
         
       <div className='mx-2 my-3 md:m-6'>
         <header>

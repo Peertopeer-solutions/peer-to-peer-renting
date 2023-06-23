@@ -31,7 +31,7 @@ function Profile() {
     email: auth.currentUser.email,
   })
 
-  const [Admin, SetAdmin] = useState()
+
 
   const { name, email } = formData
 
@@ -223,7 +223,7 @@ function Profile() {
         {
           !loading && orders?.length > 0 ?(
 
-            <div>
+            <div className=''>
               { orders?.map((order)=>(
                   <Orders
                   orderArr = {order}

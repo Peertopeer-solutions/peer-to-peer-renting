@@ -4,7 +4,7 @@ import {
   FirebaseAuthProvider,
   FirebaseDataProvider
 } from 'react-admin-firebase';
-import { firebaseConfig, app} from '../firebase.config';
+import { firebaseConfig} from '../firebase.config';
 import { UserList} from '../AdminComponents/users';
 import { OrderList } from '../AdminComponents/orders';
 

@@ -36,9 +36,10 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
   useEffect(() => {
 
   })
+  console.log(listing)
   return (
       <div className='w-full ' key={keyId} >
-    <Link className=" w-full" to={`/category/${listing.type}/${id}`}>
+    <Link className=" w-full" to={`/category/${listing.category}/${id}`}>
 
         <div className=" bg-white drop-shadow-md rounded-lg">
 

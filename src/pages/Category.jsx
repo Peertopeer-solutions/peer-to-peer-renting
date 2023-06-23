@@ -102,7 +102,8 @@ function Category() {
     }
   }
 
-  console.log("listings", listings)
+  console.log("listings", listings,params.categoryName)
+
 
   return (
     <div className='category'>
