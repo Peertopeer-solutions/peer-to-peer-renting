@@ -89,6 +89,7 @@ if(Loading){
   const options = { dateStyle: 'long' };
   const date = new Date(order.timestamp?.seconds * 1000).toLocaleString('en-US', options);
   // const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
+  
   // const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
   return (
     <div>
