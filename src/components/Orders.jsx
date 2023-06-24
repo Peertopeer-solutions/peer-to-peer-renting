@@ -2,7 +2,7 @@ import { collection, doc, getDoc, query, where } from 'firebase/firestore'
 import React, { useState, useEffect, useCallback } from 'react'
 import { db } from '../firebase.config'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+
 
 const Orders = ({orderArr}) => {
   const [product, setProduct] = useState(null)
@@ -13,7 +13,8 @@ const Orders = ({orderArr}) => {
   const orderId = orderArr.id
   const navigate = useNavigate()
   const [toogleDetails, setToogleDetails] = useState(false)
-  const handleToogle = () =>{
+  
+   const handleToogle = () =>{
     if (!toogleDetails){
       setToogleDetails(true)
     }
@@ -89,6 +90,7 @@ if(Loading){
   const date = new Date(order.timestamp?.seconds * 1000).toLocaleString('en-US', options);
   const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
   const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
+  console.log(starDate)
   return (
     <div>
         <div className='flex flex-col m-1'>
