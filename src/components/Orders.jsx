@@ -88,9 +88,8 @@ if(Loading){
   const uniqueRequestId = str.slice(-5,-1);
   const options = { dateStyle: 'long' };
   const date = new Date(order.timestamp?.seconds * 1000).toLocaleString('en-US', options);
-  const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
-  const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
-  console.log(starDate)
+  // const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
+  // const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
   return (
     <div>
         <div className='flex flex-col m-1'>
