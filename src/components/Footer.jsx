@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhoneIcon,AtSymbolIcon } from '@heroicons/react/24/outline'
+
 import { Link } from 'react-router-dom'
 
 
@@ -63,8 +63,8 @@ const Footer = () => {
               
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
                 <Link to="/privacy-policy" className="hover:opacity-75" href> Privacy Policy </Link>
-                <Link className="hover:opacity-75" href> Rental Terms &amp; Conditions</Link>
-                <Link className="hover:opacity-75" href> About us</Link>
+
+                <Link TO="/about-us" className="hover:opacity-75" href> About us</Link>
 
               </nav>
             </div>
