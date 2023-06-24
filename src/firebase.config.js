@@ -6,7 +6,7 @@ import { getMessaging } from "firebase/messaging";
 import {getFunctions} from 'firebase/functions'
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "awesome-renting.firebaseapp.com",
   projectId: "awesome-renting",
   storageBucket: "awesome-renting.appspot.com",
