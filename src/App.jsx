@@ -64,7 +64,7 @@ function App() {
           <Route path='/terms-and-conditions' element={<TermsAndConditions/>}/>
 
           <Route path='/shipping-policy' element={<ShippingPolicy/>}/>
-          <Route path='/damage-policy' element={<DamagePolicy/>}/>
+          <Route path='/damages-policy' element={<DamagePolicy/>}/>
 
         </Routes>
         </div>

@@ -102,7 +102,7 @@ function Category() {
     }
   }
 
-  console.log("listings", listings,params.categoryName)
+  console.log("listings", listings,params.  categoryName)
 
 
   return (

@@ -227,14 +227,13 @@ function Profile() {
               { orders?.map((order)=>(
                   <Orders
                   orderArr = {order}
-                  
                   />
               ))
               }
             </div>
           ):
           (
-            <p className='my-3   px-3'>No orders</p>
+            <p className='my-3  px-3'>No orders</p>
           )
         }
 
