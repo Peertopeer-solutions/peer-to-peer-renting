@@ -4,9 +4,9 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
 env:
-  VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-  VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
-  VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+  REACT_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+  REACT_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+  REACT_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
