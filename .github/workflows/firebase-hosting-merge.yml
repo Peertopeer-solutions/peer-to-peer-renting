@@ -14,10 +14,12 @@ jobs:
       - run: npm install
       - run: npm run build
         env:
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+
+
           CI: false
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AWESOME_RENTING }}'
           channelId: live
