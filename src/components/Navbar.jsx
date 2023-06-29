@@ -75,12 +75,12 @@ const Navbar = () => {
     //     </nav>
 
     // </nav>
-    <div>
-      <nav className=" w-[100%] fixed top-0 mx-auto p-4 bg-white h-16 z-10 ">
+    <div className="border">
+      <nav className=" w-[100%]  fixed top-0 mx-auto p-4 md:p-6 bg-white z-10 border ">
         <div className="flex items-center justify-between ">
           <Link to="/">
-            <div className="pt-2">
-              <img className="absolute top-0 h-16" src='https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' alt="logo" />
+            <div className="">
+              <img className="h-10 md:h-12" src='https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' alt="logo" />
             </div>
           </Link>
 
@@ -89,13 +89,13 @@ const Navbar = () => {
               <div className="hidden md:flex space-x-12 items-center">
 
                 <Link
-                  className="hover:text-white hover:bg-orange "
+                  className="text-xl p-2 rounded-full hover:bg-black hover:text-white"
                   to="/create-listing"
                 >
                   List item
                 </Link>
                 <Link
-                  className="hover:text-white hover:bg-orange "
+                  className="text-xl  p-2 rounded-full hover:bg-black hover:text-white"
                   to="/rentalRequests"
                 >
                   Requests

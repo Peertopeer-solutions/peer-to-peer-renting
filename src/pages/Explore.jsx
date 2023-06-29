@@ -114,10 +114,7 @@ const Explore = () => {
 
   return (
     <>
-
-      <Features/>
-
-      <div className=" bg-gray-50">
+      <div className="">
 
 
         <main className='flex flex-col'>
@@ -138,7 +135,7 @@ const Explore = () => {
 
                         </div>
                         <div className='rounded-lg h-12 flex   items-center bg-white'>
-                          <p className="text-[16px] w-[100%] p-1 text-center ">{data.name}</p>
+                          <p className=" text-sm md:text-lg w-[100%] p-1 text-center ">{data.name}</p>
 
                         </div>
 
