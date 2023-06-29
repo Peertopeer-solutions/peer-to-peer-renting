@@ -1,14 +1,12 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { ReactComponent as OfferIcon } from "../assets/svg/localOfferIcon.svg";
-import { ReactComponent as ExploreIcon } from "../assets/svg/exploreIcon.svg";
-import { ReactComponent as PersonOutlineIcon } from "../assets/svg/personOutlineIcon.svg";
+
 import Hamburger from 'hamburger-react'
 
 import { Link } from "react-router-dom";
 import SideNav from "./SideNav";
-import Spinner from "./Spinner";
+
 
 const Navbar = () => {
   const auth = getAuth();

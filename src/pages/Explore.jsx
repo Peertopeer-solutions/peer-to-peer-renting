@@ -20,6 +20,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import Listingitem from '../components/Listingitem'
 import Cta from '../components/Cta'
+import Features from '../components/Features'
 
 
 const Explore = () => {
@@ -113,6 +114,8 @@ const Explore = () => {
 
   return (
     <>
+
+      <Features/>
 
       <div className=" bg-gray-50">
 

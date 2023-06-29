@@ -115,6 +115,7 @@ const OrderConfirmation = () => {
     const date = new Date(order.data.timestamp?.seconds * 1000).toLocaleString('en-US', options);
     const startDate = new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
     const endDate = new Date(request.endDate?.seconds * 1000).toLocaleString('en-US', options);
+    console.log("shvchs",startDate)
     if (!user ) {
         return (
             <div>

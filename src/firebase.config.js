@@ -6,9 +6,9 @@ import { getMessaging } from "firebase/messaging";
 import {getFunctions} from 'firebase/functions'
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || process.env.REACT_FIREBASE_API_KEY,
-  authDomain:   import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || process.env.RECT_FIREBASE_AUTH_DOMAIN,
-  projectId:  import.meta.env.VITE_FIREBASE_PROJECT_ID || process.env.REACT_FIREBASE_PROJECT_ID,
+  apiKey: "AIzaSyByBWbpNlNbLlg5BrbzJc-DQ5pd_S-0IB8",
+  authDomain:  "awesome-renting.firebaseapp.com",
+  projectId:  "awesome-renting",
   storageBucket: "awesome-renting.appspot.com",
   messagingSenderId: "702713068942",
   appId: "1:702713068942:web:6620f924cf541a261238df"
