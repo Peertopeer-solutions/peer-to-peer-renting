@@ -10,7 +10,7 @@ import { ReactComponent as Photo } from '../assets/illustration/Photo.svg'
 const Cta = () => {
     return (
         <>
-            <div className=" md:flex w-full md:mx-24 py-6 md:py-12 ">
+            <div className=" md:flex w-full md:mx-24 py-6 md:py-12">
 
                 <div className="flex h-[630px]" >
                     <div className="flex relative md:left-[200px] md:items-center text-left px-8 md:px-24 lg:w-1/2">
