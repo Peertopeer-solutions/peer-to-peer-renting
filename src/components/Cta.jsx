@@ -15,11 +15,11 @@ const Cta = () => {
                 <div className=" md:flex h-[630px]" >
                     <div className=" flex relative lg:left-[100px] text-left  md:p-3  ">
                         <div >
-                            <h2 className="container text-4xl font-semibold text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl ">Rent <span className="text-indigo-600">anything</span> from people around you</h2>
-                            <p className=" text-sm mt-3 text-gray-500 md:text-lg xl:text-2xl z-1 ">Begin your adventure, let the world be your playground!</p>
-                            <div className='text-sm  lg:text-lg  flex my-3 lg:my-6 items-center rounded-full shadow-xl  bg-gray-50'>
-                                <input type="text" placeholder="search"className=" p-1 md:p-2 ml-2 w-full rounded-l-full bg-gray-50 h-9" />
-                                <button className="  m-0.5 md:m-1 rounded-full bg-blue-700 text-white h-9 md:h-12 w-2/4">Search</button>
+                            <h2 className="container text-3xl font-semibold text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl tracking-wide ">Rent <span className="text-indigo-600">anything</span> from people around you</h2>
+                            <p className=" text-sm my-6 text-gray-500 md:text-lg xl:text-2xl z-1 ">Begin your adventure, let the world be your playground!</p>
+                            <div className='text-sm  lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl  bg-gray-50'>
+                                <input type="text" placeholder="Camera, bikking jacket"className=" p-2 md:p-2 ml-3 w-full rounded-l-full bg-gray-50 h-9" />
+                                <button className="shadow-lg  m-1 md:m-1 rounded-full bg-blue-700 text-white w-2/4 h-10 md:h-12">Search</button>
                             </div>
                             <div className="md:flex items-center justify-start mt-6 hidden">
                                 <p className='mr-3'>Or</p>
