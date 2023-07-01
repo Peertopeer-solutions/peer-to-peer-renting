@@ -76,11 +76,11 @@ const Navbar = () => {
 
     // </nav>
     <div className="border">
-      <nav className=" w-[100%]  fixed top-0 mx-auto p-4 md:p-6 bg-white z-10 border ">
+      <nav className=" w-[100%]  fixed top-0 mx-auto p-2 md:p-3 bg-white z-10 border ">
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="">
-              <img className="h-10 md:h-12" src='https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' alt="logo" />
+              <img className="h-10 w-full md:h-12" src='https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' alt="logo" />
             </div>
           </Link>
 

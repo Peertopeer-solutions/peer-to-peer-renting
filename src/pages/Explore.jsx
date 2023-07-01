@@ -6,6 +6,8 @@ import { categories } from '../assets/data'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+
+
 import {
   collection,
   getDocs,
@@ -122,16 +124,16 @@ const Explore = () => {
 
 
           <div>
-            <div className='md:m-7 mt-12 mb-12'>
+            <div className='md:m-7  mt-12 mb-12'>
               <p className="text-2xl text-gray-800 md:text-[35px] m-3 mb-5 md:px-16 uppercase">Categories</p>
 
               <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-3 md:px-16' >
                 {categories.map((data) => (
-                  <div className='w-full bg-white drop-shadow-lg rounded-lg '>
+                  <div className='w-full bg-white drop-shadow-lg rounded-lg ' key={data.name}>
                     <Link to={`category/${data.name}`}  >
                       <div key={data.name} className='mx-auto w-full border rounded-full'>
                         <div className='flex item-center'>
-                          <img src={data.image} alt="" className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 " />
+                          <img src={data.image} loading="lazy" alt="" className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 " />
 
                         </div>
                         <div className='rounded-lg h-12 flex   items-center bg-white'>

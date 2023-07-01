@@ -1,46 +1,51 @@
+import React, {lazy, Suspense} from "react"
 import { BrowserRouter as Router , Routes , Route } from "react-router-dom"
-import Explore from "./pages/Explore"
-import Offers from "./pages/Offers"
-import Category from "./pages/Category"
-import Profile from "./pages/Profile"
-import Signin from "./pages/Signin"
-import Signup from "./pages/Signup"
-import Forgotpassword from "./pages/Forgotpassword"
+
+
+const Category = lazy(() => import("./pages/Category"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Signin = lazy(() => import("./pages/Signin"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Forgotpassword = lazy(() => import("./pages/Forgotpassword"));
+
 import Navbar from "./components/Navbar"
 import { ToastContainer } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css'
+// import 'react-toastify/dist/ReactToastify.css'
 import Privateroute from "./components/Privateroute"
-import CreateListing from "./pages/CreateListing"
-import Listing from "./pages/Listing"
-import Contact from "./pages/Contact"
-import EditListing from "./pages/EditListing"
-import RequestedRental from "./pages/RequestedRental"
-import Userverification from "./pages/Userverification"
-import RentalRequests from "./pages/RentalRequests"
-import OrderPage from "./pages/OrderPage"
-import OrderConfirmation from "./pages/OrderConfirmation"
-import AdminDashBoard from "./pages/AdminDashBoard"
-import FeedbackForm from "./pages/FeedbackForm"
-import Footer from "./components/Footer"
-import Home from "./pages/Home"
-import PrivcayPolicy from "./pages/PrivcayPolicy"
-import TermsAndConditions from "./pages/TermsAndConditions"
-import ShippingPolicy from "./pages/ShippingPolicy"
-import DamagePolicy from "./pages/DamagePolicy"
+const CreateListing = lazy(() => import("./pages/CreateListing"));
+const Listing = lazy(() => import("./pages/Listing"));
+const Contact = lazy(() => import("./pages/Contact"));
+const EditListing = lazy(() => import("./pages/EditListing"));
+const RequestedRental = lazy(() => import("./pages/RequestedRental"));
+const Userverification = lazy(() => import("./pages/Userverification"));
+const RentalRequests = lazy(() => import("./pages/RentalRequests"));
+const OrderPage = lazy(() => import("./pages/OrderPage"));
+// import OrderConfirmation from "./pages/OrderConfirmation"
+// import AdminDashBoard from "./pages/AdminDashBoard"
+const FeedbackForm = lazy(() => import("./pages/FeedbackForm"));
+const Footer = lazy(() => import("./components/Footer"));
+const PrivcayPolicy = lazy(() => import("./pages/PrivcayPolicy"));
+const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+const ShippingPolicy = lazy(() => import("./pages/ShippingPolicy"));
+const DamagePolicy = lazy(() => import("./pages/DamagePolicy"));
+const Home = lazy(() => import("./pages/Home"))
+const OrderConfirmation = lazy(() => import("./pages/OrderConfirmation"))
 
 function App() {
 
 
   return (
     <>
+      
       <Router>
                 
           <Navbar/>
 
+        <Suspense>
         <div className="mt-16 w-full">
           <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/offers' element={<Offers/>} />
+
           <Route path='/category/:categoryName' element={<Category/>} />
           <Route path='/profile' element={<Privateroute/>}>
           <Route path='/profile' element={<Profile/>} />
@@ -57,7 +62,7 @@ function App() {
           <Route path='/verification' element={<Userverification/>} /> 
           <Route path='/order/:requestId/:productId' element={<OrderPage/>} /> 
           <Route path='/orderConfirmation/:orderId' element={<OrderConfirmation/>} />
-          <Route path='/adminPanel/*' element={<AdminDashBoard/>} /> 
+          {/* <Route path='/adminPanel/*' element={<AdminDashBoard/>} />  */}
           <Route path='/feedback/:orderId' element={<FeedbackForm/>}/>
           <Route path='/feedback/:orderId' element={<FeedbackForm/>}/>
           <Route path='/privacy-policy' element={<PrivcayPolicy/>}/>
@@ -68,6 +73,9 @@ function App() {
 
         </Routes>
         </div>
+        </Suspense>
+       
+        
        <Footer/>
       </Router>
       <ToastContainer/>

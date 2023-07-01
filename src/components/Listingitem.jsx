@@ -49,7 +49,7 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
           </div>
 
 
-          <img className=" w-[100%] h-24 md:h-34 object-scale-down rounded-tl-lg rounded-tr-lg"
+          <img loading='lazy' className=" w-[100%] h-24 md:h-34 object-scale-down rounded-tl-lg rounded-tr-lg"
             src={listing.imgUrls[0]}
             alt={listing.title}
           />

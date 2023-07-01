@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-import { auth, db, functions } from '../firebase.config'
+import { auth } from '../firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'
 import Spinner from '../components/Spinner'
-import Stripe from 'stripe'
-import { httpsCallable } from 'firebase/functions'
+
+
 import { loadStripe } from '@stripe/stripe-js';
 
 const OrderConfirmation = () => {
