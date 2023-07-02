@@ -6,7 +6,7 @@ import Explore from './Explore'
 
 const Home = () => {
   return (
-    <div className=''>
+    <div >
       <Cta/>
       <Features />
       <Explore/>

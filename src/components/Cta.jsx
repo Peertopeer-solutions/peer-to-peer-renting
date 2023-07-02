@@ -10,16 +10,16 @@ import { ReactComponent as Photo } from '../assets/illustration/Photo.svg'
 const Cta = () => {
     return (
         <>
-            <div className="w-5/6 mx-auto md:container  md:mx-auto md:flex md:p-6 py-3 ">
+            <div className="w-5/6 mt-24 mx-auto md:container  md:mx-auto md:flex md:p-6 py-3 ">
 
-                <div className=" md:flex h-[630px]" >
-                    <div className=" flex relative lg:left-[100px] text-left  md:p-3  ">
+                <div className="mx-auto md:flex" >
+                    <div className=" flex relative lg:left-[50px] text-left  md:p-3  ">
                         <div >
-                            <h2 className="container text-3xl font-semibold text-gray-800 md:text-4xl lg:text-5xl xl:text-6xl tracking-wide ">Rent <span className="text-indigo-600">anything</span> from people around you</h2>
-                            <p className=" text-sm my-6 text-gray-500 md:text-lg xl:text-2xl z-1 ">Begin your adventure, let the world be your playground!</p>
-                            <div className='text-sm  lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl  bg-gray-50'>
-                                <input type="text" placeholder="Camera, bikking jacket"className=" p-2 md:p-2 ml-3 w-full rounded-l-full bg-gray-50 h-9" />
-                                <button className="shadow-lg  m-1 md:m-1 rounded-full bg-blue-700 text-white w-2/4 h-10 md:h-12">Search</button>
+                            <h2 className="container xl:w-3/4 text-4xl font-semibold text-gray-800 md:text-4xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600">anything</span> from people around you</h2>
+                            <p className=" text-lg my-6 text-gray-500 md:text-lg lg:text-2xl z- tracking-wider leading-loose ">Begin your adventure, let the world be your playground!</p>
+                            <div className='container text-sm  lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl p-1 bg-gray-100 lg:h-16'>
+                                <input type="text" placeholder="Camera, shoes, riding jacket "className=" bg-gray-100 p-2 md:p-2 ml-3 w-full xl:w-3/4 rounded-l-full  h-9" />
+                                <button className="shadow-lg rounded-full bg-blue-700 text-white w-2/6 p-2 lg:p-3">Search</button>
                             </div>
                             <div className="md:flex items-center justify-start mt-6 hidden">
                                 <p className='mr-3'>Or</p>
@@ -30,8 +30,8 @@ const Cta = () => {
                     </div>
                     <div className='flex flex-col items-center mx-auto'>
 
-                        <div className='mx-auto relative bottom-0  lg:right-[100px] -z-20'>
-                            <Photo className='text-red h-full w-full md:w-[350px] lg:w-[450px] xl:w-[600px] ' />
+                        <div className='mx-auto relative bottom-12 md:bottom-0 md:right-[100px] -z-20'>
+                            <Photo className='text-red h-full  w-full' />
 
                         </div>
                         <div className="flex md:hidden items-center justify-start ">
