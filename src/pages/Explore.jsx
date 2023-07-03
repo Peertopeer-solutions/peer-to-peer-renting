@@ -129,7 +129,7 @@ const Explore = () => {
 
               <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-3 md:px-16' >
                 {categories.map((data) => (
-                  <div className='w-full bg-white drop-shadow-lg rounded-lg ' key={data.name}>
+                  <div className=' w-full bg-white drop-shadow-lg rounded-lg ' key={data.name}>
                     <Link to={`category/${data.name}`}  >
                       <div key={data.name} className='mx-auto w-full border rounded-full'>
                         <div className='flex item-center'>

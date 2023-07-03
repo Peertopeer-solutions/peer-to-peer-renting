@@ -55,7 +55,7 @@ function App() {
           <Route path='/forgotpassword' element={<Forgotpassword/>} />
           <Route path='/create-listing' element={<CreateListing/>} />
           <Route path='/edit-listing/:listingId' element={<EditListing/>} />
-          <Route path='/category/:categoryName/:listingId' element={<Listing/>} /> 
+          <Route path='/:categoryName/:listingId' element={<Listing/>} /> 
           <Route path='/contact/:landlordId' element={<Contact/>} /> 
           <Route path='/requestedItems' element={<RequestedRental/>} /> 
           <Route path='/rentalRequests' element={<RentalRequests/>} /> 

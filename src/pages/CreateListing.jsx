@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import {categories} from '../assets/data'
+import { categories } from '../assets/data'
 import {
   getStorage,
   ref,
@@ -20,9 +20,9 @@ function CreateListing() {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     type: 'rent',
-    title:'',
+    title: '',
     description: '',
-    category:'',
+    category: '',
     address: '',
     offer: false,
     regularPrice: 0,
@@ -154,14 +154,14 @@ function CreateListing() {
       timestamp: serverTimestamp(),
     }
 
-    
+
     formDataCopy.location = address;
     delete formDataCopy.images;
     delete formDataCopy.address;
     location && (formDataCopy.location = location);
 
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
-  
+
     formDataCopy.imgUrls = imgUrls;
     if (geolocation.lat !== 0 && geolocation.lng !== 0)
       formDataCopy.geolocation = geolocation;
@@ -204,7 +204,16 @@ function CreateListing() {
     return <Spinner />
   }
 
-  console.log(rentPeriod)
+  //upload multiple images and show images
+
+  const imageUpload = () =>{
+    const files = input.files
+    for (let i = 0; i < files.length; i++) {
+      setFormData(...prevState, images.push(files))
+    }
+
+  }
+  console.log(images[0])
 
   return (
     <div className='profile'>
@@ -216,6 +225,25 @@ function CreateListing() {
       <main>
         <form onSubmit={onSubmit}>
 
+        
+          <label className='formLabel'>Images</label>
+          <p className='imagesInfo'>
+            The first image will be the cover (max 6).
+          </p>
+          <input
+            className='formInputFile'
+            type='file'
+            id='images'
+            onChange={onMutate}
+            max='6'
+            accept='.jpg,.png,.jpeg'
+            multiple
+            required
+          />
+         
+
+
+            
           <label className='formLabel'>Sell / Rent</label>
           <div className='formButtons'>
             <button
@@ -245,7 +273,7 @@ function CreateListing() {
             id='title'
             value={name}
             onChange={onMutate}
-            
+
             required
           />
           <label className='formLabel'>Description</label>
@@ -255,7 +283,7 @@ function CreateListing() {
             id='description'
             value={description}
             onChange={onMutate}
-            
+
             minLength='10'
             required
           />
@@ -263,19 +291,19 @@ function CreateListing() {
           <label className='formLabel'>Category</label>
 
           <div className='formInputName'>
-             <select name = "dropdown" id="category" onChange={onMutate} >
-              
-             <option value="⬇️ Select a category ⬇️"> -- Select a Category -- </option>
+            <select name="dropdown" id="category"  onChange={onMutate} >
 
-              {categories.map((items,index)=><option className='w-36' value={items.name} key={index}> {items.name}</option> )
+              <option value="⬇️ Select a category ⬇️"> -- Select a Category -- </option>
+
+              {categories.map((items, index) => <option className='w-36' value={items.name} key={index}> {items.name}</option>)
               }
-         </select>
+            </select>
 
           </div>
-         
-         
 
-          
+
+
+
 
           <label className='formLabel'>Address</label>
           <textarea
@@ -287,7 +315,7 @@ function CreateListing() {
             required
           />
 
-      
+
 
           <label className='formLabel'>Offer</label>
           <div className='formButtons'>
@@ -325,12 +353,12 @@ function CreateListing() {
               max='750000000'
               required
             />
-            {type === 'rent' && <p className='formPriceText'>₹/<select name = "dropdown"  id="rentPeriod"  onChange={onMutate} >
-            <option value = "Day" selected >Day</option>
-            <option value = "Week">Week</option>
-            <option value = "Month" >Month</option>
+            {type === 'rent' && <p className='formPriceText'>₹/<select name="dropdown" id="rentPeriod" onChange={onMutate} >
+              <option value="Day" selected >Day</option>
+              <option value="Week">Week</option>
+              <option value="Month" >Month</option>
 
-         </select></p>}
+            </select></p>}
           </div>
 
           {offer && (
@@ -344,26 +372,13 @@ function CreateListing() {
                 onChange={onMutate}
                 min='50'
                 max='750000000'
-               required={offer}
+                required={offer}
               />
-              
+
             </>
           )}
 
-          <label className='formLabel'>Images</label>
-          <p className='imagesInfo'>
-            The first image will be the cover (max 6).
-          </p>
-          <input
-            className='formInputFile'
-            type='file'
-            id='images'
-            onChange={onMutate}
-            max='6'
-            accept='.jpg,.png,.jpeg'
-            multiple
-            required
-          />
+
           <button type='submit' className='primaryButton createListingButton'>
             Create Listing
           </button>
