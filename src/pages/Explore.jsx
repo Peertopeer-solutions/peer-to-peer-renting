@@ -21,8 +21,7 @@ import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import Listingitem from '../components/Listingitem'
-import Cta from '../components/Cta'
-import Features from '../components/Features'
+
 
 
 const Explore = () => {
@@ -112,7 +111,6 @@ const Explore = () => {
       toast.error('Could not fetch listings')
     }
   }
-  console.log("last", lastFetchedListing)
 
   return (
     <>
@@ -151,16 +149,14 @@ const Explore = () => {
               </div>
             </div>
 
-           <div className='md:m-7 mt-12 mb-12'>
-           {loading ? (
-              <Spinner />
-            ) : listings && listings.length > 0 ? (
+           <div className='mx-auto mt-12 mb-12'>
+           { listings && listings.length > 0 ? (
               <>
                 <main className=''>
 
                   <h1 className='text-2xl text-gray-800 md:text-[35px] m-3 mb-5 mt-5  uppercase md:px-16 '>Trending products</h1>
                   <div className=''>
-                    <div className="grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3">
+                    <div className="grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3">
                       {listings.map((listing,) => listing.data.listingEnabled && (
 
                         <Listingitem
@@ -169,10 +165,6 @@ const Explore = () => {
                           keyId={listing.id}
 
                         />
-
-
-
-
                       )
                       )}
                       {loadMore && lastFetchedListing && (

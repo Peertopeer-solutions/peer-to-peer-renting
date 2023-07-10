@@ -10,8 +10,9 @@ const Forgotpassword = lazy(() => import("./pages/Forgotpassword"));
 
 import Navbar from "./components/Navbar"
 import { ToastContainer } from "react-toastify"
-// import 'react-toastify/dist/ReactToastify.css'
-import Privateroute from "./components/Privateroute"
+import 'react-toastify/dist/ReactToastify.css'
+
+const Privateroute = lazy(()=>import("./components/Privateroute"))
 const CreateListing = lazy(() => import("./pages/CreateListing"));
 const Listing = lazy(() => import("./pages/Listing"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -41,8 +42,8 @@ function App() {
                 
           <Navbar/>
 
-        <Suspense>
-        <div className="mt-16 w-full">
+        <Suspense fallback="..loading">
+        <div className="mt-16  w-full">
           <Routes>
           <Route path='/' element={<Home/>} />
 
@@ -75,9 +76,9 @@ function App() {
         </div>
         </Suspense>
        
-        
-       <Footer/>
-      </Router>
+        <Footer/>
+
+      </Router> 
       <ToastContainer/>
     </>
   )

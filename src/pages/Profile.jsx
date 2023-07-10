@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Listingitem from '../components/Listingitem'
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
-import homeIcon from '../assets/svg/homeIcon.svg'
 import Orders from '../components/Orders'
 
 function Profile() {
@@ -132,6 +131,7 @@ function Profile() {
         (listing) => listing.id !== listingId
       )
       setListings(updatedListings)
+      navigate(`/profile`)
       toast.success('Successfully deleted listing')
     }
   }

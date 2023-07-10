@@ -6,11 +6,10 @@ import Explore from './Explore'
 
 const Home = () => {
   return (
-    <div >
+    <div className='h-full' >
       <Cta/>
       <Features />
       <Explore/>
-
     </div>
   )
 }

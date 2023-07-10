@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 
 import { ReactComponent as DeleteIcon } from '../assets/svg/deleteIcon.svg'
 import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg'
-import { ReactComponent as LockIcon } from '../assets/svg/lockIcon.svg'
-import { ReactComponent as CheckIcon } from '../assets/svg/checkIcon.svg'
+
+import { ReactComponent as StarSolid } from '../assets/svg/star.svg'
+import { ReactComponent as StarOutlined } from '../assets/svg/starOutlined.svg'
 import Switch from 'react-switch'
 
 import { useEffect, useState } from 'react'
@@ -33,78 +34,106 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
     }
 
   }
-  useEffect(() => {
+  const solidStars = 3;
+  const outlinedStars = 5 - 3;
 
-  })
-  console.log(listing)
+  const renderStars = (count, isSolid) => {
+    const starType = isSolid ? <StarSolid className="w-3 md:w-4 aspect-square text-yellow-500"/> : <StarOutlined className="w-3 md:w-4 aspect-square text-yellow-500"/>;
+    const stars = [];
+
+    for (let i = 0; i < count; i++) {
+      stars.push(<span key={i}>{starType}</span>);
+    }
+
+    return stars;
+  };
   return (
-      <div className='w-full ' key={keyId} >
-    <Link className=" w-full" to={`/${listing.category}/${id}`}>
+    <div className='w-full md:w-[290px]' key={keyId} >
+      <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full " to={`/${listing.category}/${id}`}>
+        <div className="absolute right-0 top-0 m-1xx md:m-3 max-w-fit ">
+          {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
+            className=" hover:text-red-500 duration-300 text-2xl text-gray-900   ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
 
-        <div className=" bg-white drop-shadow-md rounded-lg">
-
-          <div className="absolute right-0 md:top-2 p-3 flex flex-col space-y-3">
-            {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
-              className="md:text-[50px] text-lg text-gray-300 hover:text-red-500 duration-300">&hearts;</Link>}
-          </div>
-
-
-          <img loading='lazy' className=" w-[100%] h-24 md:h-34 object-scale-down rounded-tl-lg rounded-tr-lg"
-            src={listing.imgUrls[0]}
-            alt={listing.title}
-          />
-          <div className="px-5 md:px-7 py-0 md:py-5">
-            <p className="text-[20px] font-semibold md:text-2xl mb-2 truncate">{listing.title}</p>
-
-            <div className="mt-6">
-              <p className='text-[15px] md:text-sm font-medium text-gray-600'>rent</p>
-              <span className="text-[20px]  text-blue-500 md:text-sm font-semibold">
-                ₹
-                {listing.offer
-                  ? listing.discountedPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                  : listing.regularPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                {listing.type === 'rent' && <span>/{listing.rentPeriod}</span>}
-
-              </span>
-              {/* <p className="text-[16px] md:text-sm line-through text-gray-500 md:mt-2">{listing.regularPrice}</p>
-                <p className="text-[10px] md:text-sm text-red-700">{Math.round(100-(listing.discountedPrice*100)/(listing.regularPrice))} % OFF</p> */}
-            </div>
-            <div className="flex justify-between items-start py-3">
-
-              {onList && (
-                <div className='flex flex-col items-start '>
-                  <Switch onChange={handleClick} checked={isEnabled} className='editList' height={19}
-                    width={34}
-                    handleDiameter={13} />
-                  <p className={isEnabled ? 'text-red-500 text-[15px] text-lg font-semiboldbold ' : 'text-green-500'}>{isEnabled ? 'Deactivate' : 'Activate  '}</p>
-                </div>
-
-              )}
-              <div className='space-y-1'>
-                {onDelete && (
-                  <DeleteIcon
-                    className='ml-3'
-                    fill='rgb(231, 76,60)'
-                    onClick={() => onDelete(listing.id, listing.name)}
-                  />
-                )}
-                {onEdit && <EditIcon className=' ml-3' onClick={() => onEdit(id)} />}
-              </div>
-
-          
-              
-
-            </div>
-          </div>
+          </Link>}
         </div>
 
-    </Link>
+        <img loading='lazy' className="aspect-[4/3]	w-full sm:object-fit md:object-cover rounded-xl border border-gray-100 shadow-sm "
+          src={listing.imgUrls[0]}
+          alt={listing.title}
+        />
+        <div className=" ">
 
-      </div>
+
+
+
+          <div className=" my-3">
+            <p className="text-xl font-medium md:text-2xl overflow-hidden ">{listing.title}</p>
+
+            <div className='my-2'>
+
+              <div>
+                
+                <div className="flex items-center">
+
+                {renderStars(solidStars, true)}
+                {renderStars(outlinedStars, false)}
+                <span className='text-sm text-gray-600'>(80)</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="">
+            <p className='text-xs md:text-sm font-medium text-gray-600'>rent</p>
+            <span className="text-sm  text-blue-500 md:text-sm font-semibold">
+              ₹
+              {listing.offer
+                ? listing.discountedPrice
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                : listing.regularPrice
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              {listing.type === 'rent' && <span>/{listing.rentPeriod}</span>}
+
+            </span>
+            {/* <p className="text-[16px] md:text-sm line-through text-gray-500 md:mt-2">{listing.regularPrice}</p>
+                <p className="text-[10px] md:text-sm text-red-700">{Math.round(100-(listing.discountedPrice*100)/(listing.regularPrice))} % OFF</p> */}
+          </div>
+          <div className={onList ? " flex justify-between items-start py-3" : "hidden  justify-between items-start py-3"}>
+
+            {onList && (
+              <div className='flex flex-col items-start '>
+                <Switch onChange={handleClick} checked={isEnabled} className='editList' height={19}
+                  width={34}
+                  handleDiameter={13} />
+                <p className={isEnabled ? 'text-red-500 text-[15px] text-lg font-semiboldbold ' : 'text-green-500'}>{isEnabled ? 'Deactivate' : 'Activate  '}</p>
+              </div>
+
+            )}
+            <div className='space-y-1'>
+              {onDelete && (
+                <DeleteIcon
+                  className='ml-3'
+                  fill='rgb(231, 76,60)'
+                  onClick={() => onDelete(listing.id, listing.name)}
+                />
+              )}
+              {onEdit && <EditIcon className=' ml-3' onClick={() => onEdit(id)} />}
+            </div>
+
+
+
+
+          </div>
+        </div>
+    </div>
+
+      </Link >
+
+    </div >
 
     // <li className='categoryListing'>
     //   <Link

@@ -18,6 +18,7 @@ const FeedbackForm = () => {
   const [loading, setLoading] = useState(false);
   const [affordabilityRating, setAffordabilityRating] = useState(0);
   const [rentingExperienceRating, setRentingExperienceRating] = useState(0);
+  const [comment, setComments] = useState(null);
  
   useEffect(() => {
 
@@ -35,18 +36,17 @@ const FeedbackForm = () => {
 
     setLoading(true)
     const docRef = await addDoc(collection(db, "feedback"), {
-       productId: "Product ID",
+       productId: productId,
        user: "User ID",
        text: "Feedback Text",
        easeOfuseRating: easeOfUseRating,
        affordabilityRating: affordabilityRating,
        rentingExperienceRating: rentingExperienceRating,
-       tags: ["Feature Request", "Bug Report"],
        timestamp: serverTimestamp()
     });
     setLoading(false);
     toast.success("Thank you for your feedback");
-    navigate(`/profile`);
+    navigate(`/`);
 
   }
   console.log(product)
@@ -153,7 +153,7 @@ const FeedbackForm = () => {
                   </div>
 
                   <div className="flex justify-between  w-full">
-                    <textarea required onChange={()=>setComments(e.target.value)} placeholder="Share your concerns" cols="30" rows="10" className='border border-black w-full rounded-xl p-3'></textarea>
+                    <textarea required onChange={(e)=>setComments(e.target.value)} placeholder="Share your concerns" cols="30" rows="10" className='border border-black w-full rounded-xl p-3'></textarea>
 
                   </div>
 

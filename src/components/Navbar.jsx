@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Hamburger from 'hamburger-react'
 
@@ -134,7 +134,7 @@ const Navbar = () => {
               <div className="flex md:hidden" >
                 <Hamburger toggled={toogleNav} toggle={setToogleNav} />
                 {
-                  toogleNav && <SideNav />
+                  toogleNav && <SideNav/>
                 }
               </div>
             </>
