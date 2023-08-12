@@ -43,7 +43,7 @@ function App() {
           <Navbar/>
 
         <Suspense fallback="..loading">
-        <div className="mt-16  w-full">
+        <div className="mt-16 h-[100%]  w-full">
           <Routes>
           <Route path='/' element={<Home/>} />
 
@@ -51,10 +51,13 @@ function App() {
           <Route path='/profile' element={<Privateroute/>}>
           <Route path='/profile' element={<Profile/>} />
           </Route>
-          <Route path='/signin' element={<Signin/>} />
+          <Route path='/sign-in' element={<Signin/>} />
           <Route path='/sign-up' element={<Signup/>} />
           <Route path='/forgotpassword' element={<Forgotpassword/>} />
-          <Route path='/create-listing' element={<CreateListing/>} />
+          <Route path="/" element={<Privateroute/>}>
+            <Route  path="/create-listing" element={<CreateListing />}/>
+          </Route>
+          
           <Route path='/edit-listing/:listingId' element={<EditListing/>} />
           <Route path='/:categoryName/:listingId' element={<Listing/>} /> 
           <Route path='/contact/:landlordId' element={<Contact/>} /> 
@@ -76,7 +79,7 @@ function App() {
         </div>
         </Suspense>
        
-        <Footer/>
+        <Footer className="fixed bottom-0"/>
 
       </Router> 
       <ToastContainer/>

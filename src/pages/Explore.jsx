@@ -3,114 +3,23 @@ import { Link } from 'react-router-dom'
 
 import { categories } from '../assets/data'
 
-import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 
 
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-  startAfter,
-} from 'firebase/firestore'
-import { db } from '../firebase.config'
-import { toast } from 'react-toastify'
-import Spinner from '../components/Spinner'
+
+
 import Listingitem from '../components/Listingitem'
 
 
 
-const Explore = () => {
-  const [listings, setListings] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [lastFetchedListing, setLastFetchedListing] = useState(null)
-  const [loadMore, setLoadMore] = useState(false)
-  const [slideIndex, setSlideIndex] = useState(0);
+const Explore = ({listings,onFetchMoreListings,loadMore,lastFetchedListing }) => {
 
 
-
+  console.log(listings)
   const params = useParams()
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        // Get reference
-        const listingsRef = collection(db, 'listings')
-
-        // Create a query
-        const q = query(
-          listingsRef,
-          orderBy('timestamp', 'desc'),
-          limit(10)
-        )
-
-        // Execute query
-        const querySnap = await getDocs(q)
-
-        const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-        setLastFetchedListing(lastVisible)
-
-        const listings = []
-
-        querySnap.forEach((doc) => {
-          return listings.push({
-            id: doc.id,
-            data: doc.data(),
-          })
-        })
-
-        setListings(listings)
-        setLoading(false)
-      } catch (error) {
-        toast.error('Could not fetch listings')
-      }
-    }
-    fetchListings()
-    if (listings?.length > 4) {
-      setLoadMore(true)
-    }
-
-  }, [])
-
-  // Pagination / Load More
-  const onFetchMoreListings = async () => {
-    try {
-      // Get reference
-      const listingsRef = collection(db, 'listings')
-
-      // Create a query
-      const q = query(
-        listingsRef,
-        orderBy('timestamp', 'desc'),
-        startAfter(lastFetchedListing),
-        limit(10)
-      )
-
-      // Execute query
-      const querySnap = await getDocs(q)
-
-      const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-      setLastFetchedListing(lastVisible)
-
-      const listings = []
-
-      querySnap.forEach((doc) => {
-        return listings.push({
-          id: doc.id,
-          data: doc.data(),
-        })
-      })
-
-      setListings((prevState) => [...prevState, ...listings])
-      setLoading(false)
-    } catch (error) {
-      toast.error('Could not fetch listings')
-    }
-  }
+ 
 
   return (
     <>
@@ -157,7 +66,7 @@ const Explore = () => {
                   <h1 className='text-2xl text-gray-800 md:text-[35px] m-3 mb-5 mt-5  uppercase md:px-16 '>Trending products</h1>
                   <div className=''>
                     <div className="grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3">
-                      {listings.map((listing,) => listing.data.listingEnabled && (
+                      {listings.map((listing) => listing.data.listingEnabled && (
 
                         <Listingitem
                           listing={listing.data}

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { categories } from '../assets/data'
@@ -178,7 +178,7 @@ const CreateListing = () => {
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
     setLoading(false);
     toast.success("Listing saved");
-    navigate(`/category/${formDataCopy.type}/${docRef.id}`);
+    navigate(`/category/${docRef.id}`);
   }
 
   const onMutate = (e) => {
@@ -246,13 +246,6 @@ const CreateListing = () => {
   if (loading) {
     return <Spinner />
   }
-
-
-
-
-
-
-
 
   const handleDeleteImage = (index) => {
     const updatedImages = [...selectedImg];

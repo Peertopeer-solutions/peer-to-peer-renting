@@ -133,8 +133,8 @@ function Category() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <div className=' grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-2 md:p-3 md:px-16 px-3'>
-              {listings.map((listing) => listing.data.listingEnabled && (<Listingitem
+            <div className=' grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3'>
+              {listings.map((listing) => listing.data.listingEnabled && (<Listingitem className="border border-1px"
                 listing={listing.data}
                 id={listing.id}
                 key={listing.id}

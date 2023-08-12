@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { ReactComponent as AudioIllustrations } from '../assets/illustration/AudioIllustration.svg'
-import { ReactComponent as Travel } from '../assets/illustration/Travel.svg'
-import { ReactComponent as Waves } from '../assets/illustration/Waves.svg'
-import { ReactComponent as Photo } from '../assets/illustration/Photo.svg'
+
+
 
 
 const Cta = () => {
-    return (
+  
+    return  (
         <>
             <div className="w-5/6 mt-24 mx-auto md:container  md:mx-auto md:flex md:p-6 py-3 ">
 
@@ -31,7 +30,8 @@ const Cta = () => {
                     <div className='flex flex-col items-center mx-auto'>
 
                         <div className='mx-auto relative bottom-12 md:bottom-0 md:right-[100px] -z-20'>
-                            <Photo className='text-red h-full  w-full' />
+                            <img className='text-red h-full  w-full'  src='/src/assets/illustration/Photo.svg' alt="" />
+                            {/* <Photo  className='text-red h-full  w-full' /> */}
 
                         </div>
                         <div className="flex md:hidden items-center justify-start ">
@@ -51,6 +51,7 @@ const Cta = () => {
 
         </>
     )
+
 }
 
 export default Cta

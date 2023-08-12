@@ -1,8 +1,6 @@
 import React from 'react'
-import {ReactComponent as Savings} from '../assets/illustration/Savings.svg'
-import {ReactComponent as Freedom} from '../assets/illustration/Freedom.svg'
-import {ReactComponent as Sustainability} from '../assets/illustration/Sustainability.svg'
-import {ReactComponent as Trust} from '../assets/illustration/Trust.svg'
+
+
 const Features = () => {
   return (
     <div>
@@ -18,7 +16,8 @@ const Features = () => {
         <div className="relative ">
           <dt className=" md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className="flex  items-center justify-center rounded-full">
-              <Freedom className="h-36 w-36 rounded-full"/>
+
+              <img src='/src/assets/illustration/Freedom.svg' className="h-36 w-36 rounded-full"/>
             </div>
             Freedom to Explore
           </dt>
@@ -27,7 +26,8 @@ const Features = () => {
         <div className="relative ">
           <dt className="md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className=" rounded-lg ">
-              <Savings className ="h-36 w-36 rounded-full text-white"/>
+              <img className ="h-36 w-36 rounded-full" src="/src/assets/illustration/Savings.svg" alt="" />
+
             </div>
             Affordability
           </dt>
@@ -37,7 +37,8 @@ const Features = () => {
         <div className="relative ">
           <dt className="md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className="flex  items-center justify-center rounded-lg ">
-             <Sustainability className="h-36 w-36 rounded-full " />
+              <img className="h-36 w-36 rounded-full "  src="src/assets/illustration/Sustainability.svg" alt="" />
+             {/* <Sustainability className="h-36 w-36 rounded-full " /> */}
             </div>
             Sustainability
           </dt>

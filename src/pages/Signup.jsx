@@ -12,10 +12,10 @@ import OAuth from '../components/OAuth'
 const Signup = () => {
     const [showPassword , setShowPassword] = useState(false)
     const [formData , setFormData] = useState({
-        name : '',
+        name :'',
         email:'',
         password:'',
-        token:''
+        
     })
     const { name,  email , password } = formData
     const navigate = useNavigate()
@@ -27,6 +27,7 @@ const Signup = () => {
         }))
         
     }
+    console.log(formData)
     const onSubmit = async (e) =>{
         e.preventDefault()
 
@@ -34,12 +35,12 @@ const Signup = () => {
             const auth =getAuth()
             const userCredential = await createUserWithEmailAndPassword(auth , email , password)
             const user = userCredential.user
-
+            console.log(user)
             updateProfile(auth.currentUser , {
                 displayName : name
             })
 
-            const formDataCopy = {...formData}
+        const formDataCopy = {...formData}
         delete formDataCopy.password
         formDataCopy.timestamp = serverTimestamp()
 
@@ -70,7 +71,7 @@ const Signup = () => {
             id = 'email'
             value={email}
             onChange={onChange}/>
-            <div className='passwordInputDiv'>
+            <div className='passwordInputDiv border-1 border'>
                 <input type={showPassword? 'text' : 'password' }
                 className='passwordInput' placeholder="Password"
                 id="password" value={password} onChange={onChange} />

@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 
 function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
   const [formData, setFormData] = useState({ ...listing })
+  const [rating, setRating] = useState(0)
   const [isEnabled, setIsEnabled] = useState(listing?.listingEnabled)
   const handleClick = async () => {
     const docRef = doc(db, 'listings', id)
@@ -34,8 +35,9 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
     }
 
   }
-  const solidStars = 3;
-  const outlinedStars = 5 - 3;
+
+  const solidStars = rating;
+  const outlinedStars = 5 - rating;
 
   const renderStars = (count, isSolid) => {
     const starType = isSolid ? <StarSolid className="w-3 md:w-4 aspect-square text-yellow-500"/> : <StarOutlined className="w-3 md:w-4 aspect-square text-yellow-500"/>;
@@ -51,13 +53,13 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
     <div className='w-full md:w-[290px]' key={keyId} >
       <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full " to={`/${listing.category}/${id}`}>
         <div className="absolute right-0 top-0 m-1xx md:m-3 max-w-fit ">
-          {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
+          {/* {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
             className=" hover:text-red-500 duration-300 text-2xl text-gray-900   ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
 
-          </Link>}
+          </Link>} */}
         </div>
 
         <img loading='lazy' className="aspect-[4/3]	w-full sm:object-fit md:object-cover rounded-xl border border-gray-100 shadow-sm "
@@ -76,12 +78,12 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
 
               <div>
                 
-                <div className="flex items-center">
+               {rating >0 && <div className="flex items-center">
 
                 {renderStars(solidStars, true)}
                 {renderStars(outlinedStars, false)}
                 <span className='text-sm text-gray-600'>(80)</span>
-              </div>
+              </div>}
             </div>
           </div>
 
