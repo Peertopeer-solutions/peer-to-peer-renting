@@ -7,11 +7,12 @@ import {getFunctions} from 'firebase/functions'
 
 export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain:  "awesome-renting.firebaseapp.com",
-  projectId:  "awesome-renting",
-  storageBucket: "awesome-renting.appspot.com",
-  messagingSenderId: "702713068942",
-  appId: "1:702713068942:web:6620f924cf541a261238df"
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID  ,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER  ,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
+
 };
 
 // Initialize Firebase
