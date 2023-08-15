@@ -129,7 +129,7 @@ const Navbar = () => {
                 >
                   How it works
                 </Link>
-                <Link to="/signin" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
+                <Link to="/sign-in" className="bg-blue-600 text-white p-1 px-2 rounded-full">Sign-In</Link>
               </div>
               <div className="flex md:hidden" >
                 <Hamburger toggled={toogleNav} toggle={setToogleNav} />

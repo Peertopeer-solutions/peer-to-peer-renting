@@ -44,21 +44,21 @@ const ProfilePage = () => {
     {/* <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"/>  */}
 
 
-<main class="h-full ">
-  <section class="">
+<main class="">
+  {/* <section class="">
     <div class="absolute top-0 w-full h-[500px] bg-center bg-cover " style={{ 
   backgroundImage: "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80')",
 }}>
       <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
     </div>
-    {/* <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style={{ transform: 'translateZ(0px)' }}>
+    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style={{ transform: 'translateZ(0px)' }}>
       <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
         <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
       </svg>
-    </div> */}
-  </section>
-  <section class="relative pt-12 md:pt-24 bg-blueGray-200">
-    <div class=" mx-auto px-4  ">
+    </div>
+  </section> */}
+  <section class="mt-12 pt-16 md:pt-24 border ">
+    <div class=" mx-auto px-4  border border-red-500">
       <div class="relative flex flex-col break-words  bg-white w-full mb-6 shadow-xl rounded-lg ">
         <div class="px-6  ">
           <div class="flex flex-wrap justify-center">
