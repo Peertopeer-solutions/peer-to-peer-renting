@@ -21,4 +21,3 @@ export const db = getFirestore(app)
 export const messaging = getMessaging(app);
 export const functions = getFunctions(app);
 
-// "AIzaSyByBWbpNlNbLlg5BrbzJc-DQ5pd_S-0IB8"
