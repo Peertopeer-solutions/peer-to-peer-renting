@@ -1,5 +1,5 @@
 ## Workflow Status
-![Workflow](https://github.com/devesh911/peer-to-peer-renting/actions/workflows/firebase-hosting-merge.yml/badge.svg)
+![Workflow](https://github.com/devesh911/peer-to-peer-renting/actions/workflows/firebase-hosting-merge.yml/badge.svg)  
 ![Workflow](https://github.com/devesh911/peer-to-peer-renting/actions/workflows/firebase-hosting-pull-request.yml/badge.svg)
 
 ## Prerequisites
