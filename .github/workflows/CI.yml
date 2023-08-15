@@ -40,12 +40,21 @@ jobs:
         run: npm run build
 
   production:
+    env:
+      REACT_FIREBASE_API_KEY: ${{secrets.VITE_FIREBASE_API_KEY}}
+      REACT_FIREBASE_AUTH_DOMAIN: ${{secrets.VITE_FIREBASE_AUTH_DOMAIN}}
+      REACT_FIREBASE_PROJECT_ID: ${{secrets.VITE_FIREBASE_PROJECT_ID}}
+
+    environment:
+      name: Production
+      url: https://rentivity.in/
     name: Deployment to Production
     runs-on: ubuntu-latest
     needs: [build]
     # environment: Production
     steps:
       - uses: actions/checkout@v3
+      - run: echo $REACT_FIREBASE_API_KEY $REACT_FIREBASE_AUTH_DOMAIN $REACT_FIREBASE_PROJECT_ID
       - name: Clean install dependencies and build
         run: npm ci && npm run build
       - name: Deploy to Firebase hosting
