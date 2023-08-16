@@ -51,7 +51,6 @@ jobs:
     name: Deployment to Production
     runs-on: ubuntu-latest
     needs: [build]
-    # environment: Production
     steps:
       - uses: actions/checkout@v3
       - run: echo $REACT_FIREBASE_API_KEY $REACT_FIREBASE_AUTH_DOMAIN $REACT_FIREBASE_PROJECT_ID
