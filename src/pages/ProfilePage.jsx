@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase.config'
-import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import arrowRight from '../../public/assets/svg/keyboardArrowRightIcon.svg'
 
 const ProfilePage = () => {
   

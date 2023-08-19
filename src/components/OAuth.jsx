@@ -4,7 +4,7 @@ import { getAuth , signInWithPopup , GoogleAuthProvider } from 'firebase/auth'
 import { doc , getDoc , setDoc , serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
-import googleIcon from '../assets/svg/googleIcon.svg'
+import googleIcon from '../../public/assets/svg/googleIcon.svg'
 
 const OAuth = () => {
     const location = useLocation()

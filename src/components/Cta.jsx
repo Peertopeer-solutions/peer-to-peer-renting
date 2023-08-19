@@ -30,7 +30,7 @@ const Cta = () => {
                     <div className='flex flex-col items-center mx-auto'>
 
                         <div className='mx-auto relative bottom-12 md:bottom-0 md:right-[100px] -z-20'>
-                            <img className='text-red h-full  w-full'  src='/src/assets/illustration/Photo.svg' alt="" />
+                            <img className='text-red h-full  w-full'  src='/assets/illustration/Photo.svg' alt="" />
                             {/* <Photo  className='text-red h-full  w-full' /> */}
 
                         </div>

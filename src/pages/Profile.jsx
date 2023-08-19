@@ -15,7 +15,7 @@ import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Listingitem from '../components/Listingitem'
-import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import arrowRight from '../../public/assets/svg/keyboardArrowRightIcon.svg'
 import Orders from '../components/Orders'
 import ProfilePage from './ProfilePage'
 

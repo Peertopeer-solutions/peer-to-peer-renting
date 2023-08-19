@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 
-import { ReactComponent as DeleteIcon } from '../assets/svg/deleteIcon.svg'
-import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg'
+import { ReactComponent as DeleteIcon } from '../../public/assets/svg/deleteIcon.svg'
+import { ReactComponent as EditIcon } from '../../public/assets/svg/editIcon.svg'
 
-import { ReactComponent as StarSolid } from '../assets/svg/star.svg'
-import { ReactComponent as StarOutlined } from '../assets/svg/starOutlined.svg'
+import { ReactComponent as StarSolid } from '../../public/assets/svg/star.svg'
+import { ReactComponent as StarOutlined } from '../../public/assets/svg/starOutlined.svg'
 import Switch from 'react-switch'
 
 import { useEffect, useState } from 'react'

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import { categories } from '../assets/data'
+import { categories } from '../../public/assets/data'
 
 import { useParams } from 'react-router-dom'
 

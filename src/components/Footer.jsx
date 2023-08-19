@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { ReactComponent as Drone } from '../assets/illustration/Drone.svg'
+import { ReactComponent as Drone } from '../../public/assets/illustration/Drone.svg'
 
 
 

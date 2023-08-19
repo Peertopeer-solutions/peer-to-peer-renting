@@ -17,7 +17,7 @@ const Features = () => {
           <dt className=" md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className="flex  items-center justify-center rounded-full">
 
-              <img src='/src/assets/illustration/Freedom.svg' className="h-36 w-36 rounded-full"/>
+              <img src='/assets/illustration/Freedom.svg' className="h-36 w-36 rounded-full"/>
             </div>
             Freedom to Explore
           </dt>
@@ -26,7 +26,7 @@ const Features = () => {
         <div className="relative ">
           <dt className="md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className=" rounded-lg ">
-              <img className ="h-36 w-36 rounded-full" src="/src/assets/illustration/Savings.svg" alt="" />
+              <img className ="h-36 w-36 rounded-full" src="/assets/illustration/Savings.svg" alt="" />
 
             </div>
             Affordability
@@ -37,7 +37,7 @@ const Features = () => {
         <div className="relative ">
           <dt className="md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">
             <div className="flex  items-center justify-center rounded-lg ">
-              <img className="h-36 w-36 rounded-full "  src="src/assets/illustration/Sustainability.svg" alt="" />
+              <img className="h-36 w-36 rounded-full "  src="/assets/illustration/Sustainability.svg" alt="" />
              {/* <Sustainability className="h-36 w-36 rounded-full " /> */}
             </div>
             Sustainability

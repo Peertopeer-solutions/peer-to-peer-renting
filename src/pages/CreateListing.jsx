@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { categories } from '../assets/data';
+import { categories } from '../../public/assets/data';
 import {
 	getStorage,
 	ref,
