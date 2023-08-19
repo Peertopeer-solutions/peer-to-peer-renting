@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "awesome-renting"
+    "default": "awesome-renting",
+    "staging": "awesomerentinggamma"
   }
 }
