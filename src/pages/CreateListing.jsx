@@ -13,6 +13,9 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 import AuthContext from '../FirebaseAuthContext';
+import UploadIcon from '../components/Form/UploadIcon';
+import DropZone from '../components/UI/Dropzone';
+import DeleteCrossIcon from '../components/UI/DeleteCrossIcon';
 
 const CreateListing = () => {
 	// eslint-disable-next-line
@@ -173,6 +176,17 @@ const CreateListing = () => {
 		navigate(`/category/${docRef.id}`);
 	};
 
+	const onUploadFile = (acceptedFiles) => {
+		// console.log(acceptedFiles);
+		if (acceptedFiles.length > 0) {
+			setSelectedImg((prevState) => [...prevState, ...acceptedFiles]);
+			setFormData((prevState) => ({
+				...prevState,
+				images: [...prevState.images, ...acceptedFiles],
+			}));
+		}
+	};
+
 	const onMutate = (e) => {
 		let boolean = null;
 
@@ -182,19 +196,6 @@ const CreateListing = () => {
 		if (e.target.value === 'false') {
 			boolean = false;
 		}
-
-		// Files
-		if (e.target.files) {
-			const files = Array.from(e.target.files);
-			const images = files.filter((file) => file.type.includes('image'));
-			setSelectedImg(Array.from(e.target.files));
-
-			setFormData((prevState) => ({
-				...prevState,
-				images: e.target.files,
-			}));
-		}
-
 		// Text/Booleans/Numbers
 		if (!e.target.files) {
 			setFormData((prevState) => ({
@@ -274,61 +275,19 @@ const CreateListing = () => {
 											}}
 											className='absolute top-2 right-2 bg-red-500 rounded-full p-1 text-white'
 										>
-											<svg
-												xmlns='http://www.w3.org/2000/svg'
-												viewBox='0 0 24 24'
-												fill='none'
-												stroke='currentColor'
-												className='h-4 w-4'
-											>
-												<path
-													strokeLinecap='round'
-													strokeLinejoin='round'
-													strokeWidth='2'
-													d='M6 18L18 6M6 6l12 12'
-												></path>
-											</svg>
+											<DeleteCrossIcon />
 										</button>
 									</div>
 								))}
 							</div>
 							<label
-								htmlfor='images'
+								htmlFor='images'
 								className='text-sm font-bold text-gray-500 tracking-wide'
 							>
 								Upload media
 							</label>
-							<div className='flex items-center justify-center w-full'>
-								<label
-									htmlFor='images'
-									className='flex flex-col rounded-lg border border-2px w-full items-center justify-center h-24  p-3 group text-center cursor-pointer'
-								>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 24 24'
-										strokeWidth={1.5}
-										stroke='currentColor'
-										className='w-9 h-9'
-									>
-										<path
-											strokeLinecap='round'
-											strokeLinejoin='round'
-											d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5'
-										/>
-									</svg>
-								</label>
-								<input
-									type='file'
-									id='images'
-									onChange={onMutate}
-									max='4'
-									accept='.jpg,.png,.jpeg'
-									multiple
-									required
-									className='hidden'
-								/>
-							</div>
+							<DropZone onSelectFiles={onUploadFile} />
+
 							<p className='text-sm text-gray-300'>
 								<span>File type: doc, pdf, types of images</span>
 							</p>
@@ -371,6 +330,7 @@ const CreateListing = () => {
 								name='dropdown'
 								id='category'
 								onChange={onMutate}
+								value={formData.category}
 							>
 								<option value='⬇️ Select a category ⬇️'>
 									{' '}
@@ -433,16 +393,19 @@ const CreateListing = () => {
 									required
 								/>
 								{type === 'rent' && (
-									<p className=''>
-										₹/
-										<select name='dropdown' id='rentPeriod' onChange={onMutate}>
-											<option value='Day' selected>
-												Day
-											</option>
+									<div className='flex'>
+										<p className='ml-3 mr-1 font-bold'>₹ /</p>
+										<select
+											name='dropdown'
+											id='rentPeriod'
+											onChange={onMutate}
+											value={formData.rentPeriod}
+										>
+											<option value='Day'>Day</option>
 											<option value='Week'>Week</option>
 											<option value='Month'>Month</option>
 										</select>
-									</p>
+									</div>
 								)}
 							</div>
 
