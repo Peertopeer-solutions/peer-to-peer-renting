@@ -15,7 +15,8 @@ import Spinner from '../components/Spinner';
 import AuthContext from '../FirebaseAuthContext';
 import UploadIcon from '../components/Form/UploadIcon';
 import DropZone from '../components/UI/DropZone';
-import DeleteCrossIcon from '../components/UI/DeleteCrossIcon';
+import DeleteCrossIcon from '@/components/UI/DeleteCrossIcon';
+import ImagePreview from '@/components/UI/ImagePreview';
 
 const CreateListing = () => {
 	// eslint-disable-next-line
@@ -266,18 +267,12 @@ const CreateListing = () => {
 						<div className='grid grid-cols-1 space-y-2'>
 							<div className='grid grid-cols-2 md:grid-cols-4 gap-2 place-content-center place-items-center'>
 								{selectedImg?.map((image, index) => (
-									<div key={index} className='relative  p-3'>
-										<img src={URL.createObjectURL(image)} alt='' />
-
-										<button
-											onClick={(e) => {
-												handleDeleteImage(index);
-											}}
-											className='absolute top-2 right-2 bg-red-500 rounded-full p-1 text-white'
-										>
-											<DeleteCrossIcon />
-										</button>
-									</div>
+									<ImagePreview
+										key={index}
+										id={index}
+										deleteHandler={handleDeleteImage}
+										image={image}
+									/>
 								))}
 							</div>
 							<label
