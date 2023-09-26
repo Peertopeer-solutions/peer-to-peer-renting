@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 import AuthContext from '../FirebaseAuthContext';
 import UploadIcon from '../components/Form/UploadIcon';
-import DropZone from '../components/UI/Dropzone';
+import DropZone from '../components/UI/DropZone';
 import DeleteCrossIcon from '../components/UI/DeleteCrossIcon';
 
 const CreateListing = () => {

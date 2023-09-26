@@ -25,17 +25,7 @@ const DropZone = (props) => {
 				Select or drop an image
 				<UploadIcon className='mt-2' />
 			</label>
-			<input
-				{...getInputProps()}
-				// type='file'
-				// id='images'
-				// // onChange={onMutate}
-				// max='4'
-				// accept='.jpg,.png,.jpeg'
-				// multiple
-				// required
-				// className='hidden'
-			/>
+			<input {...getInputProps()} />
 		</div>
 	);
 };
