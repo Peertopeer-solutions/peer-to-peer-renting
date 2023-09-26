@@ -7,108 +7,71 @@ import {
   orderBy,
   limit,
   startAfter,
+  startAt,
+  endBefore,
+  getCountFromServer,
 } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
-import Cta from '../components/Cta'
-import Features from '../components/Features'
+
 
 import Explore from './Explore'
+import DatePickerStyled from '../components/UI/DatePickerStyled'
+import { useLocation } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import Pagination from '../components/Pagination'
 
 const Home = () => {
 
-  const [listings, setListings] = useState(null)
-  const [loading, setLoading] = useState()
+  const [totalDocs, setTotalDocs] = useState()
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
-  const [loadMore, setLoadMore] = useState(false)
 
-  useEffect(() => {
-   
-    const fetchListings = async () => {
-      try {
-        // Get reference
-        const listingsRef = collection(db, 'listings')
+  const {pathName} = useLocation()
 
-        // Create a query
-        const q = query(
-          listingsRef,
-          orderBy('timestamp', 'desc'),
-          limit(10)
-        )
+  const [currentPage, setCurrentPage] = useState(1);
 
-        // Execute query
-        const querySnap = await getDocs(q)
-
-        const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-        setLastFetchedListing(lastVisible)
-
-        const listings = []
-
-        querySnap.forEach((doc) => {
-          return listings.push({
-            id: doc.id,
-            data: doc.data(),
-          })
-        })
-
-        setListings(listings)
-        setLoading(false)
-      } catch (error) {
-        toast.error('Could not fetch listings')
-      }
-    }
-    fetchListings()
-    if (listings?.length > 4) {
-      setLoadMore(true)
-    }
-
-  }, [])
-
-  // Pagination / Load More
-  const onFetchMoreListings = async () => {
-    try {
-      // Get reference
-      const listingsRef = collection(db, 'listings')
-
-      // Create a query
-      const q = query(
-        listingsRef,
+  const { data, isLoading, error } = useQuery(
+    ["paginatedData", currentPage],
+    async () => {
+      const listingref = collection(db, "listings");
+      let q = query(
+        listingref, 
         orderBy('timestamp', 'desc'),
-        startAfter(lastFetchedListing),
-        limit(10)
-      )
+        limit(10));
 
-      // Execute query
-      const querySnap = await getDocs(q)
+      // Start after the last document from the previous page, if applicable.
+      if (currentPage > 1) {
+        q = query(
+          listingref,
+          orderBy('timestamp', 'desc'),
+          startAfter(lastFetchedListing)
+          , limit(10));
+      }
 
-      const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-      setLastFetchedListing(lastVisible)
-
+      const snapshot = await getDocs(q);
+      const countSnapShot = await getCountFromServer(listingref)
+      setTotalDocs(countSnapShot.data().count)
+      setLastFetchedListing(snapshot.docs[snapshot.docs.length - 1])
       const listings = []
 
-      setTimeout(() => {
-         querySnap.forEach((doc) => {
+      snapshot.forEach((doc) => {
         return listings.push({
           id: doc.id,
           data: doc.data(),
         })
       })
-      }, 3000);
-     
-
-      setListings((prevState) => [...prevState, ...listings])
-      setLoading(false)
-    } catch (error) {
-      toast.error('Could not fetch listings')
+      return listings
     }
-  }
+  );
+
   return (
 
         <>
-          <Cta/>
-          <Features />
-          <Explore listings = {listings}  loadMore= {loadMore} onFetchMoreListings= {onFetchMoreListings} lastFetchedListing={lastFetchedListing}/>
+
+          <Explore isLoading={isLoading} error={error} listings = {data} currentPage={currentPage}  totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)} />
+          <Pagination  currentPage={currentPage}  totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)}/>
+
         </>
       
   

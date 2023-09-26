@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { auth } from '../firebase.config'
+import { auth, db } from '../firebase.config'
 import arrowRight from '../../public/assets/svg/keyboardArrowRightIcon.svg'
+import { updateProfile } from 'firebase/auth'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const ProfilePage = () => {
   
@@ -22,7 +24,8 @@ const ProfilePage = () => {
 
         // Update in firestore
         const userRef = doc(db, 'users', auth.currentUser.uid)
-        await updateDoc(userRef, {
+        console.log(auth.currentUser.uid)
+        await updateDoc (userRef, {
           name, 
         })
       }
@@ -45,26 +48,19 @@ const ProfilePage = () => {
 
 
 <main class="">
-  {/* <section class="">
-    <div class="absolute top-0 w-full h-[500px] bg-center bg-cover " style={{ 
-  backgroundImage: "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80')",
-}}>
-      <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
-    </div>
-    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style={{ transform: 'translateZ(0px)' }}>
-      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
-    </div>
-  </section> */}
-  <section class="mt-12 pt-16 md:pt-24 border ">
-    <div class=" mx-auto px-4  border border-red-500">
-      <div class="relative flex flex-col break-words  bg-white w-full mb-6 shadow-xl rounded-lg ">
-        <div class="px-6  ">
+  <section class="">
+   <div className='bg-gradient-to-r from-cyan-500 to-blue-500 h-[146px] md:h-[250px] flex justify-end p-2'>
+    <p>edit</p>
+   </div>
+  </section>
+  <section class="relative -top-16 md:-top-24 pt-16 md:pt-24  ">
+    <div class="  w-full ">
+      <div class="relative flex break-words max-auto w-full  rounded-lg ">
+        <div class="sm:px-6  mx-auto ">
           <div class="flex flex-wrap justify-center">
             <div class="w-full  px-4  flex justify-center">
               <div class="mx-auto absolute -top-12 md:-top-16">
-                <img alt="..." src={auth.currentUser.photoURL} class="aspect-square w-24 md:w-44  shadow-xl rounded-full   "/>
+                <img alt="Profile image" src={auth.currentUser.photoURL} class="aspect-square w-24 md:w-44  rounded-full ring-4 ring-white  "/>
               </div>
             </div>
             {/* <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -89,11 +85,11 @@ const ProfilePage = () => {
             </div> */}
           </div>
           <div class="text-center mt-[4rem] md:mt-36 ">
-          <form className='space-y-6 '>
+          <form className='space-y-6'>  
             <input
               type='text'
               id='name'
-              className={!changeDetails ? 'bg-white text-3xl text-center md:text-4xl font-semibold leading-normal text-blueGray-700  w-full' : 'p-2 ring-1 ring-black  rounded w-full'}
+              className={!changeDetails ? 'bg-white text-[16px] text-center md:text-4xl font-semibold leading-normal text-blueGray-700  w-full' : 'p-2 ring-1 ring-black  rounded w-full'}
               disabled={!changeDetails}
               value={name}
               onChange={onChange}
@@ -108,7 +104,7 @@ const ProfilePage = () => {
             />} */}
           </form>
           <button
-            className='bg-blue-700 p-2 text-white rounded-full  px-6 my-6'
+            className='bg-blue-700 p-2 text-white rounded-full  px-6 my-3'
             onClick={() => {
               changeDetails && onSubmit()
               setChangeDetails((prevState) => !prevState)
@@ -130,13 +126,24 @@ const ProfilePage = () => {
               <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer Science
             </div> */}
           </div>
-          <div className='my-3 p-3  flex flex-col jsutify-start space-y-3 w-full md:w-max rounded-sm '>
           
-          <Link to='/create-listing' className='rounded-full p-3 flex w-max  ring-2 ring-blue-700'>
+          <div className=' p-3 mx-auto flex flex-col jsutify-start space-y-3  rounded-sm '>
+          
+          <Link to='/create-listing' className='text-sm md:text-lg mx-auto border-black  flex w-max hover:-translate-y-2 hover:border-b-2 '>
           
           <p>rent your products</p>
           <img src={arrowRight} alt='arrow right' />
         </Link>
+       
+       
+        </div>
+          <div className=' p-3 mx-auto flex flex-col jsutify-start space-y-3  md:w-max rounded-sm  '>
+          
+          <button className='text-sm md:text-lg mx-auto  border-black flex hover:-translate-y-2 hover:border-b-2  '>
+          
+          <p>Share your rental store</p>
+          <img src={arrowRight} alt='arrow right' />
+        </button>
        
        
         </div>

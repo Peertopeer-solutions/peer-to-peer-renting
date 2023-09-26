@@ -20,7 +20,7 @@ const Privateroute = () => {
         return <Spinner/>
     }
 
-  return loggedIn ? <Outlet/> : <Navigate to='/signin' />
+  return loggedIn ? <Outlet/> : <Navigate to='/sign-in' />
 }
 
 export default Privateroute

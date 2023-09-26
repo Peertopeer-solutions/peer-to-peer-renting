@@ -41,7 +41,7 @@ const CreateListing = () => {
 
 	const {
 		type,
-		name,
+		title,
 		description,
 		category,
 		address,
@@ -173,7 +173,7 @@ const CreateListing = () => {
 		const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
 		setLoading(false);
 		toast.success('Listing saved');
-		navigate(`/category/${docRef.id}`);
+		navigate(`/${category}/${docRef.id}`);
 	};
 
 	const onUploadFile = (acceptedFiles) => {
@@ -300,7 +300,7 @@ const CreateListing = () => {
 								className='text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500'
 								type='text'
 								id='title'
-								value={name}
+								value={title}
 								onChange={onMutate}
 								placeholder='XYZ camera'
 								required

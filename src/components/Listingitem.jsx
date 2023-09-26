@@ -3,18 +3,17 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as DeleteIcon } from '../../public/assets/svg/deleteIcon.svg'
 import { ReactComponent as EditIcon } from '../../public/assets/svg/editIcon.svg'
 
-import { ReactComponent as StarSolid } from '../../public/assets/svg/star.svg'
-import { ReactComponent as StarOutlined } from '../../public/assets/svg/starOutlined.svg'
 import Switch from 'react-switch'
 
 import { useEffect, useState } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
+import RatingUI from './UI/RatingUI'
 
 function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
   const [formData, setFormData] = useState({ ...listing })
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(4)
   const [isEnabled, setIsEnabled] = useState(listing?.listingEnabled)
   const handleClick = async () => {
     const docRef = doc(db, 'listings', id)
@@ -36,19 +35,7 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
 
   }
 
-  const solidStars = rating;
-  const outlinedStars = 5 - rating;
 
-  const renderStars = (count, isSolid) => {
-    const starType = isSolid ? <StarSolid className="w-3 md:w-4 aspect-square text-yellow-500"/> : <StarOutlined className="w-3 md:w-4 aspect-square text-yellow-500"/>;
-    const stars = [];
-
-    for (let i = 0; i < count; i++) {
-      stars.push(<span key={i}>{starType}</span>);
-    }
-
-    return stars;
-  };
   return (
     <div className='w-full md:w-[290px]' key={keyId} >
       <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full " to={`/${listing.category}/${id}`}>
@@ -72,19 +59,11 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
 
 
           <div className=" my-3">
-            <p className="text-xl font-medium md:text-2xl overflow-hidden ">{listing.title}</p>
+            <p className="text-[16px] font-medium md:text-xl overflow-hidden line-clamp-2">{listing.title}</p>
 
             <div className='my-2'>
 
-              <div>
-                
-               {rating >0 && <div className="flex items-center">
-
-                {renderStars(solidStars, true)}
-                {renderStars(outlinedStars, false)}
-                <span className='text-sm text-gray-600'>(80)</span>
-              </div>}
-            </div>
+              <RatingUI rating={rating} />
           </div>
 
           <div className="">

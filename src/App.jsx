@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 const Category = lazy(() => import('./pages/Category'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -10,10 +10,12 @@ const Forgotpassword = lazy(() => import('./pages/Forgotpassword'));
 import Navbar from './components/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfileSetup from './pages/ProfileSetup';
+import Spinner from './components/Spinner';
 
 const Privateroute = lazy(() => import('./components/Privateroute'));
 const CreateListing = lazy(() => import('./pages/CreateListing'));
-const Listing = lazy(() => import('./pages/Listing'));
+const Listing = lazy(() => import('./pages/Listing/Listing'));
 const Contact = lazy(() => import('./pages/Contact'));
 const EditListing = lazy(() => import('./pages/EditListing'));
 const RequestedRental = lazy(() => import('./pages/RequestedRental'));
@@ -30,18 +32,37 @@ const ShippingPolicy = lazy(() => import('./pages/ShippingPolicy'));
 const DamagePolicy = lazy(() => import('./pages/DamagePolicy'));
 const Home = lazy(() => import('./pages/Home'));
 const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
-
+import Cta from './components/UI/Cta'
+import Features from './components/UI/Features'
+import LandingPage from './components/LandingPage';
 function App() {
+	const [loading, setLoading] = useState(true);
+	const { pathname } = useLocation();
+	console.log(pathname)
+	// Simulate a delay for loading purposes
+	useEffect(()=>{
+		window.scrollTo(0,0)
+	},[pathname])
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setLoading(false);
+		}, 1000); // Adjust the delay time as needed
+
+		return () => clearTimeout(timeout);
+	}, []);
 	return (
 		<>
 			<Navbar />
+		<Routes>
+			<Route path='/' element={<LandingPage/>}/>
 
-			<Suspense fallback='..loading'>
-				<div className='mt-16 h-[100%]  w-full'>
+		</Routes>
+
+			<Suspense >
+				<div className=' h-[100%] pt-9 w-full'>
 					<Routes>
-						<Route path='/' element={<Home />} />
-
-						<Route path='/category/:categoryName' element={<Category />} />
+						<Route path='/' element={<Home/>} />
+						<Route path='/category/:categoryName' element={<Category/>} />
 						<Route path='/profile' element={<Privateroute />}>
 							<Route path='/profile' element={<Profile />} />
 						</Route>
@@ -77,11 +98,12 @@ function App() {
 
 						<Route path='/shipping-policy' element={<ShippingPolicy />} />
 						<Route path='/damages-policy' element={<DamagePolicy />} />
+						<Route path='/profileset' element={<ProfileSetup/>} />
 					</Routes>
 				</div>
 			</Suspense>
 
-			<Footer className='fixed bottom-0' />
+			{!loading && <Footer />}
 
 			<ToastContainer />
 		</>

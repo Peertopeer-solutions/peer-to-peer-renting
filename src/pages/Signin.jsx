@@ -39,9 +39,9 @@ const Signin = () => {
         
     }
   return (
-    <div className='border m-2 border-red-600 p-6'>
+    <div className='md:border flex flex-col items-center justify-center my-9 md:shadow-md  rounded-xl  space-y-6 m-2 px-6 w-full md:w-2/4 lg:w-2/5 xl:w-1/3  mx-auto md:h-[80vh] sm:text-[16px] md:text-xl'>
         <header>
-            <p className='pageHeader'>Welcome Back!</p>
+            <p className='pageHeader'>Welcome!</p>
         </header>
         <form onSubmit={onSubmit}>
             <input type='email'
@@ -59,15 +59,20 @@ const Signin = () => {
                 className='showPassword'
                 onClick={() => setShowPassword((prevState)=> !prevState)}/>
             </div>
-            <Link to='/forgotpassword' className='forgotPasswordLink'>Forgot Password </Link>
-            <div className='signInBar'>
-                <p className='signInText'> Sign In</p>
-                <button className='signInButton'> 
-                <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
+            <div className='flex justify-betwee'>
+            <div className=' flex justify-center items-center gap-4 '>
+                <p className='text-xl font-bold'> Sign In</p>
+                <button className=''> 
+                <ArrowRightIcon fill='#ffffff' className="bg-black w-10 aspect-square rounded-full flex justify-end"/>
                 </button>
             </div>
+            <Link to='/forgotpassword' className='flex justify-center my-4 text-red-500'>Forgot Password </Link>
+
+
+            </div>
+           
         </form>
-        <OAuth/>
+        <OAuth className=""/>
         <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
     </div>
   )

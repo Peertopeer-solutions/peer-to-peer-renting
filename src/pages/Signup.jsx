@@ -49,6 +49,9 @@ const Signup = () => {
         }
         
         catch(error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
             toast.error('Something Went Wrong')
         }
 
@@ -83,7 +86,7 @@ const Signup = () => {
             <Link to='/forgot-password' className='forgotPasswordLink'>Forgot Password </Link>
             <div className='signInBar'>
                 <p className='signInText'> Sign Up</p>
-                <button className='signInButton'> 
+                <button className='bg-black'> 
                 <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
                 </button>
             </div>

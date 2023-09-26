@@ -6,7 +6,7 @@ const DatePicker = ({setEndDate,setStartDate, startDate, endDate}) => {
 
   const today = new Date();
   const minSelectableDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
+  console.log(minSelectableDate)
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -28,7 +28,6 @@ const DatePicker = ({setEndDate,setStartDate, startDate, endDate}) => {
                   selectsRange
                   inline
                   minDate={minSelectableDate}
-
                 />
     
                 {/* <Datepicker

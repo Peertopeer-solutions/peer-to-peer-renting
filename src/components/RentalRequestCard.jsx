@@ -44,7 +44,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
   const date = new Date(rentals.timestamp?.seconds * 1000).toLocaleString('en-US', options);
   const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
   const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
-  console.log(product)
+
   return (
     <div className='flex flex-col items-center'>
       <div className='w-full rounded-lg shadow-md lg:max-w-sm bg-white md:p-3'>

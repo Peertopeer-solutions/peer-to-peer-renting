@@ -75,8 +75,8 @@ const Navbar = () => {
     //     </nav>
 
     // </nav>
-    <div className="border">
-      <nav className=" w-[100%]  fixed top-0 mx-auto p-2 md:p-3 bg-white z-10 border ">
+    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed  z-10">
+      <div className="   p-2 md:p-3 bg-white  border ">
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="">
@@ -141,8 +141,8 @@ const Navbar = () => {
             )
           )}
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 };
 

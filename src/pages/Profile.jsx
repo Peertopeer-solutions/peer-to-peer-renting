@@ -39,6 +39,7 @@ function Profile() {
   const navigate = useNavigate()
 
 
+
   useEffect(() => {
     const fetchData = async () => {
       const listingsRef = collection(db, 'listings')
@@ -117,30 +118,30 @@ function Profile() {
 
   const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`)
 
-  const isNotActiveStyle = 'text-[16px] md:text-[24px] my-3 font-semibold  px-3 flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
-  const isActiveStyle = 'text-[16px] md:text-[24px] my-3 font-semibold  px-3 flex items-center px-7 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize';
+  const isNotActiveStyle = 'text-[16px] md:text-[24px] my-3 font-semibold  px-3 flex items-center px-5 gap-3 text-gray-500   capitalize border ';
+  const isActiveStyle = 'text-[16px] md:text-[24px] my-3 font-semibold  px-3 flex items-center px-7 gap-3 font-extrabold border-r-2  transition-all duration-200 ease-in-out capitalize';
   const [activeSection, setActiveSection] = useState('listings'); // Default to 'listings'
 
   return (
     <>
-     <ProfilePage />
-    <div className=' '>
-      
-
-      <main className='h-full md:flex'>
+      <ProfilePage />
 
 
 
+      <main className='h-full flex-col '>
 
-        <div className=' bg-gray-50 flex md:flex-col   w-full md:w-max rounded-sm overflow-scroll'>
-         
-            <button
+
+
+
+        <div className='border-t-2 border-gray-500 flex justify-center  mx-auto w-3/4   overflow-scroll'>
+
+          <button
             className={activeSection === 'listings' ? `${isActiveStyle}` : `${isNotActiveStyle}`}
             onClick={() => setActiveSection('listings')}
           >
             Your Listings
           </button>
-         
+
 
           <button
             className={activeSection === 'orders' ? `${isActiveStyle}` : `${isNotActiveStyle}`}
@@ -148,63 +149,63 @@ function Profile() {
           >
             Your Orders
           </button>
-       
-          
+
+
         </div>
 
-        <div className='mt-3'>
-        {activeSection === 'listings' && (
-          <div className=''>
+        <div className='mt-3 '>
+          {activeSection === 'listings' && (
+            <div className=''>
 
-            {!loading && listings?.length > 0 ? (
-              <>
-                <div className='grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 md:px-16 px-3'>
-                  {listings?.map((listing) => (
-                    <Listingitem
-                      keyId={listing.id}
-                      listing={listing.data}
-                      id={listing.id}
-                      onDelete={() => onDelete(listing.id)}
-                      onEdit={() => onEdit(listing.id)}
-                      onList={() => onList(listing.id)}
+              {!loading && listings?.length > 0 ? (
+                <>
+                  <div className='grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3'>
+                    {listings?.map((listing) => (
+                      <Listingitem
+                        keyId={listing.id}
+                        listing={listing.data}
+                        id={listing.id}
+                        onDelete={() => onDelete(listing.id)}
+                        onEdit={() => onEdit(listing.id)}
+                        onList={() => onList(listing.id)}
+                      />
+                    ))}
+                  </div>
+
+                </>
+              ) : (<p className='my-3   px-3'>no listings</p>)}
+            </div>
+          )}
+
+          {activeSection === 'orders' && (
+            <div> {
+              !loading && orders?.length > 0 ? (
+
+                <div className='mx-auto'>
+                  {orders?.map((order) => (
+                    <Orders
+                      orderArr={order}
                     />
-                  ))}
+                  ))
+                  }
                 </div>
+              ) :
+                (
+                  <p className='my-3  px-3'>No orders</p>
+                )
+            }</div>
 
-              </>
-            ) : (<p className='my-3   px-3'>no listings</p>)}
-          </div>
-        )}
-
-        {activeSection === 'orders' && (
-          <div> {
-            !loading && orders?.length > 0 ? (
-
-              <div className=''>
-                {orders?.map((order) => (
-                  <Orders
-                    orderArr={order}
-                  />
-                ))
-                }
-              </div>
-            ) :
-              (
-                <p className='my-3  px-3'>No orders</p>
-              )
-          }</div>
-
-        )}
+          )}
 
 
 
 
         </div>
-       
+
       </main>
-    </div>
+
     </>
- 
+
   )
 }
 

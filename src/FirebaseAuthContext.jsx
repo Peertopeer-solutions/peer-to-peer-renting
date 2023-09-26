@@ -1,5 +1,6 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState, useMemo } from 'react';
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.config';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ const FirebaseAuthProvider = (props) => {
 	const [user, setUser] = useState(null);
 	const navigate = useNavigate();
 	useEffect(() => {
-		console.log('I am running.');
+
 		const userAuthListener = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				console.log(user);

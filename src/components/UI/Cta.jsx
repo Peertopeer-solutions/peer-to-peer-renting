@@ -9,7 +9,7 @@ const Cta = () => {
   
     return  (
         <>
-            <div className="w-5/6 mt-24 mx-auto md:container  md:mx-auto md:flex md:p-6 py-3 ">
+            <div className="w-5/6 pt-24 mx-auto md:container md:mx-auto md:flex md:px-6 py-3 ">
 
                 <div className="mx-auto md:flex" >
                     <div className=" flex relative lg:left-[50px] text-left  md:p-3  ">

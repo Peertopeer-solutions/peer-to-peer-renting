@@ -11,7 +11,7 @@ const OAuth = () => {
     const navigate = useNavigate()
 
     const onGoogleClick = async(e) => {
-        // e.preventDefault()
+
         try {
             
             const auth = getAuth()
@@ -35,6 +35,7 @@ const OAuth = () => {
 
         } catch (error) {
             // console.log(error)
+            console.log(error.message)
             toast.error('Could not authorize with Google')
         }
     }

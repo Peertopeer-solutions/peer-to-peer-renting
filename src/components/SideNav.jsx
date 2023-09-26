@@ -1,5 +1,5 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
+import { onAuthStateChanged } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { auth } from '../firebase.config'
@@ -29,7 +29,7 @@ const SideNav = () => {
 
   return (
 
-    <div className=" absolute top-12 bg-white rounded-xl flex flex-col p-6 shadow-2xl right-2">
+    <div className=" absolute top-12 bg-white rounded-xl flex flex-col p-6 shadow-2xl right-2 z-10">
       <div className="text-[18px]  ">
         {user ? (
           <div className='flex flex-col gap-2  '> 

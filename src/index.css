@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 * {
   box-sizing: border-box;
   padding: 0rem;
@@ -32,6 +35,10 @@ button {
   outline: none;
   border: none;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 
 .input,
 .passwordInput,
@@ -223,7 +230,7 @@ button {
   padding: 1rem;
 }
 
-.forgotPasswordLink {
+/* .forgotPasswordLink {
   cursor: pointer;
   color: #00cc66;
   font-weight: 600;
@@ -275,7 +282,7 @@ button {
   .signUpButton {
     margin-left: 3rem;
   }
-}
+} */
 
 .socialLogin {
   margin-top: 4rem;
