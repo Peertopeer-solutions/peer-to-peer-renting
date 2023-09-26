@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import { BrowserRouter } from 'react-router-dom';
 import { FirebaseAuthProvider } from './FirebaseAuthContext.jsx';
 
@@ -17,7 +16,6 @@ setTimeout(() =>{
 				<QueryClientProvider client={queryClient}>
 					<App />
 					</QueryClientProvider>,
-	
 				</FirebaseAuthProvider>
 			</BrowserRouter>
 		</React.StrictMode>
