@@ -6,14 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfileSetup from './pages/ProfileSetup';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorBoundries/ErrorBoundry';
-import UserListings from './components/ProfileComponents/UserListings';
+import PrivateRoute from './components/PrivateRoute'
+
+const UserListings = lazy(()=>import('./components/ProfileComponents/UserListings'))
 const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
 const Category = lazy(() => import('./pages/Category/Category'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Signin = lazy(() => import('./pages/Signin'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Forgotpassword = lazy(() => import('./pages/Forgotpassword'));
-const PrivateRoute = lazy(() => import('./components/PrivateRoute'));
 const CreateListing = lazy(() => import('./pages/CreateListing'));
 const Listing = lazy(() => import('./pages/Listing/Listing'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -31,6 +32,7 @@ const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'));
 const ShippingPolicy = lazy(() => import('./pages/ShippingPolicy'));
 const DamagePolicy = lazy(() => import('./pages/DamagePolicy'));
 const Home = lazy(() => import('./pages/Home'));
+
 function App() {
 	const [loading, setLoading] = useState(true);
 	const { pathname } = useLocation();
@@ -55,10 +57,12 @@ function App() {
 			</ErrorBoundary> */}
 			
 			<div className='w-full'>
+				
 <Suspense fallback={<Spinner/>}>
 				<Routes>
 				
 					<Route path='/' element={
+						
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
 								<Home />
