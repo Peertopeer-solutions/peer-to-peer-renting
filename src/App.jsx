@@ -13,7 +13,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const Signin = lazy(() => import('./pages/Signin'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Forgotpassword = lazy(() => import('./pages/Forgotpassword'));
-const Privateroute = lazy(() => import('./components/PrivateRoute'));
+const PrivateRoute = lazy(() => import('./components/PrivateRoute'));
 const CreateListing = lazy(() => import('./pages/CreateListing'));
 const Listing = lazy(() => import('./pages/Listing/Listing'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -74,13 +74,13 @@ function App() {
 					} />
 					
 					<Route path='/profile' element={
-					<Privateroute>
+					<PrivateRoute>
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
 							<Profile/>
 							</Suspense>
 						</ErrorBoundary>
-					</Privateroute>} >
+					</PrivateRoute>} >
           <Route path="requestedItems" element={
 						<ErrorBoundary>
 						<Suspense fallback={<Spinner />}>
@@ -127,13 +127,13 @@ function App() {
 					} />
 					<Route path='/create-listing' element={
 						
-					<Privateroute>
+					<PrivateRoute>
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
 								<CreateListing />
 							</Suspense>
 						</ErrorBoundary>
-					</Privateroute>
+					</PrivateRoute>
 					}/>
 		
 					<Route path='/edit-listing/:listingId' element={

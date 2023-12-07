@@ -6,6 +6,8 @@ import visibilityIcon from '../../public/assets/svg/visibilityIcon.svg'
 import { getAuth , signInWithEmailAndPassword } from 'firebase/auth'
 import { toast } from 'react-toastify' 
 import OAuth from '../components/OAuth'
+import PageWrapper from '../components/Layout/PageWrapper'
+import { IoIosArrowForward, IoIosEye, IoIosLock, IoIosMail } from 'react-icons/io'
 
 
 const Signin = () => {
@@ -39,42 +41,53 @@ const Signin = () => {
         
     }
   return (
-    <div className='md:border flex flex-col items-center justify-center my-9 md:shadow-md  rounded-xl  space-y-6 m-2 px-6 w-full md:w-2/4 lg:w-2/5 xl:w-1/3  mx-auto md:h-[80vh] sm:text-[16px] md:text-xl'>
+    <PageWrapper> <div className='bg-gradient-to-l from-indigo-400 to-blue-500 md:border flex flex-col items-center justify-center max-w-fit p-9  rounded-xl  space-y-6  w-full  mx-auto md:h-[80vh] sm:text-[16px] md:text-xl '>
         <header>
-            <p className='pageHeader'>Welcome!</p>
+            <p className='text-white font-bold text-2xl'>Welcome!</p>
         </header>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className='space-y-2'>
+            <div className='flex space-x-2 w-full items-center'>
+            <label htmlFor="email">
+                <IoIosMail className='text-sm text-white'/>
+            </label>
             <input type='email'
-            className='emailInput'
+            className='text-black bg-white opacity-50 p-1 rounded-2xl text-sm w-full'
             placeholder='Email'
             id = 'email'
             value={email}
             onChange={onChange}/>
-            <div className='passwordInputDiv'>
-                <input type={showPassword? 'text' : 'password' }
-                className='passwordInput' placeholder="Password"
-                id="password" value={password} onChange={onChange} />
-                <img src={visibilityIcon} 
-                alt='show password'
-                className='showPassword'
-                onClick={() => setShowPassword((prevState)=> !prevState)}/>
             </div>
-            <div className='flex justify-betwee'>
-            <div className=' flex justify-center items-center gap-4 '>
-                <p className='text-xl font-bold'> Sign In</p>
+           
+            <div className='flex space-x-2 w-full items-center'>
+                <label htmlFor="password">
+                    <IoIosLock className='text-sm text-white'/>
+                </label>
+                <div className='flex justify-between items-center relative h-fit w-full'>
+                     <input type={showPassword? 'text' : 'password' }
+                className='text-black bg-white opacity-50 p-1 rounded-2xl text-sm w-full' placeholder="Password"
+                id="password" value={password} onChange={onChange} />
+                <IoIosEye className='absolute right-2  text-sm '  onClick={() => setShowPassword((prevState)=> !prevState)}/>
+                </div>
+               
+
+            </div>
+            <div className='flex justify-between'>
+            <div className=' flex  items-center '>
+                <p className='text-sm font-bold text-white'> Sign In</p>
                 <button className=''> 
-                <ArrowRightIcon fill='#ffffff' className="bg-black w-10 aspect-square rounded-full flex justify-end"/>
+                <IoIosArrowForward className='text-sm text-white'/>
                 </button>
             </div>
-            <Link to='/forgotpassword' className='flex justify-center my-4 text-red-500'>Forgot Password </Link>
+            <Link to='/forgotpassword' className='flex justify-center my-4 text-sm   text-red-500'>Forgot Password </Link>
 
 
             </div>
            
         </form>
         <OAuth className=""/>
-        <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
-    </div>
+        <Link to='/sign-up' className='text-white'>Sign Up Instead</Link>
+    </div></PageWrapper>
+   
   )
 }
 
