@@ -6,9 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfileSetup from './pages/ProfileSetup';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorBoundries/ErrorBoundry';
-import PrivateRoute from './components/PrivateRoute';
-
-
 const UserListings = lazy(()=>import('./components/ProfileComponents/UserListings'))
 const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
 const Category = lazy(() => import('./pages/Category/Category'));
@@ -76,13 +73,13 @@ function App() {
 					} />
 					
 					<Route path='/profile' element={
-					<PrivateRoute>
+					
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
 							<Profile/>
 							</Suspense>
 						</ErrorBoundary>
-					</PrivateRoute>} >
+				} >
           <Route path="requestedItems" element={
 						<ErrorBoundary>
 						<Suspense fallback={<Spinner />}>
@@ -129,13 +126,13 @@ function App() {
 					} />
 					<Route path='/create-listing' element={
 					
-					<PrivateRoute>
+				
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
 								<CreateListing />
 							</Suspense>
 						</ErrorBoundary>
-					</PrivateRoute>
+
 					}/>
 		
 					<Route path='/edit-listing/:listingId' element={
