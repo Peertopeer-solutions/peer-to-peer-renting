@@ -1,6 +1,7 @@
+import React from 'react'
 import { useState, useEffect, useCallback,lazy, Suspense, } from 'react'
-import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom'
-import { getAuth, onAuthStateChanged, updateProfile } from 'firebase/auth'
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {
   updateDoc,
   doc,
@@ -11,23 +12,14 @@ import {
   orderBy,
   deleteDoc,
 } from 'firebase/firestore'
-import { db } from '../firebase.config'
+
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Listingitem from '../components/Listingitem'
-import arrowRight from '../../public/assets/svg/keyboardArrowRightIcon.svg'
-import Orders from '../components/Orders'
-import ProfileLayout from '../components/Layout/ProfileLayout/ProfileLayout'
-import ErrorBoundary from '../components/ErrorBoundries/ErrorBoundry'
-import Spinner from '../components/Spinner'
-import RequestedRental from './RequestedRental'
+import { db } from '../../firebase.config'
+import ListingItem from '../Listingitem'
+import Orders from '../Orders'
 
-
-
-
-function Profile() {
-  // const RequestedRental = lazy(() => import('./RequestedRental'));  
-  // const RentalRequests = lazy(() => import('./RentalRequests'));
+const UserListings = () => {
   const auth = getAuth()
   const [loading, setLoading] = useState(true)
   const [listings, setListings] = useState(null)
@@ -46,6 +38,7 @@ function Profile() {
   const navigate = useNavigate()
 
 console.log(listings)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,16 +81,16 @@ console.log(listings)
 
   }, [user])
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      console.log(user)
-    });
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setUser(user);
+  //     console.log(user)
+  //   });
 
-    return () => {
-      unsubscribe();
-    };
-  })
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // })
 
   const onLogout = () => {
     auth.signOut()
@@ -130,20 +123,12 @@ console.log(listings)
   const [activeSection, setActiveSection] = useState('listings'); // Default to 'listings'
 
   return (
-    <>
-      {/* <ProfileHeader/> */}
-      
-
-      <ProfileLayout>
-        <Outlet/>
-      </ProfileLayout>
-    
-      {/* <main className='h-full flex-col '>
+     <main className='h-full flex-col '>
 
 
 
 
-        <div className='border-t-2 border-gray-500 flex justify-center  mx-auto w-3/4   overflow-scroll'>
+        <div className='border-t-2 border-gray-500 flex justify-center  mx-auto w-3/4  overflow-y-scroll'>
 
           <button
             className={activeSection === 'listings' ? `${isActiveStyle}` : `${isNotActiveStyle}`}
@@ -163,15 +148,15 @@ console.log(listings)
 
         </div>
 
-        <div className='mt-3 '>
+        <div className='flex  mt-3 overflow-x-scroll'>
           {activeSection === 'listings' && (
             <div className=''>
 
               {!loading && listings?.length > 0 ? (
                 <>
-                  <div className='grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 md:px-16 px-3'>
+                  <div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
                     {listings?.map((listing) => (
-                      <Listingitem
+                      <ListingItem
                         keyId={listing.id}
                         listing={listing.data}
                         id={listing.id}
@@ -212,11 +197,8 @@ console.log(listings)
 
         </div>
 
-      </main> */}
-
-    </>
-
+      </main> 
   )
 }
 
-export default Profile
+export default UserListings

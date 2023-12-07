@@ -2,10 +2,10 @@ import React from 'react'
 
 const Spinner = () => {
   return (
-    <div className='bg-white h-[100vh]'>
-        <div className=''>
+    <div className='bg-red h-[100vh]'>
+        
           Loading
-        </div>
+        
 
     </div>
   )

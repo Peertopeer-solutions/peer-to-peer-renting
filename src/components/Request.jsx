@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 import { db, auth } from '../firebase.config'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
@@ -9,9 +9,11 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import DatePickerStyled from './UI/DatePickerStyled';
 import DeleteCrossIcon from './UI/DeleteCrossIcon';
+import AuthContext from '../FirebaseAuthContext';
 
 const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
+  const authCtx = useContext(AuthContext)
 
   // set details which a user would love to see before accepting requests
 
@@ -47,7 +49,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
   // Create a new rental request document in Firestore
   const createRentalRequest = async () => {
-    const user = auth.currentUser;
+    const user = authCtx.currentUser;
     const userId = user ? user.uid : null;
 
     if (endDate === null) {
@@ -85,7 +87,8 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
     }
   }
-  console.log("start date setup", startDate)
+  console.log(endDate, startDate)
+  console.log(listing.userRef)
 
 
   // Define options for formatting the date

@@ -1,9 +1,7 @@
-import { Menu, Transition } from '@headlessui/react'
-import { DotsVerticalIcon } from '@heroicons/react/outline'
+
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid' 
 import {
   add,
-  addDays,
   addMonths,
   eachDayOfInterval,
   endOfMonth,
@@ -12,15 +10,13 @@ import {
   getDay,
   isBefore,
   isEqual,
-  isSameDay,
   isSameMonth,
   isToday,
   parse,
-  parseISO,
   startOfToday,
   startOfWeek,
 } from 'date-fns'
-import { Fragment, useState } from 'react'
+import {  useState } from 'react'
 
 
 function classNames(...classes) {
@@ -85,7 +81,7 @@ const DatePickerStyled = ({setEndDate,setStartDate, startDate, endDate}) => {
     <div className="">
       <div className=" mx-auto  ">
           <div className=" flex flex-col space-y-3">
-            <div className="md:relative md:top-16 flex justify-between  ">
+            <div className="md:relative md:top-9 flex justify-between  ">
               <button
                 type="button"
                 onClick={previousMonth}
@@ -103,7 +99,7 @@ const DatePickerStyled = ({setEndDate,setStartDate, startDate, endDate}) => {
                 <ChevronRightIcon className="w-6 h-6" aria-hidden="true" />
               </button>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 place-content-center space-x-3 max-w-max mx-auto  h-[50vh] overflow-y-auto'>
+            <div className='grid grid-cols-1 md:grid-cols-2  space-x-3 max-w-max mx-auto  h-[55vh] overflow-y-scroll'>
 
             <div className='flex flex-col space-y-4'>
             <div className='w-max-w mx-auto text-center'>

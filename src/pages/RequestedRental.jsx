@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import RentalRequestCard from '../components/RentalRequestCard'
 import Spinner from '../components/Spinner'
 import { db } from '../firebase.config'
+import PageWrapper from '../components/Layout/PageWrapper'
 
 const RequestedRental = () => {
   const auth = getAuth();
@@ -68,9 +69,11 @@ const RequestedRental = () => {
   
   console.log('user',user)
   return (
-    <div className=''>
-      <p className='font-semibold container mx-auto text-center uppercase text-[30px] md:text-[50px] px-3 m-1 text-blue-600'>Your requests</p>
-      <p className='font-medium text-center bg-white rounded-full text-[15px] md:text-[25px] px-3 mx-3 text-blue-600 '>You can see the items you have requested for renting</p>
+   
+      
+      <div className=''>
+      <p className='font-bold container mx-auto  uppercase text-2xl text-blue-600'>Your requests</p>
+      <p className='font-medium  bg-white rounded-full text-[18px]   text-blue-600'>You can see the items you have requested for renting</p>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (
@@ -89,6 +92,8 @@ const RequestedRental = () => {
 
       
     </div>
+  
+    
   )
 }
 

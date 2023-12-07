@@ -1,9 +1,5 @@
 import React from 'react'
 
-
-
-
-
 const Pagination = ({ currentPage, totalItems, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / 10);
 

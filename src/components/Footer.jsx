@@ -92,10 +92,7 @@ const Footer = () => {
       <div className='hidden md:flex items-end justify-start absolute '>
               <Drone className="h-64 w-64 "/>
       </div>
-    </footer>
-
-
-  
+    </footer>  
   )
 }
 

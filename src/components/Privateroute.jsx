@@ -3,7 +3,7 @@ import { Navigate , Outlet, useLocation } from 'react-router-dom'
 import useAuthStatus from '../hooks/useAuthStatus'
 import Spinner from './Spinner'
 
-const Privateroute = () => {
+const PrivateRoute = ({children}) => {
   // const { pathname } = useLocation();
 
     const {loggedIn , checkingStatus } = useAuthStatus()
@@ -20,7 +20,7 @@ const Privateroute = () => {
         return <Spinner/>
     }
 
-  return loggedIn ? <Outlet/> : <Navigate to='/sign-in' />
+  return loggedIn ? children : <Navigate to='/sign-in' />
 }
 
-export default Privateroute
+export default PrivateRoute

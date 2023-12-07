@@ -1,19 +1,19 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-
-const Category = lazy(() => import('./pages/Category'));
-const Profile = lazy(() => import('./pages/Profile'));
-const Signin = lazy(() => import('./pages/Signin'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Forgotpassword = lazy(() => import('./pages/Forgotpassword'));
-
 import Navbar from './components/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileSetup from './pages/ProfileSetup';
 import Spinner from './components/Spinner';
-
-const Privateroute = lazy(() => import('./components/Privateroute'));
+import ErrorBoundary from './components/ErrorBoundries/ErrorBoundry';
+import UserListings from './components/ProfileComponents/UserListings';
+const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
+const Category = lazy(() => import('./pages/Category/Category'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Signin = lazy(() => import('./pages/Signin'));
+const Signup = lazy(() => import('./pages/Signup'));
+const Forgotpassword = lazy(() => import('./pages/Forgotpassword'));
+const Privateroute = lazy(() => import('./components/PrivateRoute'));
 const CreateListing = lazy(() => import('./pages/CreateListing'));
 const Listing = lazy(() => import('./pages/Listing/Listing'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -31,10 +31,6 @@ const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'));
 const ShippingPolicy = lazy(() => import('./pages/ShippingPolicy'));
 const DamagePolicy = lazy(() => import('./pages/DamagePolicy'));
 const Home = lazy(() => import('./pages/Home'));
-const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
-import Cta from './components/UI/Cta'
-import Features from './components/UI/Features'
-import LandingPage from './components/LandingPage';
 function App() {
 	const [loading, setLoading] = useState(true);
 	const { pathname } = useLocation();
@@ -53,55 +49,191 @@ function App() {
 	return (
 		<>
 			<Navbar />
-		<Routes>
-			<Route path='/' element={<LandingPage/>}/>
+		
+			{/* <ErrorBoundary>
+				<TestComponent />
+			</ErrorBoundary> */}
+			
+			<div className='w-full'>
+<Suspense fallback={<Spinner/>}>
+				<Routes>
+				
+					<Route path='/' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Home />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/category/:categoryName' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Category />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					
+					<Route path='/profile' element={
+					<Privateroute>
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+							<Profile/>
+							</Suspense>
+						</ErrorBoundary>
+					</Privateroute>} >
+          <Route path="requestedItems" element={
+						<ErrorBoundary>
+						<Suspense fallback={<Spinner />}>
+						<RequestedRental />
+						</Suspense>
+					</ErrorBoundary>
+					} />
+          <Route path="rentalRequests" element={
+						<ErrorBoundary>
+						<Suspense fallback={<Spinner />}>
+						<RentalRequests/>
+						</Suspense>
+					</ErrorBoundary>
+					} />
+          <Route path="listings" element={
+						<ErrorBoundary>
+						<Suspense fallback={<Spinner />}>
+						<UserListings/>
+						</Suspense>
+					</ErrorBoundary>
+					} />
+					</Route>
+					<Route path='/sign-in' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Signin />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/sign-up' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Signup />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					{/* ... other routes */}
+					<Route path='/forgotpassword' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Forgotpassword />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/create-listing' element={
+						
+					<Privateroute>
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<CreateListing />
+							</Suspense>
+						</ErrorBoundary>
+					</Privateroute>
+					}/>
+		
+					<Route path='/edit-listing/:listingId' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<EditListing />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/:categoryName/:listingId' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Listing />
+							</Suspense>
+						</ErrorBoundary>
+					} />
 
-		</Routes>
+					{/* <Route path='/requestedItems' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<RequestedRental />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/rentalRequests' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<RentalRequests />
+							</Suspense>
+						</ErrorBoundary>
+					} /> */}
+					<Route path='/verification' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<Userverification />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/order/:requestId/:productId' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<OrderPage />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/orderConfirmation/:orderId' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<OrderConfirmation />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/feedback/:orderId' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner/>}>
+								<FeedbackForm />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/privacy-policy' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<PrivcayPolicy />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/terms-and-conditions' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<TermsAndConditions />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/shipping-policy' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<ShippingPolicy />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/damages-policy' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<DamagePolicy />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+					<Route path='/profileset' element={
+						<ErrorBoundary>
+							<Suspense fallback={<Spinner />}>
+								<ProfileSetup />
+							</Suspense>
+						</ErrorBoundary>
+					} />
+				</Routes></Suspense>
 
-			<Suspense >
-				<div className=' h-[100%] pt-9 w-full'>
-					<Routes>
-						<Route path='/' element={<Home/>} />
-						<Route path='/category/:categoryName' element={<Category/>} />
-						<Route path='/profile' element={<Privateroute />}>
-							<Route path='/profile' element={<Profile />} />
-						</Route>
-						<Route path='/sign-in' element={<Signin />} />
-						<Route path='/sign-up' element={<Signup />} />
-						<Route path='/forgotpassword' element={<Forgotpassword />} />
-						<Route path='/' element={<Privateroute />}>
-							<Route path='/create-listing' element={<CreateListing />} />
-						</Route>
+			</div>
+			
+		
 
-						<Route path='/edit-listing/:listingId' element={<EditListing />} />
-						<Route path='/:categoryName/:listingId' element={<Listing />} />
-						<Route path='/contact/:landlordId' element={<Contact />} />
-						<Route path='/requestedItems' element={<RequestedRental />} />
-						<Route path='/rentalRequests' element={<RentalRequests />} />
-						<Route path='/verification' element={<Userverification />} />
-						<Route
-							path='/order/:requestId/:productId'
-							element={<OrderPage />}
-						/>
-						<Route
-							path='/orderConfirmation/:orderId'
-							element={<OrderConfirmation />}
-						/>
-						{/* <Route path='/adminPanel/*' element={<AdminDashBoard/>} />  */}
-						<Route path='/feedback/:orderId' element={<FeedbackForm />} />
-						<Route path='/feedback/:orderId' element={<FeedbackForm />} />
-						<Route path='/privacy-policy' element={<PrivcayPolicy />} />
-						<Route
-							path='/terms-and-conditions'
-							element={<TermsAndConditions />}
-						/>
-
-						<Route path='/shipping-policy' element={<ShippingPolicy />} />
-						<Route path='/damages-policy' element={<DamagePolicy />} />
-						<Route path='/profileset' element={<ProfileSetup/>} />
-					</Routes>
-				</div>
-			</Suspense>
 
 			{!loading && <Footer />}
 

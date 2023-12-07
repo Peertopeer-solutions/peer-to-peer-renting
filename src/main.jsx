@@ -8,19 +8,18 @@ import { FirebaseAuthProvider } from './FirebaseAuthContext.jsx';
 
 const queryClient = new QueryClient();
 
-setTimeout(() =>{
+
 	ReactDOM.createRoot(document.getElementById('root')).render(
 		<React.StrictMode>
 			<BrowserRouter>
 				<FirebaseAuthProvider>
 				<QueryClientProvider client={queryClient}>
 					<App />
-					</QueryClientProvider>,
+					</QueryClientProvider>
 				</FirebaseAuthProvider>
 			</BrowserRouter>
 		</React.StrictMode>
 	)
-},1000)
 
 
 ;

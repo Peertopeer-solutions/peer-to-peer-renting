@@ -3,6 +3,7 @@ import { collection, getDocs, query, where,doc, updateDoc, orderBy } from 'fireb
 import React, { useCallback } from 'react'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import PageWrapper from '../components/Layout/PageWrapper'
 import RentalRequestCard from '../components/RentalRequestCard'
 import Spinner from '../components/Spinner'
 
@@ -97,9 +98,10 @@ const RentalRequests = () => {
 
  
   return (
-    <div className='mx-1 '>
-    <p className='font-semibold container mx-auto text-center uppercase text-[30px] md:text-[50px] px-3 m-1 text-blue-600 '>Requests</p>
-    <p className='font-medium   text-center uppercase text-[15px] md:text-[25px] px-3 mx-3 text-blue-600 '>Please accept or deny a request within 24 hours of requet made</p>
+   
+      <div className=''>
+    <p className='font-bold  uppercase text-2xl text-blue-600'>Requests</p>
+    <p className='font-medium  bg-white rounded-full text-[18px] text-blue-600'>Please accept or deny a request within 24 hours of requet made</p>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (
@@ -121,6 +123,8 @@ const RentalRequests = () => {
 
       
     </div>
+    
+   
   );
 };
 

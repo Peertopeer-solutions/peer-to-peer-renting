@@ -5,7 +5,7 @@ import { ReactComponent as EditIcon } from '../../public/assets/svg/editIcon.svg
 
 import Switch from 'react-switch'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
@@ -39,7 +39,7 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
   return (
     <div className='w-full md:w-[290px]' key={keyId} >
       <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full " to={`/${listing.category}/${id}`}>
-        <div className="absolute right-0 top-0 m-1xx md:m-3 max-w-fit ">
+        <div className="absolute right-0 top-0  md:m-3 max-w-fit ">
           {/* {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
             className=" hover:text-red-500 duration-300 text-2xl text-gray-900   ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
@@ -49,15 +49,11 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
           </Link>} */}
         </div>
 
-        <img loading='lazy' className="aspect-[4/3]	w-full sm:object-fit md:object-cover rounded-xl border border-gray-100 shadow-sm "
+        <img rel="preload" as='image' className="aspect-[4/3]	w-full sm:object-fit md:object-cover rounded-xl border border-gray-100 shadow-sm "
           src={listing.imgUrls[0]}
           alt={listing.title}
         />
         <div className=" ">
-
-
-
-
           <div className=" my-3">
             <p className="text-[16px] font-medium md:text-xl overflow-hidden line-clamp-2">{listing.title}</p>
 

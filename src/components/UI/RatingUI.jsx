@@ -13,7 +13,7 @@ const RatingUI = ({rating}) => {
     for (let i = 0; i < count; i++) {
       stars.push(<span key={i}>{starType}</span>);
     }
-    console.log(stars)
+
     return stars;
     
   };

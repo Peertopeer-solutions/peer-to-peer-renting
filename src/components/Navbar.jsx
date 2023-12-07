@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import  React, {useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -75,8 +75,8 @@ const Navbar = () => {
     //     </nav>
 
     // </nav>
-    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed  z-10">
-      <div className="   p-2 md:p-3 bg-white  border ">
+    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed z-10">
+      <div className="  p-2 md:p-3 bg-white  border ">
         <div className="flex items-center justify-between ">
           <Link to="/">
             <div className="">
@@ -117,7 +117,7 @@ const Navbar = () => {
                   alt="No image"
                 />
               </div>
-              {toogleNav && <SideNav />}
+              {toogleNav && <SideNav/>}
             </div>
           ) : (!user &&
 
@@ -145,5 +145,4 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;
+export default Navbar

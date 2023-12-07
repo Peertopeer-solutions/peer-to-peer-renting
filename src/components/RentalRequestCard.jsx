@@ -47,7 +47,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
 
   return (
     <div className='flex flex-col items-center'>
-      <div className='w-full rounded-lg shadow-md lg:max-w-sm bg-white md:p-3'>
+      <div className='w-full rounded-lg shadow-md  bg-white '>
         <div className='grid grid-cols-3 place-items-center'>
         <img
                 className="object-contain w-16 md:w-[100px] ml-1"

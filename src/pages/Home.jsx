@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   collection,
   getDocs,
   query,
-  where,
   orderBy,
   limit,
   startAfter,
-  startAt,
-  endBefore,
   getCountFromServer,
 } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { toast } from 'react-toastify'
-import Spinner from '../components/Spinner'
-
-
 import Explore from './Explore'
-import DatePickerStyled from '../components/UI/DatePickerStyled'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import Pagination from '../components/Pagination'
+import Cta from '../components/UI/Cta'
+import Features from '../components/UI/Features'
+
 
 const Home = () => {
 
@@ -38,7 +33,7 @@ const Home = () => {
       let q = query(
         listingref, 
         orderBy('timestamp', 'desc'),
-        limit(10));
+        limit(8));
 
       // Start after the last document from the previous page, if applicable.
       if (currentPage > 1) {
@@ -46,11 +41,12 @@ const Home = () => {
           listingref,
           orderBy('timestamp', 'desc'),
           startAfter(lastFetchedListing)
-          , limit(10));
+          , limit(8));
       }
 
       const snapshot = await getDocs(q);
       const countSnapShot = await getCountFromServer(listingref)
+      console.log(countSnapShot.data().count)
       setTotalDocs(countSnapShot.data().count)
       setLastFetchedListing(snapshot.docs[snapshot.docs.length - 1])
       const listings = []
@@ -69,9 +65,10 @@ const Home = () => {
 
         <>
 
-          <Explore isLoading={isLoading} error={error} listings = {data} currentPage={currentPage}  totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)} />
+          <Cta/>
+          <Features/>  
+          <Explore isLoading={isLoading} error={error} listings = {data}  />
           <Pagination  currentPage={currentPage}  totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)}/>
-
         </>
       
   
