@@ -42,7 +42,7 @@ const OAuth = () => {
 
   return (
    
-        <button className="ring-1 ring-white shadow-md flex items-center gap-2 p-3 rounded  text-white" onClick={onGoogleClick}>
+        <button className="ring-1 ring-black shadow-md flex items-center gap-2 p-3 rounded " onClick={onGoogleClick}>
                     <p className='text-[18px]'>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with</p>
 
             <img className='h-[22px] w-[22px] ' src={googleIcon} alt='google'/> 

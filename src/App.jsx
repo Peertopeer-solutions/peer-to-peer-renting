@@ -6,7 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfileSetup from './pages/ProfileSetup';
 import Spinner from './components/Spinner';
 import ErrorBoundary from './components/ErrorBoundries/ErrorBoundry';
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute';
+
 
 const UserListings = lazy(()=>import('./components/ProfileComponents/UserListings'))
 const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
@@ -52,9 +53,6 @@ function App() {
 		<>
 			<Navbar />
 		
-			{/* <ErrorBoundary>
-				<TestComponent />
-			</ErrorBoundary> */}
 			
 			<div className='w-full'>
 				
@@ -130,7 +128,7 @@ function App() {
 						</ErrorBoundary>
 					} />
 					<Route path='/create-listing' element={
-						
+					
 					<PrivateRoute>
 						<ErrorBoundary>
 							<Suspense fallback={<Spinner />}>
