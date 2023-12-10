@@ -29,11 +29,11 @@ const SideNav = () => {
 
   return (
 
-    <div className=" absolute top-12 bg-white rounded-xl flex flex-col p-6 shadow-2xl right-2 z-10">
-      <div className="text-[18px]  ">
+    <div className=" relative ">
+      <div className="text-[18px] absolute top-0  bg-white rounded-xl flex flex-col p-6 shadow-2xl  right-2 w-[200px] z-50 ">
         {user ? (
           <div className='flex flex-col gap-2  '> 
-            <Link className='font-semibold' to='/profile'>Profile</Link>
+            <Link className='font-semibold' to='/profile/listings'>Profile</Link>
             <Link to='' className='font-semibold'>How it works </Link>
             <Link className='text-blue-700 font-semibold' to="/requestedItems ">Requested items</Link>
             <Link className='text-blue-700 font-semibold' to="/rentalRequests">Requests</Link>

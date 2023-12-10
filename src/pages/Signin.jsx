@@ -66,7 +66,7 @@ const Signin = () => {
                      <input type={showPassword? 'text' : 'password' }
                 className='text-black bg-white opacity-50 p-1 rounded-2xl text-sm w-full' placeholder="Password"
                 id="password" value={password} onChange={onChange} />
-                <IoIosEye className='absolute right-2  text-sm '  onClick={() => setShowPassword((prevState)=> !prevState)}/>
+                <IoIosEye className='absolute right-2  text-sm  '  onClick={() => setShowPassword((prevState)=> !prevState)}/>
                 </div>
                
 

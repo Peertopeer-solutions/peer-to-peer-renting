@@ -1,54 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileHeader from '../../ProfileComponents/ProfileHeader'
 import ProfileNavigation from '../../ProfileComponents/ProfileNavigation'
-import ContentWrapper from '../ContentWrapper'
 import PageWrapper from '../PageWrapper'
 import Hamburger from 'hamburger-react'
-const ProfileLayout = ({children}) => {
+import { useLocation } from 'react-router-dom'
+import { IoIosMenu } from 'react-icons/io'
+const ProfileLayout = ({ children }) => {
   const [toogle, setToogle] = useState(false)
+  const location = useLocation()
+  useEffect(() => {
+    setToogle(false);
+
+  }, [location.pathname]);
+
   return (
-    <div className=''>
-      {toogle && (<div className="fixed inset-0 bg-black box-content opacity-60	z-10"></div>)}
+    <>
+      {toogle && (<div className="fixed bottom inset-0 bg-black box-content opacity-60 z-10"></div>)}
+      <PageWrapper>
+        <ProfileHeader />
+        <div className='flex flex-row md:hidden relative '>
+          <div className=' z-10 '>
 
-      <PageWrapper>  <div class="">
-        {/* <!-- Profile Header --> */}
-        <ProfileHeader/>
-        
-        <div class="flex mt-12 md:mt-6 ">
-          <div className='flex flex-row md:hidden relative '>
-            <div className='fixed z-20 top-16 '>
-               <div className=''>
-        <Hamburger toggled={toogle}  toggle={setToogle}/>
+          {!toogle && <IoIosMenu className='my-3' onClick={()=>setToogle(true)}/>}
 
-        </div>
-          <div className='h-full'>
+            <div className=' absolute left-1/2 transform -translate-x-1/2 w-4/5'>
               {
-                  toogle && <ProfileNavigation/>
-                }
-          </div>  
+                toogle && <ProfileNavigation toogle={toogle} setToogle={setToogle}/>
+              }
             </div>
-         
+           
           </div>
-        <div className='hidden md:block'>
-           <ProfileNavigation/>
-            
-        </div>
-            <div class=" md:p-6 ">
-            {children}
-            </div>
-        </div>
-       
-       
-    </div>
-    </PageWrapper>
-    
-       {/* <div>
 
-      <div className="profile-content">
-        {children}  This is where the routed content will be rendered 
-      </div>
-    </div> */}
-    </div>
+        </div>
+
+        <div class="flex mt-12 md:mt-6">
+
+          <div className='hidden md:block w-1/5 '>
+            <ProfileNavigation />
+
+          </div>
+          <div class=" md:p-6 md:w-3/4">
+            {children}
+          </div>
+        </div>
+
+      </PageWrapper>
+    </>
+
   )
 }
 

@@ -21,7 +21,8 @@ import ReviewList from "../../components/ReviewSection/ReviewList";
 import PageWrapper from "../../components/Layout/PageWrapper";
 import PriceCard from "./PriceCard";
 
-import { IoIosHeart } from "react-icons/io";
+import { IoIosHeart, IoIosShare } from "react-icons/io";
+import { BsHeart, BsShare } from "react-icons/bs";
 
 
 const Listing = () => {
@@ -36,6 +37,14 @@ const Listing = () => {
   const params = useParams();
   const authCtx = useContext(AuthContext)
   const listingId = params.listingId;
+  const onClick = (() => {
+    if (authCtx.currentUser) {
+      setShowRentalRequestForm(true)
+    }
+    else {
+      navigate("/sign-in")
+    }
+  })
 
   useEffect(() => {
 
@@ -79,9 +88,7 @@ const Listing = () => {
 
   return (
     <>
-      {showRentalRequestForm && (<div className="fixed inset-0 bg-black box-content opacity-60	z-20">
-
-      </div>)}
+      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-0">hellos </div>)}
       {
         isLoading ?
           <div>
@@ -89,14 +96,17 @@ const Listing = () => {
           </div> : (
               <PageWrapper>
                  <main
-                className="md:grid md:grid-cols-2 mx-auto   md:gap-16 
-                xl:gap-6 md:h-[100vh] overflow-y-scroll no-scrollbar "
+                className="md:grid md:grid-cols-2 mx-auto md:gap-16 xl:gap-6 md:h-[100vh] overflow-y-scroll no-scrollbar "
               >
                 <section className=" w-full md:max-h-full block">
-                  <div className="relative w-full aspect-[4/3] flex items-center bg-gray-100 border rounded-xl">
+                  <div className="relative w-full aspect-[4/3] flex items-center bg-gray-100 border rounded-xl -z-10">
                     <div className="flex flex-col flex-1 absolute top-6 right-6 space-y-4">
-                      <p>Share</p>
-                      <p>Whislist</p>
+                    <button>
+                      <BsShare/>
+                    </button>
+                      <button>
+                        <BsHeart/>
+                      </button>
                     </div>
                     <img
                       className="h-full w-full object-cover md:cursor-pointer rounded-2xl"
@@ -104,7 +114,7 @@ const Listing = () => {
                       alt="img"
                     />
                   </div>
-                  <div className="flex justify-start mt-4 items-center  overflow-x-scroll space-x-2 mx-auto">
+                  <div className="flex justify-start mt-4 items-center  overflow-x-scroll space-x-2 mx-auto ">
                     {
                       listing.imgUrls.map((index) => (
                         <button key={index} className="bg-gray-100 rounded-lg  my-2 overflow-hidden " onClick={() => setDisplayImage(index)}>
@@ -115,16 +125,6 @@ const Listing = () => {
                       ))
                     }
                   </div>
-
-                  {/* <button
-                  className="absolute grid place-content-center top-1/2 -translate-y-1/2 left-5 rounded-full bg-light p-3 active:scale-110 active:text-element md:hidden">
-              </button> */}
-
-                  {/* <button
-                  className="absolute grid place-content-center top-1/2 -translate-y-1/2 right-5 rounded-full bg-light p-3 active:scale-110 active:text-element  md:hidden">
-              </button> */}
-
-                  {/* <div className="hidden md:grid grid-cols-4 gap-8">thumbnail</div> */}
 
                   <div className="hidden md:block ">
                     <div className="flex flex-col space-y-2 leading-loose mb-4">
@@ -146,9 +146,31 @@ const Listing = () => {
 
                 </section>
 
-                <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 z-1 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 z-1 "}>
+                <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 "}>
 
                   <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
+                  
+          <div className="p-3 mx-auto w-full z-50">
+            {requestStatus ? (
+              <Link className=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded" to="/profile/requestedItems">
+                Go to requested rental
+              </Link>
+            ) : (
+              <div className=" mx-auto">
+                {showRentalRequestForm ? (
+                  <Request
+                    listing={listing}
+                    listingId={listingId}
+                    listingPrice = {listing.regularPrice}
+                    onClose={() => setShowRentalRequestForm(false)}
+                    
+                  />
+                ) : (
+                  <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={onClick}>Check Availability and price</button>
+                )}
+              </div>
+            )}
+          </div>
 
                   <div className="flex md:hidden flex-col space-y-2 leading-loose">
 

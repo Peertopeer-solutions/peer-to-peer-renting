@@ -25,15 +25,6 @@ const UserListings = () => {
   const [listings, setListings] = useState(null)
   const [orders, setOrders] = useState(null)
   const [user, setUser] = useState(null)
-  const [changeDetails, setChangeDetails] = useState(false)
-  const [formData, setFormData] = useState({
-    name: auth.currentUser.displayName,
-    email: auth.currentUser.email,
-  })
-
-
-
-  const { name, email } = formData
 
   const navigate = useNavigate()
 
@@ -154,7 +145,7 @@ console.log(listings)
 
               {!loading && listings?.length > 0 ? (
                 <>
-                  <div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
+                  <div className='grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:p-3 '>
                     {listings?.map((listing) => (
                       <ListingItem
                         keyId={listing.id}

@@ -47,8 +47,8 @@ const Footer = () => {
            
             <div>
               <nav className="flex flex-col mt-4 space-y-4 text-sm md:text-lg  text-gray-500">
-              <Link to="/terms-and-conditions" className="hover:opacity-75" href> Terms &amp; Conditions </Link>
-              <Link to="/shipping-policy" className="hover:opacity-75" href> Shipping policy </Link>
+              <Link to="/termscondition" className="hover:opacity-75" href> Terms &amp; Conditions </Link>
+              <Link to="shippingpolicy" className="hover:opacity-75" href> Shipping policy </Link>
               <Link to="/damage-policy" className="hover:opacity-75" href> Damage policy </Link>
               </nav>
             </div>
@@ -56,7 +56,7 @@ const Footer = () => {
             <div>
               
               <nav className="flex flex-col mt-4 space-y-2 text-sm md:text-lg    text-gray-500">
-                <Link to="/privacy-policy" className="hover:opacity-75" href> Privacy Policy </Link>
+                <Link to="privacypolicy" className="hover:opacity-75" href> Privacy Policy </Link>
 
                 <Link to="/about-us" className="hover:opacity-75" href> About us</Link>
 

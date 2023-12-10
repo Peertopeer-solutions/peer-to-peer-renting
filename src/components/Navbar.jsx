@@ -1,11 +1,10 @@
 import  React, {useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 import Hamburger from 'hamburger-react'
-
 import { Link } from "react-router-dom";
 import SideNav from "./SideNav";
+import { LinkButton } from "./Design/Button";
 
 
 const Navbar = () => {
@@ -26,7 +25,7 @@ const Navbar = () => {
   useEffect(() => {
     setToogleNav(false);
 
-  }, [navigate]);
+  }, [location.pathname]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -47,35 +46,7 @@ const Navbar = () => {
   };
 
   return (
-    // <nav className='navbar'>
-    //     <nav className='navbarNav'>
-    //         <ul className='navbarListItems'>
-    //             <li className='navbarListItems' onClick={() => navigate('/')} >
-    //                 <ExploreIcon fill={pathMatchRoute('/') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px' />
-    //                 <p className={
-    //                     pathMatchRoute('/') ? 'navbarListItemNameActive' : 'navbarListItemName'
-    //                 }>Explore</p>
-
-    //             </li>
-    //             <li className='navbarListItems' onClick={() => navigate('/offers')} >
-    //                 <OfferIcon fill={pathMatchRoute('/offers') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px' />
-    //                 <p className={
-    //                     pathMatchRoute('/offers') ? 'navbarListItemNameActive' : 'navbarListItemName'
-    //                 }>Offer</p>
-
-    //             </li>
-    //             <li className='navbarListItems' onClick={() => navigate('/profile')}>
-    //                 <PersonOutlineIcon fill={pathMatchRoute('/profile') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px' />
-    //                 <p className={
-    //                     pathMatchRoute('/profile') ? 'navbarListItemActive' : 'navbarListItem'
-    //                 }>Profile</p>
-
-    //             </li>
-    //         </ul>
-    //     </nav>
-
-    // </nav>
-    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed z-10">
+    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed z-0">
       <div className="  p-2 md:p-3 bg-white  border ">
         <div className="flex items-center justify-between ">
           <Link to="/">
@@ -86,20 +57,22 @@ const Navbar = () => {
 
           {user ? (
             <div>
-              <div className="hidden md:flex space-x-12 items-center">
-
+              <div className="hidden md:flex space-x-3 items-center">
+                <LinkButton  
+                  to="/create-listing">
+                List item
+                
+                </LinkButton>
                 <Link
-                  className="text-xl p-2 rounded-full hover:bg-black hover:text-white"
-                  to="/create-listing"
+                 
                 >
-                  List item
                 </Link>
-                <Link
-                  className="text-xl  p-2 rounded-full hover:bg-black hover:text-white"
-                  to="/rentalRequests"
+                <LinkButton
+              
+                  to="/profile/rentalrequests"
                 >
                   Requests
-                </Link>
+                </LinkButton>
                 <div
                   className="rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white"
                   onClick={handleToogle}

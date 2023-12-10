@@ -73,7 +73,7 @@ const RequestedRental = () => {
       
       <div className=''>
       <p className='font-bold container mx-auto  uppercase text-2xl text-blue-600'>Your requests</p>
-      <p className='font-medium  bg-white rounded-full text-[18px]   text-blue-600'>You can see the items you have requested for renting</p>
+      <p className='font-medium  bg-white rounded-full text-[18px]    text-blue-600'>You can see the items you have requested for renting</p>
       {loading ? (<Spinner/>) : 
       
       rentalRequests && rentalRequests.length > 0 ? (

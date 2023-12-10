@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -11,13 +11,11 @@ const queryClient = new QueryClient();
 
 	ReactDOM.createRoot(document.getElementById('root')).render(
 		<React.StrictMode>
-			<BrowserRouter>
-				<FirebaseAuthProvider>
 				<QueryClientProvider client={queryClient}>
+					<Suspense fallback={'..loading'}>
 					<App />
+					</Suspense>
 					</QueryClientProvider>
-				</FirebaseAuthProvider>
-			</BrowserRouter>
 		</React.StrictMode>
 	)
 

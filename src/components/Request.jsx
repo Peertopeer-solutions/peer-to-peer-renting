@@ -116,9 +116,8 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
     <>
 
       {TotalBill ?
+        <div className=' left-0 right-0 m-auto md:w-2/5 bg-white rounded-l z-40 '>
 
-        <div className='fixed -bottom-1 md:bottom-[40%]  left-0 right-0 m-auto md:w-2/5 bg-white rounded-lg  z-20 '>
-          <button className='absolute -top-1 md:-right-1 -right-0 bg-red-500 text-white rounded-full w-6 aspect-[1/1] px-1' onClick={onClose}><DeleteCrossIcon /></button>
 
           <div className='p-3 m-3'>
             <div className=''>
@@ -167,7 +166,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
         </div>
 
-        : <div className='fixed -bottom-1 md:bottom-[10%]  left-0 right-0 m-auto md:w-2/5 bg-white rounded-lg  z-20 '>
+        : <div className='fixed -bottom-1 md:bottom-[10%]  left-0 right-0 m-auto md:w-2/5 bg-white rounded-lg '>
           <button className='absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 aspect-[1/1] px-1' onClick={onClose}><DeleteCrossIcon /></button>
           <div className="flex  justify-center items-center  p-3 ">
 

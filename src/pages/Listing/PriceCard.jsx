@@ -8,22 +8,15 @@ import AuthContext from '../../FirebaseAuthContext';
 const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus, showRentalRequestForm}) => {
   const authCtx = useContext(AuthContext)
 
-  const onClick = (() => {
-    if (authCtx.currentUser) {
-      setShowRentalRequestForm(true)
-    }
-    else {
-      navigate("/sign-in")
-    }
-  })
+
   
   console.log(listingId)
   return (
-    <div className="space-y-4 md:space-y-6  sticky top-0 box-border">
+    <div className="space-y-4 md:space-y-6  sticky top-0 box-border -z-10">
     <h1 className="text-[32px] font-medium capitalize text-primary ">
       {listing.title}
     </h1>
-    <div className="flex-col justify-between md:block ">
+    <d  iv className="flex-col justify-between md:block ">
       <div className="">
         <div className="mx-auto xl:mr-24 bg-gray-50 rounded-xl  ">
           <div className="flex justify-between p-3 xl:p-6   ">
@@ -39,7 +32,7 @@ const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus,
               ? listing.discountedPrice
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              : <div className="grid grid-cols-3 place-item-center gap-2 xl:gap-6 font-normal -z-1">
+              : <div className="grid grid-cols-3 place-item-center gap-2 xl:gap-6 font-normal">
                 <div className="flex flex-col items-center border shadow-lg py-3 space-y-1 justify-center rounded-md  bg-white">
                   <p className="text-[14px] text-gray-400 font-light">Daily</p>
                   <span className="text-[16px] text-blue-500">
@@ -75,27 +68,6 @@ const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus,
           </div>
 
 
-          <div className="p-3 mx-auto w-full">
-            {requestStatus ? (
-              <Link className=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded" to="/requestedItems">
-                Go to requested rental
-              </Link>
-            ) : (
-              <div className=" mx-auto  ">
-                {showRentalRequestForm ? (
-                  <Request
-                    listing={listing}
-                    listingId={listingId}
-                    listingPrice = {listing.regularPrice}
-                    onClose={() => setShowRentalRequestForm(false)}
-                    
-                  />
-                ) : (
-                  <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={onClick}>Check Availability and price</button>
-                )}
-              </div>
-            )}
-          </div>
 
         </div>
         {listing.offer && (
@@ -112,7 +84,7 @@ const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus,
       <p className="text-sm md:text-2xl text-off line-through text-red-600">
         {listing.offer && <span>₹{listing.regularPrice}</span>}
       </p>
-    </div>
+    </d>
     
 
   </div>

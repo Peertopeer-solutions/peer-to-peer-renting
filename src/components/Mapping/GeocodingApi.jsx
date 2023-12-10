@@ -77,10 +77,10 @@ const GeocodingApi = ({pincode}) => {
   const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center}&zoom=${zoom}&size=${size}&key=${GOOGLE_GEOCODING_API_KEY}&map_ids=${mapId}`;
 
   return (
-    <div className=' relative w-full'>
+    <div className=' relative w-full -z-10'>
 
            <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-        md:h-24 md:w-24 h-12 w-12 bg-blue-300 opacity-40 rounded-full ring-2 ring-blue-700 '></div>
+        md:h-24 md:w-24 h-12 w-12 bg-blue-300 opacity-40 rounded-full ring-2 ring-blue-700'></div>
          {center === null ? <div>loading</div>:<img className='rounded-lg w-full' src={mapUrl} alt="Static Map" />}
      
 

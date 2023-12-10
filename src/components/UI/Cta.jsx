@@ -12,10 +12,10 @@ const Cta = () => {
             <div className="w-5/6 pt-24 mx-auto md:container md:mx-auto md:flex md:px-6 py-3 ">
 
                 <div className="mx-auto md:flex" >
-                    <div className=" flex relative lg:left-[50px] text-left  md:p-3  ">
+                    <div className=" flex relative lg:left-[50px] text-left  md:p-3 -z-10 ">
                         <div >
-                            <h2 className="container xl:w-3/4 text-4xl font-semibold text-gray-800 md:text-4xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600">anything</span> from people around you</h2>
-                            <p className=" text-lg my-6 text-gray-500 md:text-lg lg:text-2xl z- tracking-wider leading-loose ">Begin your adventure, let the world be your playground!</p>
+                            <h2 className="container xl:w-3/4 text-3xl sm:text-4xl   font-semibold text-gray-800 md:text-5xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-8xl">anything</span> from people around you</h2>
+                            <p className=" text-lg my-6 text-gray-500 md:text-lg lg:text-2xl  tracking-wider leading-loose ">Begin your adventure, let the world be your playground!</p>
                             <div className='container text-sm  lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl p-1 bg-gray-100 lg:h-16'>
                                 <input type="text" placeholder="Camera, shoes, riding jacket "className=" bg-gray-100 p-2 md:p-2 ml-3 w-full xl:w-3/4 rounded-l-full  h-9" />
                                 <button className="shadow-lg rounded-full bg-blue-700 text-white w-2/6 p-2 lg:p-3">Search</button>

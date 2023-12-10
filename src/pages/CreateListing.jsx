@@ -27,17 +27,18 @@ const CreateListing = () => {
 	const [selectedImg, setSelectedImg] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const authCtx = useContext(AuthContext);
+	console.log(authCtx?.currentUser)
 	const navigate = useNavigate();
 	const isMounted = useRef(true);
 	useEffect(() => {
-		if (isMounted) {
-			const user = authCtx.currentUser;
-			if (user) {
-				console.log(user.uid)
-			} else {
-				navigate('/sign-in');
-			}
-		}
+		// if (isMounted) {
+		// 	const user = authCtx.currentUser;
+		// 	if (user != null) {
+		// 		console.log(user.uid)
+		// 	} else {
+		// 		navigate('/sign-in');
+		// 	}
+		// }
 
 		return () => {
 			isMounted.current = false;
@@ -153,7 +154,7 @@ const CreateListing = () => {
 
 		
 		<PageWrapper>	
-			<div className='relative min-h-screen flex items-center justify-center  bg-no-repeat bg-cover '>
+			<div className='relative min-h-screen flex items-center justify-center  bg-no-repeat bg-cover -z-10'>
 				<div className='absolute bg-black opacity-60 '></div>
 
 					<div className=' w-full p-6 md:p-10 bg-white rounded-xl '>
@@ -423,11 +424,11 @@ const CreateListing = () => {
 								</button>
 							</div>
 						</form>
-						<DevTool control={control}/>
 					</div>
 				
 			</div>
-	
+			<DevTool control={control}/>
+
 	</PageWrapper>
 	
 		
