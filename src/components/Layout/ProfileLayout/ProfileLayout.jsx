@@ -20,10 +20,9 @@ const ProfileLayout = ({ children }) => {
         <ProfileHeader />
         <div className='flex flex-row md:hidden relative '>
           <div className=' z-10 '>
-
           {!toogle && <IoIosMenu className='my-3' onClick={()=>setToogle(true)}/>}
 
-            <div className=' absolute left-1/2 transform -translate-x-1/2 w-4/5'>
+            <div className=' fixed  left-1/2 top-[50%] transform -translate-x-1/2  w-full '>
               {
                 toogle && <ProfileNavigation toogle={toogle} setToogle={setToogle}/>
               }
@@ -33,7 +32,7 @@ const ProfileLayout = ({ children }) => {
 
         </div>
 
-        <div class="flex mt-12 md:mt-6">
+        <div class="flex mt-6 md:mt-6">
 
           <div className='hidden md:block w-1/5 '>
             <ProfileNavigation />

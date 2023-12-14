@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
 
 					},
 					{
-						path:'orderConfirmation',
+						path:'orderConfirmation/:orderId',
 						element:<OrderConfirmation/>,
 						errorElement:<ErrorBoundary />,
 

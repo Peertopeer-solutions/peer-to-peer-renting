@@ -14,8 +14,9 @@ const Footer = () => {
           <div>
           <img src="#" className="mr-5 h-6 sm:h-9" alt="logo" />
             <p className="max-w-xs mt-4 text-sm text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
-            </p>
+            Begin your adventure, let the world be your playground!
+
+</p>
             <div className="flex mt-8 space-x-6 text-gray-600">
               <a className="hover:opacity-75" href="https://facebook.com" target="_blank" rel="noreferrer">
                 <span className="sr-only"> Facebook </span>
@@ -89,7 +90,7 @@ const Footer = () => {
           © 2022 Comany Name
         </p>
       </div>
-      <div className='hidden md:flex items-end justify-start absolute '>
+      <div className='hidden md:flex items-end justify-start absolute right-0'>
               <Drone className="h-64 w-64 "/>
       </div>
     </footer>  

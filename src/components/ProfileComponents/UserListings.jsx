@@ -18,6 +18,7 @@ import { toast } from 'react-toastify'
 import { db } from '../../firebase.config'
 import ListingItem from '../Listingitem'
 import Orders from '../Orders'
+import ListingProfileTile from './ListingProfileTile'
 
 const UserListings = () => {
   const auth = getAuth()
@@ -29,7 +30,7 @@ const UserListings = () => {
   const navigate = useNavigate()
 
 console.log(listings)
-
+console.log(orders)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,15 +140,15 @@ console.log(listings)
 
         </div>
 
-        <div className='flex  mt-3 overflow-x-scroll'>
+        <div className='flex mt-3 '>
           {activeSection === 'listings' && (
             <div className=''>
 
               {!loading && listings?.length > 0 ? (
                 <>
-                  <div className='grid sm:grid-cols-2 place-items-center md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:p-3 '>
+                  <div className='  md:p-3 '>
                     {listings?.map((listing) => (
-                      <ListingItem
+                      <ListingProfileTile
                         keyId={listing.id}
                         listing={listing.data}
                         id={listing.id}

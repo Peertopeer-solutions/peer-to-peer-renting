@@ -29,7 +29,7 @@ const Explore = ({ listings, isLoading, error }) => {
           <div>
             <div className='  mt-12 mb-12'>
               <p className="text-2xl text-gray-800 md:text-[35px]  mb-5  uppercase">Categories</p>
-              <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 ' >
+              <div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 ' >
                 {categories.map((data) => (
                   <div className=' w-full bg-white drop-shadow-lg rounded-lg ' key={data.name}>
                     <Link to={`category/${data.name}`}  >
@@ -39,7 +39,7 @@ const Explore = ({ listings, isLoading, error }) => {
 
                         </div>
                         <div className='rounded-lg h-12 flex   items-center bg-white'>
-                          <p className=" text-sm md:text-lg w-[100%] p-1 text-center ">{data.name}</p>
+                          <p className=" text-[16px] md:text-lg w-[100%] p-1 text-center ">{data.name}</p>
 
                         </div>
 

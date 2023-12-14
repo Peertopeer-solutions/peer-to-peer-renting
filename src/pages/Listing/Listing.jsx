@@ -88,7 +88,7 @@ const Listing = () => {
 
   return (
     <>
-      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-0">hellos </div>)}
+      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-10">hellos </div>)}
       {
         isLoading ?
           <div>
@@ -148,15 +148,16 @@ const Listing = () => {
 
                 <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 "}>
 
-                  <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
+<div className="">
+  <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
                   
-          <div className="p-3 mx-auto w-full z-50">
+          <div   className="p-3 mx-auto w-full  ">
             {requestStatus ? (
               <Link className=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded" to="/profile/requestedItems">
                 Go to requested rental
               </Link>
             ) : (
-              <div className=" mx-auto">
+              <div className=" mx-auto relative">
                 {showRentalRequestForm ? (
                   <Request
                     listing={listing}
@@ -172,6 +173,8 @@ const Listing = () => {
             )}
           </div>
 
+</div>
+                
                   <div className="flex md:hidden flex-col space-y-2 leading-loose">
 
                     <h1 className="text-[24px] font-bold text-gray-900 mb-4">Description</h1>

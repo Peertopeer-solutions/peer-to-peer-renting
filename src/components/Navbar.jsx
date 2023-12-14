@@ -46,7 +46,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed z-0">
+    <nav className=" w-[100%] mx-auto border-b-1 border-black fixed z-10">
       <div className="  p-2 md:p-3 bg-white  border ">
         <div className="flex items-center justify-between ">
           <Link to="/">

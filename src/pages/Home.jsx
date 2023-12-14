@@ -64,7 +64,6 @@ const Home = () => {
   return (
 
         <>
-
           <Cta/>
           <Features/>  
           <Explore isLoading={isLoading} error={error} listings = {data}  />

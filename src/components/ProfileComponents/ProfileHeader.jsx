@@ -59,7 +59,7 @@ const ProfileHeader = () => {
         <div class="flex flex-col space-y-3  items-center ">
           <img alt="Profile image" src={auth.currentUser?.photoURL} class="aspect-square w-24 rounded-full ring-4 ring-white  " />
           <div className='flex flex-col '>
-            <div className='relative -z-10 '> 
+            <div className='relative z-0 '> 
             <form className='text-center'>
               <input
                 type='text'

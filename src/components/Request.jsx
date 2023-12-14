@@ -73,7 +73,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
           timestamp: serverTimestamp(),
 
         });
-        navigate('/requestedItems')
+        navigate('/profile/requestedItems')
         console.log('collection created')
       }
 
@@ -82,13 +82,12 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
   }
 
   const PriceCheck = () => {
-    if (startDate && endDate) {
-      SetTotalBill(true)
+      if (startDate && endDate) {
+        SetTotalBill(true)
 
+      }
     }
-  }
-  console.log(endDate, startDate)
-  console.log(listing.userRef)
+
 
 
   // Define options for formatting the date
@@ -116,20 +115,18 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
     <>
 
       {TotalBill ?
-        <div className=' left-0 right-0 m-auto md:w-2/5 bg-white rounded-l z-40 '>
-
-
-          <div className='p-3 m-3'>
-            <div className=''>
-              <div className='flex justify-between py-4 ' >
-              <div className='flex space-x-4 text-[16px] font-medium'>
+        <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-24 md:w-1/2 z-20 bg-white rounded-2xl'>
+          <div className='p-3 m-3 '>
+            <div className='flex flex-col space-y-6'>
+              <div className='flex space-x-4 justify-between py-4 ' >
+              <div className='flex space-x-6 text-[16px] font-medium'>
               <p className='font-light'>{rentalPeriod} Days</p>
                 <p>{RentalStartDate}-{RentalFinishDate}</p>
               </div>
               <button className='text-blue-500 font-medium text-[16px]' onClick={() => SetTotalBill(false)}>Change Dates</button>
               </div>
               
-              <div className='border-b border-t py-3'>
+              <div className='flex flex-col space-y-3 border-b border-t py-3'>
               <div className='flex justify-between leading-loose '>
               <p className='font-light'>₹{listingPrice} x {rentalPeriod} Days</p>
               <p className='font-light'>₹{listingPrice*rentalPeriod}</p>
@@ -166,7 +163,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
         </div>
 
-        : <div className='fixed -bottom-1 md:bottom-[10%]  left-0 right-0 m-auto md:w-2/5 bg-white rounded-lg '>
+        : <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-12 md:w-1/2 z-20 bg-white rounded-2xl'>
           <button className='absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 aspect-[1/1] px-1' onClick={onClose}><DeleteCrossIcon /></button>
           <div className="flex  justify-center items-center  p-3 ">
 
