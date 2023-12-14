@@ -31,7 +31,7 @@ const OAuth = () => {
                     timeStamp : serverTimestamp()
                 }) 
             }
-            navigate('/')   
+            navigate(-2)   
 
         } catch (error) {
             // console.log(error)

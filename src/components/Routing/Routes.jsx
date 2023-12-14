@@ -1,10 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorBoundary from '../ErrorBoundries/ErrorBoundry';
-import PrivateRoute from '../PrivateRoute';
+
 import RootLayout from '../Layout/RootLayout';
 import { lazy } from 'react';
 
+import { Navigate, Outlet } from 'react-router-dom'
+import useAuthStatus from '../../hooks/useAuthStatus'
+import Spinner from '../Spinner'
 const UserListings = lazy(() => import('../ProfileComponents/UserListings'))
 const OrderConfirmation = lazy(() => import('../../pages/OrderConfirmation'));
 const Category = lazy(() => import('../../pages/Category/Category'));
@@ -28,6 +31,15 @@ const ShippingPolicy = lazy(() => import('../../pages/Policies/ShippingPolicy'))
 const DamagePolicy = lazy(() => import('../../pages/Policies/DamagePolicy'));
 const Home = lazy(() => import('../../pages/Home'));
 
+const PrivateRoute = () => {
+	
+    const {loggedIn , checkingStatus } = useAuthStatus()
+    if(checkingStatus){
+        return <Spinner/>
+    }
+
+  return loggedIn ? <Outlet/> : <Navigate to='/sign-in' />
+}
 
 
 export const router = createBrowserRouter([
