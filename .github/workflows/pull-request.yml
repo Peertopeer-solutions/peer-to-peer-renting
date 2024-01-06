@@ -13,8 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Clean install package dependencies
         run: npm ci
-      - name:
-        Check linting and formatting
+      - name: Check linting and formatting
         run: npm run lint --if-present
       # Run test cases and this could ensure minimum coverage as well if set
       - name: Execute test cases
