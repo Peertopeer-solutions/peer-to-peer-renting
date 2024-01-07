@@ -94,7 +94,7 @@ const Listing = () => {
           <div>
             <SkeletonListing />
           </div> : (
-              <PageWrapper>
+
                  <main
                 className="md:grid md:grid-cols-2 mx-auto md:gap-16 xl:gap-6 md:h-[100vh] overflow-y-scroll no-scrollbar "
               >
@@ -148,7 +148,7 @@ const Listing = () => {
 
                 <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 "}>
 
-<div className="">
+<div className=" sticky top-0">
   <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
                   
           <div   className="p-3 mx-auto w-full  ">
@@ -195,7 +195,7 @@ const Listing = () => {
                 </section>
 
               </main>
-              </PageWrapper>
+
              
 
        
