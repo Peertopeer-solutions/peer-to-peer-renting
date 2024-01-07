@@ -9,9 +9,9 @@ const Cta = () => {
   
     return  (
         <>
-            <div className="w-5/6 pt-24 mx-auto md:container md:mx-auto md:flex md:px-6 py-3 ">
+            <div className="w-full  md:container  md:flex  ">
 
-                <div className="mx-auto md:flex" >
+                <div className=" md:flex" >
                     <div className=" flex relative lg:left-[50px] text-left  md:p-3 -z-10 ">
                         <div >
                             <h2 className="container xl:w-3/4 text-3xl sm:text-4xl   font-semibold text-gray-800 md:text-5xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-8xl">anything</span> from people around you</h2>

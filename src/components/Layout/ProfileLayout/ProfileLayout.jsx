@@ -16,7 +16,7 @@ const ProfileLayout = ({ children }) => {
   return (
     <>
       {toogle && (<div className="fixed bottom inset-0 bg-black box-content opacity-60 z-10"></div>)}
-      <PageWrapper>
+      
         <ProfileHeader />
         <div className='flex flex-row md:hidden relative '>
           <div className=' z-10 '>
@@ -43,7 +43,7 @@ const ProfileLayout = ({ children }) => {
           </div>
         </div>
 
-      </PageWrapper>
+
     </>
 
   )

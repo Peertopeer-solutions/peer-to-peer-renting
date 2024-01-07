@@ -11,7 +11,7 @@ const Features = () => {
       <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need to deploy your app</p>
       <p className="mt-6 text-lg leading-8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
     </div> */}
-    <div className="mx-auto my-12 md:my-24  bg-gray-50 py-3 px-3 lg:px-8 ">
+    <div className="mx-auto my-12 md:my-24  py-3 px-3 lg:px-8 ">
       <dl className="grid grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none  lg:grid-cols-3 lg:gap-y-3">
         <div className="relative ">
           <dt className=" md:text-xl flex flex-col items-center justify-center itemtext-base font-semibold leading-7 text-gray-900">

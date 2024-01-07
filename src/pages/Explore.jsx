@@ -23,7 +23,7 @@ const Explore = ({ listings, isLoading, error }) => {
 
   return (
     <>
-    <ContentWrapper>
+
     <div className="">
         <main className='flex flex-col'>
           <div>
@@ -93,7 +93,7 @@ const Explore = ({ listings, isLoading, error }) => {
 
         </main>
       </div>
-    </ContentWrapper>
+
     
     </>
 
