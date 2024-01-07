@@ -154,7 +154,7 @@ const CreateListing = () => {
 
 		
 		<PageWrapper>	
-			<div className='relative min-h-screen flex items-center justify-center  bg-no-repeat bg-cover -z-10'>
+			<div className='relative min-h-screen flex items-center justify-center  bg-no-repeat bg-cover '>
 				<div className='absolute bg-black opacity-60 '></div>
 
 					<div className=' w-full p-6 md:p-10 bg-white rounded-xl '>

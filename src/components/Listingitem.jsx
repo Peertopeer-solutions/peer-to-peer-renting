@@ -38,7 +38,7 @@ function ListingItem({ listing, id, onEdit, onDelete, onList, keyId, orders }) {
 
   return (
     <div className='w-full md:w-[290px]' key={keyId} >
-      <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full " to={`/${listing.category}/${id}`}>
+      <Link className="relative flex flex-col justify-start w-full md:w-[290px] h-full z-10" to={`/${listing.category}/${id}`}>
         <div className="absolute right-0 top-0  md:m-3 max-w-fit ">
           {/* {!onDelete && <Link to="/whishlist" href="#" title="Add to Favorites"
             className=" hover:text-red-500 duration-300 text-2xl text-gray-900   ">

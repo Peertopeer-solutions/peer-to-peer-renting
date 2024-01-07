@@ -6,10 +6,9 @@ name: Continuous Development (CD)
 on:
   workflow_run:
     workflows: ['Continuous Integration (CI)']
+    branches: ['main']
     types:
       - completed
-  push:
-    branches: ['main']
 env:
   VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
   VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN}}
@@ -26,11 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo $REACT_FIREBASE_API_KEY $REACT_FIREBASE_AUTH_DOMAIN $REACT_FIREBASE_PROJECT_ID
-      - run: npm install
-      - run: npm run build
+      - name: Clean install package dependencies and build
+        run: npm ci && npm run build
         env:
           CI: false
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploying to hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AWESOME_RENTING }}'
