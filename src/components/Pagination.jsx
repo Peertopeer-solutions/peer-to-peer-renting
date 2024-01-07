@@ -1,26 +1,25 @@
-import React from 'react'
+import React from 'react';
+import PaginationItem from './PaginationItem';
 
 const Pagination = ({ currentPage, totalItems, onPageChange }) => {
-  const totalPages = Math.ceil(totalItems / 10);
+	const totalPages = Math.ceil(totalItems / 10);
 
-  const pages = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(
-      <button
-        key={i}
-        onClick={() => onPageChange(i)}
-        className={currentPage === i ? "border-2 bg-gray-300  w-6" : "bg-gray-100 w-6"}
-      >
-        {i}
-      </button>
-    );
-  }
-
-  return (
-    <div className="max-w-max mx-auto m-3 ">
-      <ul className='space-x-2'>{pages}</ul>
-    </div>
-  );
+	const pages = [];
+	for (let i = 1; i <= 4; i++) {
+		pages.push(
+			<PaginationItem
+				key={`page-number-${i}`}
+				pageNumber={i}
+				isCurrentPage={currentPage === i}
+				onClick={onPageChange.bind(null, i)}
+			/>
+		);
+	}
+	return (
+		<div className='m-3 mx-auto max-w-max '>
+			<ul className='space-x-2'>{pages}</ul>
+		</div>
+	);
 };
 
-export default Pagination
+export default Pagination;

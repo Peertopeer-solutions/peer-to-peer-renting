@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
@@ -7,7 +8,13 @@ import svgr from 'vite-plugin-svgr'
 console.log(process.env.VITE_FIREBASE_API_KEY)
 export default defineConfig({
   optimizeDeps: {
-    include: ['react/jsx-runtime']},
-  plugins: [react(),svgr()],
-  
+    include: ['react/jsx-runtime']
+  },
+  plugins: [react(), svgr()],
+  test: {
+    global: true,
+    environment: 'jsdom',
+    setupFiles: './test/setup-test.js',
+
+  }
 })
