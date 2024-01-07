@@ -5,7 +5,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
 	const totalPages = Math.ceil(totalItems / 10);
 
 	const pages = [];
-	for (let i = 1; i <= 4; i++) {
+	for (let i = 1; i <= totalPages; i++) {
 		pages.push(
 			<PaginationItem
 				key={`page-number-${i}`}
