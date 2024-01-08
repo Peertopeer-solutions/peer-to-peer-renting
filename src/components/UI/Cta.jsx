@@ -12,7 +12,7 @@ const Cta = () => {
             <div className="w-full  md:container  md:flex  ">
 
                 <div className=" md:flex" >
-                    <div className=" flex relative lg:left-[50px] text-left  md:p-3 -z-10 ">
+                    <div className=" flex relative lg:left-[50px] text-left  md:p-3  ">
                         <div >
                             <h2 className="container xl:w-3/4 text-3xl sm:text-4xl   font-semibold text-gray-800 md:text-5xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-8xl">anything</span> from people around you</h2>
                             <p className=" text-lg my-6 text-gray-500 md:text-lg lg:text-2xl  tracking-wider leading-loose ">Begin your adventure, let the world be your playground!</p>

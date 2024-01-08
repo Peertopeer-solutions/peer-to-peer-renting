@@ -75,7 +75,7 @@ const Explore = ({ listings, isLoading, error }) => {
 											))}
 										</div>
 									) : (
-										<div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
+										<div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 '>
 											{listings.map(
 												(listing) =>
 													listing.data.listingEnabled && (

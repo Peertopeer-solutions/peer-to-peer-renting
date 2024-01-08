@@ -115,7 +115,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
     <>
 
       {TotalBill ?
-        <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-24 md:w-1/2 z-20 bg-white rounded-2xl'>
+        <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-44 md:w-1/2  bg-white rounded-2xl z-20 '>
           <div className='p-3 m-3 '>
             <div className='flex flex-col space-y-6'>
               <div className='flex space-x-4 justify-between py-4 ' >
@@ -163,7 +163,7 @@ const Request = ({ listing, listingId, onClose,listingPrice }) => {
 
         </div>
 
-        : <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-12 md:w-1/2 z-20 bg-white rounded-2xl'>
+        : <div className='fixed -bottom-2 left-0 w-full  md:translate-x-1/2 md:bottom-12 md:w-1/2  bg-white rounded-2xl z-20'>
           <button className='absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 aspect-[1/1] px-1' onClick={onClose}><DeleteCrossIcon /></button>
           <div className="flex  justify-center items-center  p-3 ">
 

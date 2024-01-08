@@ -9,7 +9,6 @@ const DropZone = (props) => {
 		accept: {
 			'image/*': ['.jpeg', '.png'],
 		},
-		maxFiles: 4,
 	});
 
 	return (

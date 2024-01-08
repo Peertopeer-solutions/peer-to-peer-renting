@@ -12,11 +12,11 @@ const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus,
   
   console.log(listingId)
   return (
-    <div className="space-y-4 md:space-y-6 box-border -z-10">
+    <div className="space-y-4 md:space-y-6 box-border">
     <h1 className="text-[32px] font-medium capitalize text-primary ">
       {listing.title}
     </h1>
-    <d  iv className="flex-col justify-between md:block ">
+    <div className="flex-col justify-between md:block ">
       <div className="">
         <div className=" aspect-4/3 w-full bg-gray-50 rounded-xl  ">
           <div className="flex justify-between p-3 xl:p-6   ">
@@ -84,7 +84,7 @@ const PriceCard = ({listing, listingId, setShowRentalRequestForm, requestStatus,
       <p className="text-sm md:text-2xl text-off line-through text-red-600">
         {listing.offer && <span>₹{listing.regularPrice}</span>}
       </p>
-    </d>
+    </div>
     
 
   </div>

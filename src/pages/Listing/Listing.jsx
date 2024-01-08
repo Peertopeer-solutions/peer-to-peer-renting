@@ -95,111 +95,111 @@ const Listing = () => {
             <SkeletonListing />
           </div> : (
 
-                 <main
-                className="md:grid md:grid-cols-2 mx-auto md:gap-16 xl:gap-6 md:h-[100vh] overflow-y-scroll no-scrollbar "
-              >
-                <section className=" w-full md:max-h-full block">
-                  <div className="relative w-full aspect-[4/3] flex items-center bg-gray-100 border rounded-xl -z-10">
-                    <div className="flex flex-col flex-1 absolute top-6 right-6 space-y-4">
-                    <button>
-                      <BsShare/>
+            <main
+              className="md:grid md:grid-cols-2 mx-auto md:gap-16 xl:gap-6 md:h-[100vh] overflow-y-scroll no-scrollbar "
+            >
+              <section className=" w-full md:max-h-full block">
+                <div className="relative w-full aspect-[4/3] flex items-center bg-gray-100  rounded-2xl ">
+                  <div className="flex flex-col flex-1 absolute top-6 right-6 space-y-4">
+                    <button className="cursor-pointer">
+                      <BsShare />
                     </button>
-                      <button>
-                        <BsHeart/>
-                      </button>
-                    </div>
-                    <img
-                      className="h-full w-full object-cover md:cursor-pointer rounded-2xl"
-                      src={displayImage === null ? listing.imgUrls[0] : displayImage}
-                      alt="img"
-                    />
+                    <button className="cursor-pointer">
+                      <BsHeart />
+                    </button>
                   </div>
-                  <div className="flex justify-start mt-4 items-center  overflow-x-scroll space-x-2 mx-auto ">
-                    {
-                      listing.imgUrls.map((index) => (
-                        <button key={index} className="bg-gray-100 rounded-lg  my-2 overflow-hidden " onClick={() => setDisplayImage(index)}>
-
-                          <img className="object-cover border shadow-xl  w-[150px] aspect-[4/3]" src={index} />
-
-                        </button>
-                      ))
-                    }
-                  </div>
-
-                  <div className="hidden md:block ">
-                    <div className="flex flex-col space-y-2 leading-loose mb-4">
-                      <h1 className="text-[24px] font-semibold text-gray-900 ">Description</h1>
-                      <p className="text-gray-700 font-normal whitespace-pre-line">Great as always, item returned as borrowed
-                      </p>
-                    </div>
-                    <div className=" text-[32px] font-semibold space-y-2">
-                      <p className=" text-2xl font-semibold text-gray-900 mb-4">Location</p>
-                      <div className="">
-                        <GeocodingApi pincode={listing.pincode} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="hidden md:block">
-                  <ReviewList />
-
-                  </div>
-
-                </section>
-
-                <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 "}>
-
-<div className=" sticky top-0">
-  <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
-                  
-          <div   className="p-3 mx-auto w-full  ">
-            {requestStatus ? (
-              <Link className=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded" to="/profile/requestedItems">
-                Go to requested rental
-              </Link>
-            ) : (
-              <div className=" mx-auto relative">
-                {showRentalRequestForm ? (
-                  <Request
-                    listing={listing}
-                    listingId={listingId}
-                    listingPrice = {listing.regularPrice}
-                    onClose={() => setShowRentalRequestForm(false)}
-                    
+                  <img
+                    className="h-full w-full object-cover"
+                    src={displayImage === null ? listing.imgUrls[0] : displayImage}
+                    alt="img"
                   />
-                ) : (
-                  <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={onClick}>Check Availability and price</button>
-                )}
-              </div>
-            )}
-          </div>
+                </div>
+                <div className="flex justify-start mt-4 items-center  overflow-x-scroll space-x-2 mx-auto ">
+                  {
+                    listing.imgUrls.map((index) => (
+                      <button key={index} className="bg-gray-100 rounded-lg  my-2 overflow-hidden " onClick={() => setDisplayImage(index)}>
 
-</div>
-                
-                  <div className="flex md:hidden flex-col space-y-2 leading-loose">
+                        <img className="object-cover  shadow-xl  w-[150px] aspect-[4/3]" src={index} />
 
-                    <h1 className="text-[24px] font-bold text-gray-900 mb-4">Description</h1>
-                    <p className="text-[16px] font-normal text-gray-700 whitespace-pre-wrap">{listing.description}</p>
+                      </button>
+                    ))
+                  }
+                </div>
+
+                <div className="hidden md:block ">
+                  <div className="flex flex-col space-y-2 leading-loose mb-4">
+                    <h1 className="text-[24px] font-semibold text-gray-900 ">Description</h1>
+                    <p className="text-gray-700 font-normal whitespace-pre-line">Great as always, item returned as borrowed
+                    </p>
                   </div>
-                  <div className="md:hidden ">
-                    <p className="text-2xl font-normal text-gray-900 mb-4">Location</p>
+                  <div className=" text-[32px] font-semibold space-y-2">
+                    <p className=" text-2xl font-semibold text-gray-900 mb-4">Location</p>
                     <div className="">
                       <GeocodingApi pincode={listing.pincode} />
                     </div>
                   </div>
-                  <div className="md:hidden">
+                </div>
+                <div className="hidden md:block">
                   <ReviewList />
 
+                </div>
+
+              </section>
+
+              <section className={showRentalRequestForm ? "pt-6 space-y-6 font-bold pb-10 md:p-0 " : "pt-6 space-y-6 font-bold pb-10 md:p-0 "}>
+
+                <div className=" ">
+                  <PriceCard listingId={listingId} requestStatus={requestStatus} listing={listing} setShowRentalRequestForm={setShowRentalRequestForm} showRentalRequestForm={showRentalRequestForm} />
+
+                  <div className="p-3 mx-auto w-full  ">
+                    {requestStatus ? (
+                      <Link className=" text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded" to="/profile/requestedItems">
+                        Go to requested rental
+                      </Link>
+                    ) : (
+                      <div className=" mx-auto relative ">
+                        {showRentalRequestForm ? (
+                          <Request
+                            listing={listing}
+                            listingId={listingId}
+                            listingPrice={listing.regularPrice}
+                            onClose={() => setShowRentalRequestForm(false)}
+
+                          />
+                        ) : (
+                          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={onClick}>Check Availability and price</button>
+                        )}
+                      </div>
+                    )}
                   </div>
 
+                </div>
 
-                </section>
+                <div className="flex md:hidden flex-col space-y-2 leading-loose">
 
-              </main>
+                  <h1 className="text-[24px] font-bold text-gray-900 mb-4">Description</h1>
+                  <p className="text-[16px] font-normal text-gray-700 whitespace-pre-wrap">{listing.description}</p>
+                </div>
+                <div className="md:hidden ">
+                  <p className="text-2xl font-normal text-gray-900 mb-4">Location</p>
+                  <div className="">
+                    <GeocodingApi pincode={listing.pincode} />
+                  </div>
+                </div>
+                <div className="md:hidden">
+                  <ReviewList />
 
-             
+                </div>
 
-       
-            
+
+              </section>
+
+            </main>
+
+
+
+
+
 
           )
       }

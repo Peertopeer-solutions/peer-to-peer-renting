@@ -15,7 +15,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../../components/Spinner'
 import Listingitem from '../../components/Listingitem'
 import Wrapper from '../../components/Layout/PageWrapper'
-import {  useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import PageWrapper from '../../components/Layout/PageWrapper'
 import Pagination from '../../components/Pagination'
 import ContentWrapper from '../../components/Layout/ContentWrapper'
@@ -34,12 +34,12 @@ function Category() {
   const params = useParams()
   const categoryName = params.categoryName
 
-  const { data:listings, isLoading, error } = useQuery(
+  const { data: listings, isLoading, error } = useQuery(
     ["paginatedData", currentPage, categoryName],
     async () => {
       const listingref = collection(db, "listings");
       let q = query(
-        listingref, 
+        listingref,
         where('category', '==', categoryName),
         orderBy('timestamp', 'desc'),
         limit(8));
@@ -72,73 +72,73 @@ function Category() {
   );
 
   console.dir(listings, totalDocs)
-  
+
 
   return (
     <PageWrapper>
-      <> 
+      <>
         <div className=''>
-      <header className=' flex-col items-start '>
+          <header className=' flex-col items-start '>
 
-        <div className='flex items-center gap-1 text-[10px] mb-3'>
-          <div>
-            <img className='h-9' src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="ICON" />
-          </div>
-          <div className='flex items-start flex-col'>
-            <h1 className='text-xl'>Gandhinagar</h1>
-            <p className='text-[16px]'>Daiict road, infocity...</p>
-          </div>
-        </div>
-        <div className='h-[300px] bg-slate-50 p-3 rounded-xl w-full md:w-max shadow-lg'>
-        <h1 className= 'text-[25px] md:text-[35px] my-3 font-bold text-blue-700 '>Rent {params.categoryName} equipment in Gandhinagar</h1>
-        <p className='tex-[16px] font-light'>Hire photography equipments from fellow photographer in Gandhinagar, over 50% cheaper than traditional rental houses  </p>
-        </div>
-
-
-
-      </header>
-
-
-
-      {isLoading ? (
-                          <div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
-                          { [...Array(10).keys()].map(i => (
-                          <SkeletonPost/> 
-                          ))}
-                          </div>
-                          
-                       
-                        
-                      ) : listings && listings.length > 0 ? (
-        <>
-          <main className='my-12'>
-            <div className=' grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2  z-0'>
-              {listings.map((listing) => listing.data.listingEnabled && (<Listingitem className="border border-1px"
-                listing={listing.data}
-                id={listing.id}
-                key={listing.id}
-              />)
-              )}
+            <div className='flex items-center gap-1 text-[10px] mb-3'>
+              <div>
+                <img className='h-9' src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="ICON" />
+              </div>
+              <div className='flex items-start flex-col'>
+                <h1 className='text-xl'>Gandhinagar</h1>
+                <p className='text-[16px]'>Daiict road, infocity...</p>
+              </div>
             </div>
-          </main>
+            <div className='h-[300px] bg-slate-50 p-3 rounded-xl w-full md:w-max shadow-lg'>
+              <h1 className='text-[25px] md:text-[35px] my-3 font-bold text-blue-700 '>Rent {params.categoryName} equipment in Gandhinagar</h1>
+              <p className='tex-[16px] font-light'>Hire photography equipments from fellow photographer in Gandhinagar, over 50% cheaper than traditional rental houses  </p>
+            </div>
 
-          <br />
-          <br />
-          {loadMore && lastFetchedListing && (
-            <p className='loadMore' onClick={onFetchMoreListings}>
-              Load More
-            </p>
+
+
+          </header>
+
+
+
+          {isLoading ? (
+            <div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
+              {[...Array(10).keys()].map(i => (
+                <SkeletonPost />
+              ))}
+            </div>
+
+
+
+          ) : listings && listings.length > 0 ? (
+            <>
+              <main className='my-12'>
+                <div className=' grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2  z-0'>
+                  {listings.map((listing) => listing.data.listingEnabled && (<Listingitem className="border border-1px"
+                    listing={listing.data}
+                    id={listing.id}
+                    key={listing.id}
+                  />)
+                  )}
+                </div>
+              </main>
+
+              <br />
+              <br />
+              {loadMore && lastFetchedListing && (
+                <p className='loadMore' onClick={onFetchMoreListings}>
+                  Load More
+                </p>
+              )}
+            </>
+          ) : (
+            <p>No listings for {params.categoryName}</p>
           )}
-        </>
-      ) : (
-        <p>No listings for {params.categoryName}</p>
-      )}
-      <Pagination  currentPage={currentPage}  totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)}/>
+          <Pagination currentPage={currentPage} totalItems={totalDocs} onPageChange={(pageNumber) => setCurrentPage(pageNumber)} />
 
-    </div></>
-      
+        </div></>
+
     </PageWrapper>
-   
+
   )
 }
 
