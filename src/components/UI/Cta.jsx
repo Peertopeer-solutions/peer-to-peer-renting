@@ -1,9 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-
-
-
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Cta = () => {
   
@@ -48,10 +44,8 @@ const Cta = () => {
             {/* <div className='h-36'>
                 
             </div> */}
+		</>
+	);
+};
 
-        </>
-    )
-
-}
-
-export default Cta
+export default Cta;
