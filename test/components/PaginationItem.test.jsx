@@ -1,4 +1,4 @@
-import PaginationItem from '../../src/components/PaginationItem';
+import PaginationItem from '../../src/components/Pagination/PaginationItem';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { vi, expect, describe, test, afterEach } from 'vitest';
 
