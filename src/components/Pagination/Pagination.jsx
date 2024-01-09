@@ -2,7 +2,7 @@ import React from 'react';
 import PaginationItem from './PaginationItem';
 
 const Pagination = ({ currentPage, totalItems, onPageChange }) => {
-	const totalPages = Math.ceil(totalItems / 10);
+	const totalPages = Math.ceil(totalItems / 8);
 
 	const pages = [];
 	for (let i = 1; i <= totalPages; i++) {
