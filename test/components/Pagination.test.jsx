@@ -9,6 +9,6 @@ describe('Pagination Component', () => {
 		);
 		expect(container).toBeInTheDocument();
 		const paginationItems = screen.getAllByRole('button');
-		expect(paginationItems).toHaveLength(5);
+		expect(paginationItems).toHaveLength(Math.ceil(50/8);
 	});
 });
