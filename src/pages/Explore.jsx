@@ -64,7 +64,7 @@ const Explore = ({ listings, isLoading, error }) => {
 						<CategoriesList />
 						<div className='mx-auto mt-12 mb-12'>
 							<main className=''>
-								<h1 className='text-2xl text-gray-800 md:text-[35px]  mb-5 mt-5  uppercase  '>
+								<h1 className='text-2xl text-gray-800 md:text-[35px] mb-5 mt-5 uppercase'>
 									Trending products
 								</h1>
 								<div className=''>
@@ -75,7 +75,7 @@ const Explore = ({ listings, isLoading, error }) => {
 											))}
 										</div>
 									) : (
-										<div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 '>
+										<div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 '>
 											{listings.map(
 												(listing) =>
 													listing.data.listingEnabled && (
