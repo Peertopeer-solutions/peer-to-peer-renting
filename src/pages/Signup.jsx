@@ -13,33 +13,28 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import OAuth from '../components/OAuth';
 import { useForm } from 'react-hook-form';
-import {
-	IoIosArrowForward,
-	IoIosEye,
-	IoIosLock,
-	IoIosMail,
-	IoIosInformation,
-	IoIosPerson,
-} from 'react-icons/io';
 import { PasswordInput, TextInput } from '../components/Form/Input';
+import Joi from 'joi';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { routes } from '../components/Routing/Routes';
 
-const AuthTextInput = ({ id, label, options, placeholder, type }) => {
-	return (
-		<div className='input-container'>
-			<input type={type ?? 'text'} {...options} />
-			<label>{label}</label>
-		</div>
-	);
-};
+const schema = Joi.object({
+	fullName: Joi.string().min(3).required().label('Name'),
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.required()
+		.label('Email'),
+	password: Joi.string().min(8).label('Password'),
+});
 
 const Signup = () => {
 	const {
 		register,
+		setError,
 		handleSubmit,
 		formState: { errors, isSubmitting },
-	} = useForm();
-	const [showPassword, setShowPassword] = useState(false);
-
+	} = useForm({ resolver: joiResolver(schema) });
+	const navigate = useNavigate();
 	const onSubmit = async (data) => {
 		try {
 			const { email, password, fullName } = data;
@@ -51,52 +46,67 @@ const Signup = () => {
 			const user = userCredential.user;
 			console.log(user);
 			updateProfile(auth.currentUser, {
-				displayName: name,
+				displayName: fullName,
 			});
 
-			const formDataCopy = { ...formData };
-			delete formDataCopy.password;
-			formDataCopy.timestamp = serverTimestamp();
+			const userData = {
+				email: user.email,
+				name: user.displayName,
+				timestamp: user.metadata.creationTime ?? serverTimestamp(),
+				phone: user.phoneNumber,
+			};
 
-			await setDoc(doc(db, 'users', user.uid), formDataCopy);
+			await setDoc(doc(db, 'users', user.uid), userData);
 			navigate('/');
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
+			if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+				setError(
+					'email',
+					{
+						message: 'Email is already registered with another account.',
+					},
+					{ shouldFocus: true }
+				);
+			}
+
 			console.log(errorCode, errorMessage);
 			toast.error('Something Went Wrong');
 		}
 	};
 
 	return (
-		<div className='md:w-1/4 md:mx-auto'>
-			<div className='mb-6 gap-1 flex flex-col '>
+		<div className='w-full'>
+			<div className='mb-6 gap-2 flex flex-col '>
 				<h1 className='text-3xl'>Create an account</h1>
 				<h4 className='text-gray-500 text-sm'>
 					Let&apos;s setup an account for you.
 				</h4>
 			</div>
 			<form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
+				{errors.root && (
+					<div className='text-red-400'>{errors.root.message}</div>
+				)}
 				<TextInput
 					id='full-name'
 					label='Name'
-					placeholder='Your full name'
 					options={register('fullName')}
+					error={errors.fullName}
 				/>
 				<TextInput
-					id='full-name'
+					id='email'
 					label='Email'
-					placeholder='example@example.com'
 					options={register('email')}
+					error={errors.email}
 				/>
 				<PasswordInput
-					type={showPassword ? 'text' : 'password'}
-					id='full-name'
+					id='password'
 					label='Password'
-					placeholder='8+ characters'
 					options={register('password')}
+					error={errors.password}
 				/>
-				<div className='mt-2'>
+				<div className='mt-2 flex flex-col gap-3'>
 					<button
 						className='flex items-center bg-blue-500 w-full py-2 rounded-lg'
 						disabled={isSubmitting}
@@ -106,11 +116,11 @@ const Signup = () => {
 						</span>
 						{/* <IoIosArrowForward className='text-sm ' /> */}
 					</button>
-
-					<div className='text-sm flex gap-1 mt-4 justify-center'>
+					<OAuth />
+					<div className='text-sm flex gap-1 mt-2 justify-center'>
 						<span className='text-gray-400'>Already have an account? </span>
 						<Link
-							to='/sign-in'
+							to={routes.signin}
 							className='text-blue-500 underline text-md font-bold'
 						>
 							Sign in
@@ -122,7 +132,7 @@ const Signup = () => {
 	);
 };
 
-const SignupV2 = () => {
+const SignupV1 = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [formData, setFormData] = useState({
 		name: '',
