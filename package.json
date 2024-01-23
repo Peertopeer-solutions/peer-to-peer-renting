@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@headlessui/react": "^1.7.17",
 		"@heroicons/react": "^1.0.6",
+		"@hookform/resolvers": "^3.3.4",
 		"@reduxjs/toolkit": "^2.0.1",
 		"@stripe/stripe-js": "^1.52.1",
 		"axios": "^1.5.1",
@@ -38,7 +39,8 @@
 		"react-toastify": "^9.1.1",
 		"swiper": "^6.8.4",
 		"uuid": "^9.0.0",
-		"vite-plugin-svgr": "^2.4.0"
+		"vite-plugin-svgr": "^2.4.0",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@hookform/devtools": "^4.3.1",
