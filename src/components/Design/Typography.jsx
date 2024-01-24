@@ -12,7 +12,7 @@ const PrimaryHeading = ({ children, className = "" }) => {
 
 const SubHeading = ({ children, className = "" }) => {
   return (
-    <h2 className={twMerge("text-2xl font-bold mb-3", className)}>
+    <h2 className={twMerge("text-2xl text-grey-900 my-3", className)}>
       {children}
     </h2>
   );
@@ -39,6 +39,20 @@ const Label = ({ children, className = "" }) => {
   );
 };
 
+//terms and condition
+// const LinkTypography = ({ href, children, icon, className }) => (
+//   <a
+//     href={href}
+//     className={twMerge(
+//       "custom-hover cursor-pointer flex items-center",
+//       className
+//     )}
+//   >
+//     {icon && React.cloneElement(icon, { className: "mr-2" })}
+//     {children}
+//   </a>
+// );
+
 PrimaryHeading.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
@@ -59,4 +73,10 @@ Label.propTypes = {
   className: PropTypes.string,
 };
 
+// LinkTypography.propTypes = {
+//   href: PropTypes.string.isRequired,
+//   children: PropTypes.node.isRequired,
+//   icon: PropTypes.element, // If an icon is provided, it should be a React element
+//   className: PropTypes.string,
+// };
 export { PrimaryHeading, SubHeading, Content, Label };
