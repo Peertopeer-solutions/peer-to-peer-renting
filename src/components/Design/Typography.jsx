@@ -12,11 +12,17 @@ const PrimaryHeading = ({ children, className = "" }) => {
 
 const SubHeading = ({ children, className = "" }) => {
   return (
-    <h2 className={twMerge("text-2xl text-grey-900 my-3", className)}>
+    <h2 className={twMerge("text-2xl font-bold text-grey-900 my-3", className)}>
       {children}
     </h2>
   );
 };
+
+// const SubSectionHeading = ({ children, className = "" }) => {
+//   return (
+//     <h3 className={twMerge("text-xl mb-2 mt-4", className)}>{children}</h3>
+//   );
+// };
 
 const Content = ({ children, className = "" }) => {
   return (
@@ -73,6 +79,10 @@ Label.propTypes = {
   className: PropTypes.string,
 };
 
+// SubSectionHeading.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   className: PropTypes.string,
+// };
 // LinkTypography.propTypes = {
 //   href: PropTypes.string.isRequired,
 //   children: PropTypes.node.isRequired,
