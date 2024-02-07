@@ -874,3 +874,14 @@ button {
 
   color: #000000;
 }
+.ais-Hits-list{
+  border-radius: 10px;
+  background-color: rgb(249 250 251);
+  padding: 2px;
+  
+}
+
+.ais-Highlight-highlighted{
+  color: rgb(29,78,216);
+  background-color: white;
+}
