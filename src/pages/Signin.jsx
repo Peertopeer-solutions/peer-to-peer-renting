@@ -54,7 +54,7 @@ const Signin = () => {
 			formDataCopy.timestamp = serverTimestamp();
 
 			await setDoc(doc(db, 'users', user.uid), formDataCopy);
-			navigate('/');
+			navigate(routes.home);
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
