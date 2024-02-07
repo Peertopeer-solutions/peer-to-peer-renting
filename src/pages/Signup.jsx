@@ -7,6 +7,7 @@ import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	updateProfile,
+	sendEmailVerification,
 } from 'firebase/auth';
 import { auth, db } from '../firebase.config';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
@@ -48,16 +49,17 @@ const Signup = () => {
 			updateProfile(auth.currentUser, {
 				displayName: fullName,
 			});
-
+			
 			const userData = {
 				email: user.email,
-				name: user.displayName,
+				name: fullName,
 				timestamp: user.metadata.creationTime ?? serverTimestamp(),
 				phone: user.phoneNumber,
 			};
 
 			await setDoc(doc(db, 'users', user.uid), userData);
-			navigate('/');
+			await sendEmailVerification(auth.currentUser);
+			navigate(routes.emailVerification,{replace: true});
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
