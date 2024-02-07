@@ -18,6 +18,7 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { PasswordInput, TextInput } from '../components/Form/Input';
 import { routes } from '../components/Routing/Routes';
+import { auth } from '../firebase.config';
 
 const schema = Joi.object({
 	email: Joi.string()
@@ -37,35 +38,29 @@ const Signin = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			const { email, password, fullName } = data;
-			const userCredential = await createUserWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
-			const user = userCredential.user;
-			console.log(user);
-			updateProfile(auth.currentUser, {
-				displayName: fullName,
-			});
-
-			const formDataCopy = { ...formData };
-			delete formDataCopy.password;
-			formDataCopy.timestamp = serverTimestamp();
-
-			await setDoc(doc(db, 'users', user.uid), formDataCopy);
+			const { email, password } = data;
+			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			if (userCredential.user) 
 			navigate(routes.home);
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+			if (errorMessage.includes('auth/wrong-password')) {
 				setError(
-					'email',
+					'password',
 					{
-						message: 'Email is already registered with another account.',
+						message: 'Wrong password',
 					},
 					{ shouldFocus: true }
 				);
+			} else if (errorMessage.includes('auth/user-not-found')) {
+				setError(
+					'email',
+					{
+						message: 'No user registered with this email',
+					},
+					{ shouldFocus: true }
+				)
 			}
 
 			console.log(errorCode, errorMessage);

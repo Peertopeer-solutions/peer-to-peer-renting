@@ -8,7 +8,7 @@ import {
 	startAfter,
 	getCountFromServer,
 } from 'firebase/firestore';
-import { db } from '../firebase.config';
+import { auth, db } from '../firebase.config';
 import Explore from './Explore';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -17,6 +17,7 @@ import Cta from '../components/UI/Cta';
 import Features from '../components/UI/Features';
 
 const Home = () => {
+	console.log(auth.currentUser)
 	const [totalDocs, setTotalDocs] = useState();
 	const [lastFetchedListing, setLastFetchedListing] = useState(null);
 
