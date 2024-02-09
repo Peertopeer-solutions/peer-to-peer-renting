@@ -9,6 +9,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import useAuthStatus from '../../hooks/useAuthStatus';
 import Spinner from '../Spinner';
 import AuthPage from '../../pages/AuthPage';
+import EmailVerification from '../../pages/EmailVerification';
 const UserListings = lazy(() => import('../ProfileComponents/UserListings'));
 const OrderConfirmation = lazy(() => import('../../pages/OrderConfirmation'));
 const Category = lazy(() => import('../../pages/Category/Category'));
@@ -42,12 +43,13 @@ const PrivateRoute = () => {
 		return <Spinner />;
 	}
 
-	return loggedIn ? <Outlet /> : <Navigate to='/sign-in' />;
+	return loggedIn ? <Outlet /> : <Navigate to='/auth/sign-in' />;
 };
 
 export const routes = {
 	signin: '/auth/sign-in',
 	signup: '/auth/sign-up',
+	emailVerification: '/auth/verify',
 	home: '/',
 	createListing: '/create-listing',
 };
@@ -184,6 +186,11 @@ export const router = createBrowserRouter([
 				element: <Signup />,
 				errorElement: <ErrorBoundary />,
 			},
+			{
+				path: 'verify',
+				element: <EmailVerification />,
+				errorElement: <ErrorBoundary />
+			}
 		],
 	},
 ]);

@@ -473,6 +473,12 @@ button {
     width: 79%;
   }
 }
+.image-zoom:hover {
+  transform: scale(1.1); /* You can adjust the scale factor as needed */
+}
+.custom-hover:hover {
+  color: #5bb5f1; /* Change the color to your desired hover color */
+}
 
 .categoryListingLocation {
   font-weight: 600;

@@ -102,7 +102,7 @@ const Navbar = () => {
 										Sign-In
 									</Link>
 								</div>
-								<div className='flex md:hidden'>
+								<div className='md:hidden'>
 									<Hamburger toggled={toogleNav} toggle={setToogleNav} />
 									{toogleNav && <SideNav />}
 								</div>
