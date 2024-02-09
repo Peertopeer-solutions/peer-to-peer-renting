@@ -63,7 +63,7 @@ const Signup = () => {
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+			if (errorMessage.includes('auth/email-already-in-use')) {
 				setError(
 					'email',
 					{
@@ -71,7 +71,7 @@ const Signup = () => {
 					},
 					{ shouldFocus: true }
 				);
-			}
+			} 
 
 			console.log(errorCode, errorMessage);
 			toast.error('Something Went Wrong');
