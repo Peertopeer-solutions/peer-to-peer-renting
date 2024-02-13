@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch  ,Hits,Highlight,connectSearchBox, Stats,connectStateResults  } from 'react-instantsearch-dom';
+import { InstantSearch  ,Hits,Highlight,connectSearchBox, Stats  } from 'react-instantsearch-dom';
 import { Link } from 'react-router-dom';
 
 
