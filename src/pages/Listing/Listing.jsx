@@ -89,7 +89,7 @@ const Listing = () => {
 
   return (
     <>
-      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-10">hellos </div>)}
+      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-10">hellos</div>)}
       {
         isLoading ?
           <div>

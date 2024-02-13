@@ -75,7 +75,7 @@ const CustomSearchBox = ({ currentRefinement, refine, setSearchQuery }) => {
     >
       Search
     </button>
-    )}
+    )}̀
   </form>
 
   );
