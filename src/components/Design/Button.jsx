@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-// import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
 const   LinkButton = ({ to, children, variant, className = '' }) => {
 	let btnStyle = 'bg-white text-black hover:bg-blue-500 hover:text-white';
@@ -30,7 +30,7 @@ const Button = ({
 	if (outline) btnStyle = twMerge(btnStyle, 'border-2 border-lime-300');
 	if (variant === 'text') btnStyle = 'text-gray-400 hover:text-lime-300';
 	if (variant === 'primary') {
-		btnStyle = 'text-white bg-black hover:bg-gray-800 ';
+		btnStyle = 'text-white bg-blue-500 hover:bg-blue-600 ';
 	}
 	return (
 		<button
