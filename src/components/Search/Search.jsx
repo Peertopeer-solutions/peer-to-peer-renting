@@ -3,10 +3,6 @@ import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch  ,Hits,Highlight,connectSearchBox, Stats  } from 'react-instantsearch-dom';
 import { Link } from 'react-router-dom';
 
-
-
-
-
 const CustomSearchBox = ({ currentRefinement, refine, setSearchQuery }) => {
 
   const PLACEHOLDERS = [
@@ -48,7 +44,7 @@ const CustomSearchBox = ({ currentRefinement, refine, setSearchQuery }) => {
   }
 
   return (
-    <form onSubmit={e => e.preventDefault()} className="container text-sm  lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl p-1 bg-gray-100 lg:h-16">
+    <form onSubmit={e => e.preventDefault()} className=" text-sm lg:text-lg  flex  lg:my-6 items-center rounded-full shadow-xl p-1 bg-gray-100 lg:h-16">
     <input
       type="text"
       placeholder={animatedPlaceholder}

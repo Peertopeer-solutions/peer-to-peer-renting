@@ -11,8 +11,8 @@ const Cta = () => {
                 <div className=" md:flex" >
                     <div className=" flex relative lg:left-[50px] text-left  md:p-3  ">
                         <div >
-                            <h2 className="container xl:w-3/4 text-3xl sm:text-4xl   font-semibold text-gray-800 md:text-5xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-8xl">anything</span> from people around you</h2>
-                            <p className=" text-lg my-6 text-gray-500 md:text-lg lg:text-2xl  tracking-wider leading-loose ">Begin your adventure, let the world be your playground!</p>
+                            <h2 className="container  xl:w-3/4  sm:text-5xl font-semibold text-gray-800 md:text-5xl lg:text-7xl tracking-wide ">Rent <span className="text-indigo-600 text-4xl sm:text-6xl md:text-6xl lg:text-8xl">anything</span> from people around you</h2>
+                            <p className=" text-2xl my-6 text-gray-500 md:text-lg lg:text-2xl  tracking-wider  ">Begin your adventure, let the world be your playground!</p>
                             <Search/>
                             <div className="md:flex items-center justify-start mt-6 hidden">
                                 <p className='mr-3'>Or</p>
