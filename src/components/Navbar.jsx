@@ -5,6 +5,7 @@ import Hamburger from "hamburger-react";
 import { Link } from "react-router-dom";
 import SideNav from "./SideNav";
 import { LinkButton } from "./Design/Button";
+import { routes } from "./Routing/Routes";
 
 const Navbar = () => {
   const auth = getAuth();
@@ -95,13 +96,13 @@ const Navbar = () => {
                     How it works
                   </Link>
                   <Link
-                    to="/sign-in"
+                    to={routes.signin}
                     className="bg-blue-600 text-white p-1 px-2 rounded-full"
                   >
                     Sign-In
                   </Link>
                 </div>
-                <div className="flex md:hidden">
+                <div className="md:hidden">
                   <Hamburger toggled={toogleNav} toggle={setToogleNav} />
                   {toogleNav && <SideNav />}
                 </div>

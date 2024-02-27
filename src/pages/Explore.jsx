@@ -62,46 +62,46 @@ const Explore = ({ listings, isLoading, error }) => {
   //   return <div className='bg-red-500'>..loading</div>
   // }
 
-  return (
-    <ContentWrapper>
-      <div className="">
-        <main className="flex flex-col">
-          <div>
-            <CategoriesList />
-            <div className="mx-auto mt-12 mb-12">
-              <main className="">
-                <h1 className="text-2xl text-gray-800 md:text-[35px]  mb-5 mt-5  uppercase  ">
-                  Trending products
-                </h1>
-                <div className="">
-                  {isLoading ? (
-                    <div className="grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 ">
-                      {[...Array(10).keys()].map((i) => (
-                        <SkeletonPost />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 ">
-                      {listings.map(
-                        (listing) =>
-                          listing.data.listingEnabled && (
-                            <Listingitem
-                              listing={listing.data}
-                              id={listing.id}
-                              keyId={listing.id}
-                            />
-                          )
-                      )}
-                    </div>
-                  )}
-                </div>
-              </main>
-            </div>
-          </div>
-        </main>
-      </div>
-    </ContentWrapper>
-  );
+	return (
+		<ContentWrapper>
+			<div className=''>
+				<main className='flex flex-col'>
+					<div>
+						<CategoriesList />
+						<div className='mx-auto mt-12 mb-12'>
+							<main className=''>
+								<h1 className='text-2xl text-gray-800 md:text-[35px] mb-5 mt-5 uppercase'>
+									Trending products
+								</h1>
+								<div className=''>
+									{isLoading ? (
+										<div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
+											{[...Array(10).keys()].map((i) => (
+												<SkeletonPost />
+											))}
+										</div>
+									) : (
+										<div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 md:p-3 '>
+											{listings.map(
+												(listing) =>
+													listing.data.listingEnabled && (
+														<Listingitem
+															listing={listing.data}
+															id={listing.id}
+															keyId={listing.id}
+														/>
+													)
+											)}
+										</div>
+									)}
+								</div>
+							</main>
+						</div>
+					</div>
+				</main>
+			</div>
+		</ContentWrapper>
+	);
 };
 
 export default Explore;
