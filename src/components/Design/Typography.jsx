@@ -10,9 +10,12 @@ const PrimaryHeading = ({ children, className = "" }) => {
   );
 };
 
-const SubHeading = ({ children, className = "" }) => {
+const SubHeading = ({ children, id, className = "" }) => {
   return (
-    <h2 className={twMerge("text-2xl font-bold text-grey-900 my-3", className)}>
+    <h2
+      id={id}
+      className={twMerge("md:text-2xl font-bold text-grey-900 my-3", className)}
+    >
       {children}
     </h2>
   );
