@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 const PrimaryHeading = ({ children, className = "" }) => {
   return (
-    <h1 className={twMerge("text-4xl font-bold mb-4", className)}>
+    <h1 className={twMerge("text-4xl font-bold ", className)}>
       {children}
     </h1>
   );

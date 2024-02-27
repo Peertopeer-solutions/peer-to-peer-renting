@@ -23,6 +23,7 @@ import PriceCard from "./PriceCard";
 
 import { IoIosHeart, IoIosShare } from "react-icons/io";
 import { BsHeart, BsShare } from "react-icons/bs";
+import { routes } from "../../components/Routing/Routes";
 
 
 const Listing = () => {
@@ -42,7 +43,7 @@ const Listing = () => {
       setShowRentalRequestForm(true)
     }
     else {
-      navigate("/sign-in")
+      navigate(routes.signin)
     }
   })
 
@@ -88,7 +89,7 @@ const Listing = () => {
 
   return (
     <>
-      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-10">hellos </div>)}
+      {showRentalRequestForm && (<div className="fixed inset-0  bg-black box-content opacity-60 z-10">hellos</div>)}
       {
         isLoading ?
           <div>
