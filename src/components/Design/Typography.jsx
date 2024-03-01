@@ -4,15 +4,18 @@ import { twMerge } from "tailwind-merge";
 
 const PrimaryHeading = ({ children, className = "" }) => {
   return (
-    <h1 className={twMerge("text-4xl font-bold ", className)}>
+    <h1 className={twMerge("lg:text-4xl text-2xl font-bold ", className)}>
       {children}
     </h1>
   );
 };
 
-const SubHeading = ({ children, className = "" }) => {
+const SubHeading = ({ children, id, className = "" }) => {
   return (
-    <h2 className={twMerge("text-2xl font-bold text-grey-900 my-3", className)}>
+    <h2
+      id={id}
+      className={twMerge("md:text-2xl font-bold text-grey-900 my-3", className)}
+    >
       {children}
     </h2>
   );

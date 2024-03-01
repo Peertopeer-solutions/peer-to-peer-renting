@@ -1,60 +1,66 @@
-import React, { useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { categories } from '../../public/assets/data';
-import Listingitem from '../components/Listingitem';
-import SkeletonPost from '../components/Skeletons/SkeletonPost';
-import Wrapper from '../components/Layout/PageWrapper';
-import ContentWrapper from '../components/Layout/ContentWrapper';
+import React, { useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import { categories } from "../../public/assets/data";
+import Listingitem from "../components/Listingitem";
+import SkeletonPost from "../components/Skeletons/SkeletonPost";
+import Wrapper from "../components/Layout/PageWrapper";
+import ContentWrapper from "../components/Layout/ContentWrapper";
 
 const CategoriesList = React.memo(() => {
-	return (
-		<div className='mt-12 mb-12'>
-			<p className='text-2xl text-gray-800 md:text-[35px]  mb-5  uppercase'>
-				Categories
-			</p>
-			<div className='grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 '>
-				{categories.map((data) => (
-					<div
-						className=' w-full bg-white drop-shadow-lg rounded-lg '
-						key={data.name}
-					>
-						<Link to={`category/${data.name}`}>
-							<div
-								key={data.name}
-								className='mx-auto w-full border rounded-full'
-							>
-								<div className='flex item-center'>
-									<img
-										src={data.image}
-										loading='lazy'
-										alt=''
-										className='rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 '
-									/>
-								</div>
-								<div className='rounded-lg h-12 flex   items-center bg-white'>
-									<p className=' text-[16px] md:text-lg w-[100%] p-1 text-center '>
-										{data.name}
-									</p>
-								</div>
-							</div>
-						</Link>
-					</div>
-				))}
-			</div>
-		</div>
-	);
+  return (
+    <div className="mt-12 mb-12">
+      <p className="text-2xl text-gray-800 md:text-[35px]  mb-5  uppercase">
+        Categories
+      </p>
+      <div className="grid gap-[16px] md:place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 ">
+        {categories.map((data) => (
+          <div
+            className=" w-full bg-white drop-shadow-lg rounded-lg image-zoom "
+            key={data.name}
+            style={{
+              transition: "transform 0.3s ease",
+            }}
+          >
+            <Link to={`category/${data.name}`}>
+              <div
+                key={data.name}
+                className="mx-auto w-full border rounded-full"
+              >
+                <div className="flex item-center">
+                  <img
+                    src={data.image}
+                    loading="lazy"
+                    alt=""
+                    className="rounded-tl-lg rounded-tr-lg h-24 w-full object-cover md:h-36 "
+                    style={{
+                      transformOrigin: "center center",
+                    }}
+                  />
+                </div>
+                <div className="rounded-lg h-12 flex   items-center bg-white">
+                  <p className=" text-[16px] md:text-lg w-[100%] p-1 text-center ">
+                    {data.name}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 });
 
 const Explore = ({ listings, isLoading, error }) => {
-	console.log(listings);
-	const params = useParams();
+  console.log(listings);
+  const params = useParams();
 
-	if (error) {
-		return <div>Error: {error.message}</div>;
-	}
-	// if(isLoading){
-	//   return <div className='bg-red-500'>..loading</div>
-	// }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  // if(isLoading){
+  //   return <div className='bg-red-500'>..loading</div>
+  // }
 
 	return (
 		<ContentWrapper>
