@@ -5,7 +5,7 @@ import PolicyLayout from "../../components/Layout/PolicyLayout/PolicyLayout";
 const ShippingPolicy = () => {
   return (
     <PolicyLayout pageTitle="Shipping Policy">
-      <SubHeading>Effective Date: [Date]</SubHeading>
+      <SubHeading>Effective Date: January 20, 2024</SubHeading>
       <Content>
         Thank you for choosing Rentivity, your go-to peer-to-peer rental
         application. This Shipping Policy outlines the terms and conditions

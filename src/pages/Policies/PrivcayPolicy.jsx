@@ -5,7 +5,7 @@ import PolicyLayout from "../../components/Layout/PolicyLayout/PolicyLayout";
 const PrivacyPolicy = () => {
   return (
     <PolicyLayout pageTitle="Privacy Policy">
-      <SubHeading>Effective Date: [Date]</SubHeading>
+      <SubHeading>Effective Date: January 20, 2024</SubHeading>
 
       <Content>
         This Privacy Policy governs the manner in which Rentivity ("we," "us,"
