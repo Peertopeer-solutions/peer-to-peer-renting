@@ -1,6 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as StarSolid } from '../../../public/assets/svg/star.svg';
 import { ReactComponent as StarOutlined } from '../../../public/assets/svg/starOutlined.svg';
+
+export const RatingInput = ({ options, setStar, getStar }) => {
+	const stars = [];
+	const [hoveredOver, setHoveredOver] = useState(null);
+	const [rating, setRating] = useState(null);
+	// console.log(`Rating is ${star} stars.`);
+	for (let i = 0; i < 5; i++) {
+		let star;
+		if (i < rating) {
+			star = <StarSolid className='w-5 aspect-square mr-0.5 text-orange-400' />;
+		} else {
+			star = (
+				<StarOutlined className='w-5 aspect-square mr-0.5 text-gray-400' />
+			);
+		}
+		stars.push(
+			<button
+				type='button'
+				onClick={() => {
+					setStar(i + 1);
+					setRating(i + 1);
+				}}
+				onMouseOver={() => {
+					setHoveredOver(i + 1);
+				}}
+				onMouseOut={() => {
+					setHoveredOver(undefined);
+				}}
+			>
+				{star}
+			</button>
+		);
+	}
+	return (
+		<div className='flex mt-0.5'>
+			<input {...options} className='hidden' />
+			{stars}
+		</div>
+	);
+};
 
 const RatingUI = ({ rating }) => {
 	const solidStars = rating;
