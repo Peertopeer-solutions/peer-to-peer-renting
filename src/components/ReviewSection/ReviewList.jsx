@@ -46,7 +46,10 @@ async function fetchReviews() {
 			const authorDoc = await getDoc(
 				doc(db, 'users', review.feedback.authorId)
 			);
-			review.author = { name: authorDoc.data().name, totalReviews: 1 };
+			review.author = {
+				name: authorDoc.data().name,
+				totalReviews: authorDoc.data().reviewsPosted ?? 0,
+			};
 			return transformReview(review);
 		})
 	);
