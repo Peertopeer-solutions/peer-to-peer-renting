@@ -32,13 +32,13 @@ const ProfileLayout = ({ children }) => {
 
         </div>
 
-        <div class="flex mt-6 md:mt-6">
+        <div className="flex mt-6 md:mt-6">
 
           <div className='hidden md:block w-1/5 '>
             <ProfileNavigation />
 
           </div>
-          <div class=" md:p-6 md:w-3/4">
+          <div className=" md:p-6 md:w-3/4">
             {children}
           </div>
         </div>
