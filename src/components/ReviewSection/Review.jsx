@@ -1,7 +1,32 @@
+import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 import RatingUI from '../UI/RatingUI';
+import { useState } from 'react';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase.config';
 
-const Review = ({ author, profileImgUrl, postedOn, stars, desc }) => {
-	console.log(' Date: ', postedOn);
+const Review = ({ id, author, profileImgUrl, postedOn, stars, desc }) => {
+	// const [liked, setLiked] = useState(false);
+
+	// async function toggleLikeReview(state) {
+	// 	setLiked(!state);
+	// 	const docRef = doc(db, 'feedback', id);
+	// 	const likeCount = await getDoc(docRef).then(
+	// 		(val) => val.data().likeCount ?? 0
+	// 	);
+	// 	try {
+	// 		await setDoc(
+	// 			docRef,
+	// 			{
+	// 				likeCount: state ? likeCount - 1 : likeCount + 1,
+	// 			},
+	// 			{ merge: true }
+	// 		);
+	// 	} catch (err) {
+	// 		console.error('Error liking review!');
+	// 		setLiked(state);
+	// 	}
+	// }
+	// console.log(' Date: ', postedOn);
 	return (
 		<div className='flex border-b-2 py-5 last:border-none'>
 			<div className='flex gap-6 min-w-[24rem] items-center'>
@@ -33,6 +58,16 @@ const Review = ({ author, profileImgUrl, postedOn, stars, desc }) => {
 				</div>
 				<div className='text-gray-700'>{desc}</div>
 			</div>
+			{/* <div className='flex flex-col justify-center px-4'>
+				<button
+					className={`m-2 ${
+						liked ? 'text-orange-500' : 'text-gray-600'
+					} hover:text-orange-500 text-xl`}
+					onClick={toggleLikeReview.bind(null, liked)}
+				>
+					{liked ? <FaThumbsUp /> : <FaRegThumbsUp />}
+				</button>
+			</div> */}
 		</div>
 	);
 };
