@@ -107,6 +107,7 @@ const ReviewList = ({ product }) => {
 						{...reviews.map((review) => (
 							<Review
 								key={review.id}
+								id={review.id}
 								author={review.author}
 								postedOn={review.postedOn}
 								stars={review.rating}
