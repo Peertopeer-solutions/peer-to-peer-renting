@@ -217,7 +217,13 @@ const Listing = () => {
 							</div>
 						</section>
 					</div>
-					<ReviewList />
+					<ReviewList
+						product={{
+							id: listingId,
+							title: listing.title,
+							imageUrl: listing.imgUrls[0],
+						}}
+					/>
 				</main>
 			)}
 		</>
