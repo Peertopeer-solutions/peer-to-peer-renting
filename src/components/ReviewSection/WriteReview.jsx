@@ -4,7 +4,14 @@ import { RatingInput } from '../UI/RatingUI';
 import Modal from '../UI/Modal';
 import Joi from 'joi';
 import { auth, db } from '../../firebase.config';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	serverTimestamp,
+	setDoc,
+} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import Spinner from '../Spinner';
 
@@ -45,9 +52,18 @@ const ReviewForm = ({ closeModal, productId, authorId, imgUrl }) => {
 		const feedbackCollection = collection(db, 'feedback');
 		try {
 			await addDoc(feedbackCollection, feedbackData);
+			const userDocRef = doc(db, 'users', authorId);
+			const reviewsPosted = await getDoc(userDocRef).then(
+				(user) => user.data().reviewsPosted ?? 0
+			);
+			await setDoc(
+				userDocRef,
+				{ reviewsPosted: reviewsPosted + 1 },
+				{ merge: true }
+			);
 			toast.success('Review posted.');
 		} catch (err) {
-			console.error(err.message);
+			console.error(err);
 			toast.error('Error posting review.');
 		} finally {
 			closeModal();
