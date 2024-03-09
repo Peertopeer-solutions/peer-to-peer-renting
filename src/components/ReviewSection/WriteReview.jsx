@@ -143,7 +143,7 @@ const WriteReview = ({ showReviewForm, product, closeModal }) => {
 					<div className='h-full w-6 bg-gray-400' />
 					<ReviewForm
 						closeModal={closeModal}
-						authorId={auth.currentUser.uid}
+						authorId={auth.currentUser?.uid}
 						productId={product.id}
 					/>
 				</div>
