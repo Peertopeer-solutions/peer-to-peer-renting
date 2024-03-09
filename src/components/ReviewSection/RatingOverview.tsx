@@ -1,27 +1,38 @@
-import { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import RatingUI from '../UI/RatingUI';
 import { doc, getDoc, query } from 'firebase/firestore';
 import { db } from '../../firebase.config';
+import { RatingDetails } from '../../types';
 
 const reviewData = [46, 23, 13, 6, 12];
 
-async function fetchRatingOverview(listingId) {
+async function fetchRatingOverview(
+	listingId: string
+): Promise<RatingDetails | undefined> {
 	try {
 		const overview = await getDoc(doc(db, `ratingOverviews/${listingId}`));
-		return overview.data();
+		return overview.data() as RatingDetails;
 	} catch (err) {
 		console.error(err.message);
 		console.error('Error fetching overviews for listindId: ' + listingId);
 	}
 }
-const RatingOverview = ({ listingId }) => {
+
+interface RatingOverviewProps {
+	listingId: string;
+}
+
+const RatingOverview: FC<RatingOverviewProps> = ({ listingId }) => {
 	const [totalReviews, setTotalReviews] = useState(0);
 	const [stars, setStars] = useState([0, 0, 0, 0, 0]);
-	const averageReview = stars.reduce((prev, cur) => prev + cur, 0);
+	const averageReview: number = stars.reduce((prev, cur) => prev + cur, 0);
 	useEffect(() => {
-		fetchRatingOverview(listingId).then(({ totalReviews, stars }) => {
-			setTotalReviews(totalReviews);
-			setStars(stars);
+		fetchRatingOverview(listingId).then((data) => {
+			if (!data) {
+				return;
+			}
+			setTotalReviews(data.totalReviews);
+			setStars(data.stars);
 		});
 	}, []);
 

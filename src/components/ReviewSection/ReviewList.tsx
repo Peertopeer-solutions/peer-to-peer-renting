@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { auth, db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import {
+	DocumentData,
 	collection,
 	doc,
 	getDoc,
@@ -13,66 +14,87 @@ import {
 	serverTimestamp,
 	setDoc,
 } from 'firebase/firestore';
-import RatingOverview from './RatingOverview';
 import Review from './Review';
 import WriteReview from './WriteReview';
+import RatingOverview from './RatingOverview';
+import {
+	UserDocumentData,
+	Feedback,
+	FeedbackDocumentData,
+	User,
+} from '../../types';
 
-function transformReview(review) {
+type ReviewDetail = {
+	id: string;
+	rating: number;
+	author: User;
+	desc: string;
+	postedOn: Date;
+	liked: boolean;
+};
+
+function transformReview(feedback: Feedback, author: User): ReviewDetail {
 	return {
-		id: review.feedback.id,
-		rating: review.feedback.overallRating,
-		author: review.author,
-		desc: review.feedback.text,
-		postedOn: review.feedback.timestamp.toDate(),
+		id: feedback.id,
+		rating: feedback.overallRating,
+		author: author,
+		desc: feedback.text,
+		postedOn: feedback.timestamp.toDate(),
+		liked: author.likedReviews.includes(feedback.id),
 	};
 }
 
-async function fetchReviews() {
+async function fetchReviews(): Promise<ReviewDetail[]> {
 	const feedbackRef = collection(db, 'feedback');
-	const q = query(feedbackRef, orderBy('timestamp', 'desc'));
+	const q = query(
+		feedbackRef,
+		orderBy('likeCount', 'desc'),
+		orderBy('timestamp', 'desc'),
+		limit(3)
+	);
 	const snapshot = await getDocs(q);
-	console.log(snapshot);
-	const reviewsData = snapshot.docs.map((doc) => {
-		return { feedback: { id: doc.id, ...doc.data() } };
+
+	const feedbacks: Feedback[] = snapshot.docs.map((doc) => {
+		const data = doc.data() as FeedbackDocumentData;
+		return { id: doc.id, ...data };
 	});
-	// const authorDocs = await Promise.all(
-	// 	reviewsData.map((review) => {
-	// 		const { authorId } = review.feedback;
-	// 		return getDoc(doc(db, 'users', authorId));
-	// 	})
-	// );
-	// console.log(authorDocs);
+
 	return await Promise.all(
-		reviewsData.map(async (review) => {
-			const authorDoc = await getDoc(
-				doc(db, 'users', review.feedback.authorId)
-			);
-			review.author = {
-				name: authorDoc.data().name,
-				totalReviews: authorDoc.data().reviewsPosted ?? 0,
-			};
-			return transformReview(review);
+		feedbacks.map(async (feedback) => {
+			const authorDocData = (
+				await getDoc(doc(db, 'users', feedback.authorId))
+			).data() as UserDocumentData;
+			const author: User = { id: feedback.authorId, ...authorDocData };
+			return transformReview(feedback, author);
 		})
 	);
 }
 
-async function fetchLikedReviews(userId) {
+async function fetchLikedReviews(userId: string): Promise<string[]> {
 	return await getDoc(doc(db, 'users', userId)).then(
-		(user) => user.data().likedReviews
+		(user) => (user.data() as UserDocumentData).likedReviews
 	);
 }
 
-const ReviewList = ({ product }) => {
+interface ReviewListProps {
+	product: {
+		id: string;
+		title: string;
+		imageUrl: string;
+	};
+}
+
+const ReviewList: FC<ReviewListProps> = ({ product }) => {
 	const [showReviewForm, setShowReviewForm] = useState(false);
-	const [reviews, setReviews] = useState([]);
+	const [reviews, setReviews] = useState<ReviewDetail[]>([]);
 	const [fetchingReviews, setFetchingReviews] = useState(false);
-	const [likedReviews, setLikedReviews] = useState([]);
+	const [likedReviews, setLikedReviews] = useState<string[]>([]);
 	useEffect(() => {
 		async function fetchAndSetReviews() {
 			try {
 				setFetchingReviews(true);
 				const reviewsData = await fetchReviews();
-
+				console.log(reviewsData);
 				setFetchingReviews(false);
 				setReviews(reviewsData);
 
@@ -98,7 +120,7 @@ const ReviewList = ({ product }) => {
 					product={product}
 					closeModal={() => setShowReviewForm(false)}
 				/>,
-				document.getElementById('modal-root')
+				document.getElementById('modal-root')!
 			)}
 			<div>
 				<div className=' rounded-lg my-6'>
@@ -122,6 +144,7 @@ const ReviewList = ({ product }) => {
 					<div className='flex flex-col mt-5'>
 						{...reviews.map((review) => (
 							<Review
+								profileImgUrl='https://placehold.co/512x512'
 								isLiked={likedReviews?.includes(review.id) ?? false}
 								key={review.id}
 								id={review.id}
