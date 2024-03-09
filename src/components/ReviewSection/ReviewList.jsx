@@ -31,16 +31,17 @@ async function fetchReviews() {
 	const feedbackRef = collection(db, 'feedback');
 	const q = query(feedbackRef, orderBy('timestamp', 'desc'));
 	const snapshot = await getDocs(q);
+	console.log(snapshot);
 	const reviewsData = snapshot.docs.map((doc) => {
 		return { feedback: { id: doc.id, ...doc.data() } };
 	});
-	const authorDocs = Promise.all(
-		reviewsData.map((review) => {
-			const { authorId } = review.feedback;
-			return getDoc(doc(db, 'users', authorId));
-		})
-	);
-	console.log(authorDocs);
+	// const authorDocs = await Promise.all(
+	// 	reviewsData.map((review) => {
+	// 		const { authorId } = review.feedback;
+	// 		return getDoc(doc(db, 'users', authorId));
+	// 	})
+	// );
+	// console.log(authorDocs);
 	return await Promise.all(
 		reviewsData.map(async (review) => {
 			const authorDoc = await getDoc(
@@ -55,18 +56,30 @@ async function fetchReviews() {
 	);
 }
 
+async function fetchLikedReviews(userId) {
+	return await getDoc(doc(db, 'users', userId)).then(
+		(user) => user.data().likedReviews
+	);
+}
+
 const ReviewList = ({ product }) => {
 	const [showReviewForm, setShowReviewForm] = useState(false);
 	const [reviews, setReviews] = useState([]);
 	const [fetchingReviews, setFetchingReviews] = useState(false);
+	const [likedReviews, setLikedReviews] = useState([]);
 	useEffect(() => {
 		async function fetchAndSetReviews() {
 			try {
 				setFetchingReviews(true);
 				const reviewsData = await fetchReviews();
-				console.log(reviewsData);
+
 				setFetchingReviews(false);
 				setReviews(reviewsData);
+
+				if (auth.currentUser) {
+					const likedReviews = await fetchLikedReviews(auth.currentUser.uid);
+					setLikedReviews(likedReviews);
+				}
 			} catch (err) {
 				console.error(err.message);
 				toast.info('Something went wrong fetching reviews!');
@@ -90,7 +103,7 @@ const ReviewList = ({ product }) => {
 			<div>
 				<div className=' rounded-lg my-6'>
 					<h2 className='text-2xl font-bold text-gray-900  mb-4'>Reviews</h2>
-					<RatingOverview />
+					<RatingOverview listingId={product.id} />
 					<div>
 						<span>Want to share your thoughts with other customers?</span>
 						<button
@@ -109,6 +122,7 @@ const ReviewList = ({ product }) => {
 					<div className='flex flex-col mt-5'>
 						{...reviews.map((review) => (
 							<Review
+								isLiked={likedReviews?.includes(review.id) ?? false}
 								key={review.id}
 								id={review.id}
 								author={review.author}
