@@ -1,6 +1,6 @@
 import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 import RatingUI from '../UI/RatingUI';
-import { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
 	arrayRemove,
 	arrayUnion,
@@ -9,8 +9,19 @@ import {
 	setDoc,
 } from 'firebase/firestore';
 import { auth, db } from '../../firebase.config';
+import { FeedbackDocumentData, User } from '../../types';
 
-const Review = ({
+type ReviewProps = {
+	id: string;
+	author: User;
+	profileImgUrl: string;
+	postedOn: Date;
+	stars: number;
+	desc: string;
+	isLiked: boolean;
+};
+
+const Review: FC<ReviewProps> = ({
 	id,
 	author,
 	profileImgUrl,
@@ -19,17 +30,17 @@ const Review = ({
 	desc,
 	isLiked,
 }) => {
-	const [liked, setLiked] = useState(isLiked);
+	const [liked, setLiked] = useState<boolean>(isLiked);
 	if (liked !== isLiked) setLiked(isLiked);
 
-	async function toggleLikeReview(state) {
+	async function toggleLikeReview(state: boolean) {
 		if (!auth.currentUser) {
 			return;
 		}
 		setLiked(!state);
 		const docRef = doc(db, 'feedback', id);
 		const likeCount = await getDoc(docRef).then(
-			(val) => val.data().likeCount ?? 0
+			(val) => (val.data() as FeedbackDocumentData).likeCount ?? 0
 		);
 		try {
 			await setDoc(
@@ -49,14 +60,14 @@ const Review = ({
 			setLiked(state);
 		}
 	}
-	// console.log(' Date: ', postedOn);
+
 	return (
 		<div className='flex border-b-2 py-5 last:border-none'>
 			<div className='flex gap-6 min-w-[24rem] items-center'>
 				<div className='flex gap-6 h-fit items-center'>
 					<img
 						className='h-16 w-16 rounded-full'
-						src={profileImgUrl ?? 'https://placehold.co/512x512'}
+						src={profileImgUrl}
 						alt='Reviewer avatar'
 					/>
 					<div className='flex flex-col'>
@@ -66,7 +77,7 @@ const Review = ({
 						<span className='text-gray-500 text-sm'>
 							Total reviews:
 							<span className='text-gray-900 font-bold ml-0.5'>
-								{author.totalReviews}
+								{author.reviewsPosted}
 							</span>
 						</span>
 					</div>
