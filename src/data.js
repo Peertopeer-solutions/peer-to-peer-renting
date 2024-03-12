@@ -31,5 +31,5 @@ export const categories = [
     name: 'Fashion',
     image: 'https://media.istockphoto.com/id/1094775212/photo/luxury-fashionable-clothing-and-stationery-items-flat-lay-on-white-background.jpg?b=1&s=170667a&w=0&k=20&c=s2J-MtvkjUIUW-bKzwmhwu4_AQprpaXSO7IS8rVj3Wo=',
   },
- 
+
 ];

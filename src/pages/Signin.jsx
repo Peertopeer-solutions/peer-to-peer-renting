@@ -1,8 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as ArrowRightIcon } from '../../public/assets/svg/keyboardArrowRightIcon.svg';
-import visibilityIcon from '../../public/assets/svg/visibilityIcon.svg';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import OAuth from '../components/OAuth';
@@ -39,9 +37,12 @@ const Signin = () => {
 	const onSubmit = async (data) => {
 		try {
 			const { email, password } = data;
-			const userCredential = await signInWithEmailAndPassword(auth, email, password);
-			if (userCredential.user) 
-			navigate(routes.home);
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			if (userCredential.user) navigate(routes.home);
 		} catch (error) {
 			const errorCode = error.code;
 			const errorMessage = error.message;
@@ -60,7 +61,7 @@ const Signin = () => {
 						message: 'No user registered with this email',
 					},
 					{ shouldFocus: true }
-				)
+				);
 			}
 
 			console.log(errorCode, errorMessage);

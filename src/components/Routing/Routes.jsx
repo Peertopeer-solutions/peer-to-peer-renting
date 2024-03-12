@@ -26,7 +26,7 @@ const Userverification = lazy(() => import('../../pages/Userverification'));
 const RentalRequests = lazy(() => import('../../pages/RentalRequests'));
 const OrderPage = lazy(() => import('../../pages/OrderPage'));
 const FeedbackForm = lazy(() => import('../../pages/FeedbackForm'));
-const Footer = lazy(() => import('../Footer'));
+
 const PrivcayPolicy = lazy(() => import('../../pages/Policies/PrivcayPolicy'));
 const TermsAndConditions = lazy(() =>
 	import('../../pages/Policies/TermsAndConditions')
@@ -189,8 +189,8 @@ export const router = createBrowserRouter([
 			{
 				path: 'verify',
 				element: <EmailVerification />,
-				errorElement: <ErrorBoundary />
-			}
+				errorElement: <ErrorBoundary />,
+			},
 		],
 	},
 ]);
