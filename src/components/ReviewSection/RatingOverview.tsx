@@ -60,7 +60,7 @@ const RatingOverview: FC<RatingOverviewProps> = ({ listingId }) => {
 					{reviewData.map((rating, index) => {
 						const star = stars[index];
 						return (
-							<li className='flex items-center'>
+							<li className='flex items-center' key={`star-count-${index + 1}`}>
 								<span className='mr-1 text-gray-300'>★</span>
 								<span className='mr-3'>{index + 1}</span>
 								<div className='w-full flex items-center'>

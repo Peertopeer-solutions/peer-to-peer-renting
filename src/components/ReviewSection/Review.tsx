@@ -31,8 +31,10 @@ const Review: FC<ReviewProps> = ({
 	isLiked,
 }) => {
 	const [liked, setLiked] = useState<boolean>(isLiked);
-	if (liked !== isLiked) setLiked(isLiked);
-
+	// if (liked !== isLiked) setLiked(isLiked);
+	useEffect(() => {
+		setLiked(isLiked);
+	}, [isLiked]);
 	async function toggleLikeReview(state: boolean) {
 		if (!auth.currentUser) {
 			return;
