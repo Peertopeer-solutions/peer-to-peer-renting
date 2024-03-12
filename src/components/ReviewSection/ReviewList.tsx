@@ -4,6 +4,7 @@ import { auth, db } from '../../firebase.config';
 import { toast } from 'react-toastify';
 import {
 	DocumentData,
+	Query,
 	collection,
 	doc,
 	getDoc,
@@ -13,6 +14,7 @@ import {
 	query,
 	serverTimestamp,
 	setDoc,
+	where,
 } from 'firebase/firestore';
 import Review from './Review';
 import WriteReview from './WriteReview';
@@ -23,6 +25,8 @@ import {
 	FeedbackDocumentData,
 	User,
 } from '../../types';
+import { useQuery } from 'react-query';
+import LoadingSpinner from '../Design/LoadingSpinner';
 
 type ReviewDetail = {
 	id: string;
@@ -40,18 +44,23 @@ function transformReview(feedback: Feedback, author: User): ReviewDetail {
 		author: author,
 		desc: feedback.text,
 		postedOn: feedback.timestamp.toDate(),
-		liked: author.likedReviews.includes(feedback.id),
+		liked: author.likedReviews && author.likedReviews.includes(feedback.id),
 	};
 }
 
-async function fetchReviews(): Promise<ReviewDetail[]> {
+function getReviewQuery(productId: string): Query<DocumentData> {
 	const feedbackRef = collection(db, 'feedback');
-	const q = query(
+	return query(
 		feedbackRef,
+		where('productId', '==', productId),
 		orderBy('likeCount', 'desc'),
 		orderBy('timestamp', 'desc'),
 		limit(3)
 	);
+}
+
+async function fetchReviews(productId: string): Promise<ReviewDetail[]> {
+	const q = getReviewQuery(productId);
 	const snapshot = await getDocs(q);
 
 	const feedbacks: Feedback[] = snapshot.docs.map((doc) => {
@@ -71,6 +80,7 @@ async function fetchReviews(): Promise<ReviewDetail[]> {
 }
 
 async function fetchLikedReviews(userId: string): Promise<string[]> {
+	if (userId === 'no-user') return [];
 	return await getDoc(doc(db, 'users', userId)).then(
 		(user) => (user.data() as UserDocumentData).likedReviews
 	);
@@ -86,32 +96,31 @@ interface ReviewListProps {
 
 const ReviewList: FC<ReviewListProps> = ({ product }) => {
 	const [showReviewForm, setShowReviewForm] = useState(false);
-	const [reviews, setReviews] = useState<ReviewDetail[]>([]);
-	const [fetchingReviews, setFetchingReviews] = useState(false);
-	const [likedReviews, setLikedReviews] = useState<string[]>([]);
-	useEffect(() => {
-		async function fetchAndSetReviews() {
-			try {
-				setFetchingReviews(true);
-				const reviewsData = await fetchReviews();
-				console.log(reviewsData);
-				setFetchingReviews(false);
-				setReviews(reviewsData);
+	// const [reviews, setReviews] = useState<ReviewDetail[]>([]);
+	// const [fetchingReviews, setFetchingReviews] = useState(false);
+	// const [likedReviews, setLikedReviews] = useState<string[]>([]);
 
-				if (auth.currentUser) {
-					const likedReviews = await fetchLikedReviews(auth.currentUser.uid);
-					setLikedReviews(likedReviews);
-				}
-			} catch (err) {
-				console.error(err.message);
-				toast.info('Something went wrong fetching reviews!');
-			} finally {
-				setFetchingReviews(false);
-			}
-		}
-		fetchAndSetReviews().catch((err) => console.error(err.message));
-	}, [fetchReviews]);
-
+	const {
+		data: reviews,
+		isLoading,
+		error,
+	} = useQuery(['feedback', product.id], fetchReviews.bind(null, product.id));
+	const { data: likedReviews, error: errorLikedReviews } = useQuery(
+		['liked-reviews', auth.currentUser?.uid ?? 'no-user'],
+		fetchLikedReviews.bind(null, auth.currentUser?.uid ?? 'no-user')
+	);
+	const reviewsJsx = (reviews ?? []).map((review) => (
+		<Review
+			profileImgUrl='https://placehold.co/512x512'
+			isLiked={likedReviews?.includes(review.id) ?? false}
+			key={review.id}
+			id={review.id}
+			author={review.author}
+			postedOn={review.postedOn}
+			stars={review.rating}
+			desc={review.desc}
+		/>
+	));
 	return (
 		<>
 			{createPortal(
@@ -142,18 +151,8 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 						</button>
 					</div>
 					<div className='flex flex-col mt-5'>
-						{...reviews.map((review) => (
-							<Review
-								profileImgUrl='https://placehold.co/512x512'
-								isLiked={likedReviews?.includes(review.id) ?? false}
-								key={review.id}
-								id={review.id}
-								author={review.author}
-								postedOn={review.postedOn}
-								stars={review.rating}
-								desc={review.desc}
-							/>
-						))}
+						{isLoading ? <LoadingSpinner /> : reviewsJsx}
+
 						{/* <Review
 							author={{ name: 'Reinold', totalReviews: 4 }}
 							postedOn='26 Oct 23'
