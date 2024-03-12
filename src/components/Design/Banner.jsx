@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { uiActions } from '../../store/ui-slice';
+
 const Banner = ({ text, link, linkText }) => {
+	const dispatch = useDispatch();
+
+	function closeBanner() {
+		dispatch(uiActions.hideBanner());
+	}
+
 	return (
 		<div
 			id='sticky-banner'
@@ -35,6 +44,7 @@ const Banner = ({ text, link, linkText }) => {
 			<div className='flex items-center'>
 				<button
 					data-dismiss-target='#sticky-banner'
+					onClick={closeBanner}
 					type='button'
 					className='flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-400 dark:hover:text-white'
 				>
