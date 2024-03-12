@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { categories } from '../../public/assets/data';
 import Listingitem from '../components/Listingitem';
 import SkeletonPost from '../components/Skeletons/SkeletonPost';
-import Wrapper from '../components/Layout/PageWrapper';
 import ContentWrapper from '../components/Layout/ContentWrapper';
+import { categories } from '../data';
 
 const CategoriesList = React.memo(() => {
 	return (
@@ -71,7 +70,7 @@ const Explore = ({ listings, isLoading, error }) => {
 									{isLoading ? (
 										<div className='grid sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-2 md:p-3 '>
 											{[...Array(10).keys()].map((i) => (
-												<SkeletonPost />
+												<SkeletonPost key={i} />
 											))}
 										</div>
 									) : (
@@ -80,6 +79,7 @@ const Explore = ({ listings, isLoading, error }) => {
 												(listing) =>
 													listing.data.listingEnabled && (
 														<Listingitem
+															key={listing.id}
 															listing={listing.data}
 															id={listing.id}
 															keyId={listing.id}

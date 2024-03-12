@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ReactComponent as StarSolid } from '../../../public/assets/svg/star.svg';
-import { ReactComponent as StarOutlined } from '../../../public/assets/svg/starOutlined.svg';
+import StarSolid from '../../../public/assets/svg/star.svg?react';
+import StarOutlined from '../../../public/assets/svg/starOutlined.svg?react';
 
 export const RatingInput = ({ options, setStar, getStar }) => {
 	const stars = [];

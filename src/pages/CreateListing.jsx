@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { categories } from '../../public/assets/data';
+import { categories } from '../data';
 import {
 	getStorage,
 	ref,
@@ -27,7 +27,7 @@ const CreateListing = () => {
 	const [selectedImg, setSelectedImg] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const authCtx = useContext(AuthContext);
-	console.log("UID",authCtx?.currentUser);
+	console.log('UID', authCtx?.currentUser);
 	const navigate = useNavigate();
 	const isMounted = useRef(true);
 	useEffect(() => {
@@ -47,22 +47,22 @@ const CreateListing = () => {
 	}, [isMounted]);
 	const { register, handleSubmit, setValue, control, formState } = useForm();
 	const onSubmit = async (data) => {
-
-		if (selectedImg.length > 6 ) {
+		if (selectedImg.length > 6) {
 			setLoading(false);
 			toast.error('Max 6 images');
 			return;
-		}
-		else if(selectedImg.length == 0){
-			setLoading(false)
-			toast.error("Upload atleast 1 image")
-			return
+		} else if (selectedImg.length == 0) {
+			setLoading(false);
+			toast.error('Upload atleast 1 image');
+			return;
 		}
 
 		const storeImage = async (image) => {
 			return new Promise((resolve, reject) => {
 				const storage = getStorage();
-				const fileName = `${authCtx?.currentUser.uid}-${image.name}-${uuidv4()}`;
+				const fileName = `${authCtx?.currentUser.uid}-${
+					image.name
+				}-${uuidv4()}`;
 
 				const storageRef = ref(storage, 'images/' + fileName);
 
@@ -99,18 +99,17 @@ const CreateListing = () => {
 			});
 		};
 
-		const imgUrls = await toast.promise(
-      Promise.all(selectedImg.map((image) => storeImage(image))),
-      {
-        pending: 'Images are uploading...',
-        success: 'Images successfully uploaded',
-        error: 'Error uploading images'
-      }
-    ).catch((error) => {
-			console.error("Error uploading images:", error);
-			setLoading(false);
-			return;
-		});
+		const imgUrls = await toast
+			.promise(Promise.all(selectedImg.map((image) => storeImage(image))), {
+				pending: 'Images are uploading...',
+				success: 'Images successfully uploaded',
+				error: 'Error uploading images',
+			})
+			.catch((error) => {
+				console.error('Error uploading images:', error);
+				setLoading(false);
+				return;
+			});
 		const formDataCopy = {
 			...data,
 			imgUrls,
@@ -152,9 +151,8 @@ const CreateListing = () => {
 	};
 
 	return (
-		<><div className=' flex items-center justify-center min-h-screen bg-no-repeat bg-cover'>
-
-
+		<>
+			<div className=' flex items-center justify-center min-h-screen bg-no-repeat bg-cover'>
 				<div className='w-full bg-white  rounded-xl'>
 					<div className='text-center'>
 						<h2 className='mt-3 text-3xl font-bold text-gray-900'>
@@ -196,7 +194,6 @@ const CreateListing = () => {
 
 							<p className='text-sm text-gray-300'>
 								<span>File type: doc, pdf, types of images</span>
-
 							</p>
 						</div>
 						<div className='grid grid-cols-1 space-y-2'>
@@ -414,8 +411,7 @@ const CreateListing = () => {
 				</div>
 			</div>
 			<DevTool control={control} />
-</>
-			
+		</>
 	);
 };
 
