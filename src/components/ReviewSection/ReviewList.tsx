@@ -27,6 +27,7 @@ import {
 } from '../../types';
 import { useQuery } from 'react-query';
 import LoadingSpinner from '../Design/LoadingSpinner';
+import Alert from '../Design/Alert';
 
 type ReviewDetail = {
 	id: string;
@@ -109,18 +110,24 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 		['liked-reviews', auth.currentUser?.uid ?? 'no-user'],
 		fetchLikedReviews.bind(null, auth.currentUser?.uid ?? 'no-user')
 	);
-	const reviewsJsx = (reviews ?? []).map((review) => (
-		<Review
-			profileImgUrl='https://placehold.co/512x512'
-			isLiked={likedReviews?.includes(review.id) ?? false}
-			key={review.id}
-			id={review.id}
-			author={review.author}
-			postedOn={review.postedOn}
-			stars={review.rating}
-			desc={review.desc}
-		/>
-	));
+	const noReviewFallback = (
+		<Alert text='There are no reviews for this product.' />
+	);
+	const nonZeroReviews = reviews && reviews.length > 0;
+	const reviewsJsx = nonZeroReviews
+		? reviews.map((review) => (
+				<Review
+					profileImgUrl='https://placehold.co/512x512'
+					isLiked={likedReviews?.includes(review.id) ?? false}
+					key={review.id}
+					id={review.id}
+					author={review.author}
+					postedOn={review.postedOn}
+					stars={review.rating}
+					desc={review.desc}
+				/>
+		  ))
+		: noReviewFallback;
 	return (
 		<>
 			{createPortal(
@@ -171,11 +178,13 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 							stars={4}
 						/> */}
 					</div>
-					<div className='mx-auto pt-4 text-center'>
-						<button className='md:w-1/3 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-							See all reviews
-						</button>
-					</div>
+					{nonZeroReviews && (
+						<div className='mx-auto pt-4 text-center'>
+							<button className='md:w-1/3 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+								See all reviews
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
 		</>
