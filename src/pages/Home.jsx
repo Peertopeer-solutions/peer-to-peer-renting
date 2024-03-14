@@ -15,15 +15,15 @@ import { useQuery } from 'react-query';
 import Pagination from '../components/Pagination/Pagination';
 import Cta from '../components/UI/Cta';
 import Features from '../components/UI/Features';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-	console.log(auth.currentUser)
+	console.log(auth.currentUser);
 	const [totalDocs, setTotalDocs] = useState();
 	const [lastFetchedListing, setLastFetchedListing] = useState(null);
 
 	const { pathName } = useLocation();
-
-	const [currentPage, setCurrentPage] = useState(1);
+	const { currentPage } = useSelector((state) => state.products);
 
 	const { data, isLoading, error } = useQuery(
 		['paginatedData', currentPage],
@@ -63,11 +63,7 @@ const Home = () => {
 			<Cta />
 			<Features />
 			<Explore isLoading={isLoading} error={error} listings={data} />
-			<Pagination
-				currentPage={currentPage}
-				totalItems={totalDocs}
-				onPageChange={(pageNumber) => setCurrentPage(pageNumber)}
-			/>
+			<Pagination currentPage={currentPage} totalItems={totalDocs} />
 		</>
 	);
 };

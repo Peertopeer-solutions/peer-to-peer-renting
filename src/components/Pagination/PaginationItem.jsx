@@ -1,12 +1,18 @@
-const PaginationItem = ({ pageNumber, onClick, isCurrentPage }) => {
+import { productsAction } from '../../store/products-slice';
+import { twMerge } from 'tailwind-merge';
+
+const PaginationItem = ({ isCurrentPage, onClick, children }) => {
+	console.log(onClick);
+	const selectedStyle = isCurrentPage ? 'bg-gray-300 hover:bg-gray-300' : '';
 	return (
 		<button
 			onClick={onClick}
-			className={
-				isCurrentPage ? 'border-2 bg-gray-300  w-6' : 'bg-gray-100 w-6'
-			}
+			className={twMerge(
+				'bg-gray-100 py-1 px-3 border-r border-gray-300 last:border-none flex items-center hover:bg-gray-200',
+				selectedStyle
+			)}
 		>
-			{pageNumber}
+			<span className='flex flex-col'>{children}</span>
 		</button>
 	);
 };
