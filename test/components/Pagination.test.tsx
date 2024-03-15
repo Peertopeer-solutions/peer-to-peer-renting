@@ -1,3 +1,10 @@
+vi.mock('react-redux', (orginal) => {
+	return {
+		...orginal,
+		useDispatch: vi.fn(),
+	};
+});
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, test, vi, afterEach, expect } from 'vitest';
@@ -10,6 +17,6 @@ describe('Pagination Component', () => {
 		);
 		expect(container).toBeInTheDocument();
 		const paginationItems = screen.getAllByRole('button');
-		expect(paginationItems).toHaveLength(Math.ceil(50 / 8));
+		expect(paginationItems).toHaveLength(Math.ceil(50 / 8) + 2); // adding two to include prev and next button
 	});
 });
