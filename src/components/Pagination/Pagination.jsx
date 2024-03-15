@@ -28,13 +28,9 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
 	return (
 		<div className='m-3 mx-auto max-w-max '>
 			<ul className='border flex border-gray-300 rounded overflow-hidden'>
-				<PaginationItem>
-					<IoArrowBack className='text-lg' />
-				</PaginationItem>
+				<PaginationItem>Prev</PaginationItem>
 				{pages}
-				<PaginationItem>
-					<IoArrowForward className='text-lg' />
-				</PaginationItem>
+				<PaginationItem>Next</PaginationItem>
 			</ul>
 		</div>
 	);

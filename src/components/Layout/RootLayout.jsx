@@ -20,12 +20,12 @@ const RootLayout = () => {
 	return (
 		<>
 			<FirebaseAuthProvider>
-				{isBannerVisible && (
+				{/* {isBannerVisible && (
 					<Banner
 						text='You might not be able to use few features as you have not verified your email address.'
 						linkText='Verify now'
 					/>
-				)}
+				)} */}
 				<header>
 					<Navbar />
 				</header>
