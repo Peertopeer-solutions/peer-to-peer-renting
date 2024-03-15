@@ -1,6 +1,31 @@
 import { useState } from 'react';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
+export function FloatingLabelTextInput({ id, label, error, options }) {
+	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-500';
+	return (
+		<div className='relative'>
+			<input
+				type='text'
+				id={id}
+				className={
+					'block px-4 pb-2.5 pt-4 w-full text-sm text-gray-900 rounded-lg border-2 peer outline-none ' +
+					borderColor
+				}
+				placeholder=' '
+				{...options}
+			/>
+			<label
+				htmlFor={id}
+				className='absolute text peer-focus:font-bold bg-transparent text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-2'
+			>
+				{label}
+			</label>
+			{error && <div className='text-red-400'>{error.message}</div>}
+		</div>
+	);
+}
+
 export function TextInput({ id, label, options, error }) {
 	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-300';
 	return (
@@ -18,7 +43,7 @@ export function TextInput({ id, label, options, error }) {
 		</div>
 	);
 }
-
+ 
 export function PasswordInput({ id, label, options, error }) {
 	const borderColor = error
 		? 'focus-within:border-red-300'
@@ -67,14 +92,11 @@ export const MobileNumber = ({ id, label, options, error }) => {
 			</label>
 			<div
 				className={
-					'flex border-2 pr-2 overflow-hidden rounded-lg items-center ' + borderColor
+					'flex border-2 pr-2 overflow-hidden rounded-lg items-center ' +
+					borderColor
 				}
 			>
-				<div	
-					className='text-gray-600 px-4'
-				>
-					+91
-				</div>
+				<div className='text-gray-600 px-4'>+91</div>
 				<input
 					id={id}
 					inputMode='tel'
@@ -86,20 +108,21 @@ export const MobileNumber = ({ id, label, options, error }) => {
 			{error && <div className='text-red-400'>{error.message}</div>}
 		</div>
 	);
-}
+};
 
-
-const OtpInput = ({error}) => {
+const OtpInput = ({ error }) => {
 	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-300';
-	return <input className={'w-12 rounded-lg border-2 p-2 outline-none ' + borderColor}/>;
-}
+	return (
+		<input
+			className={'w-12 rounded-lg border-2 p-2 outline-none ' + borderColor}
+		/>
+	);
+};
 
-export const OtpBox = ({error}) => {
+export const OtpBox = ({ error }) => {
 	const boxes = [];
 	for (let i = 0; i < 4; i++) {
-		boxes.push(<OtpInput error={error} key={`otp-${i}`}/>)
+		boxes.push(<OtpInput error={error} key={`otp-${i}`} />);
 	}
-	return <div className='flex gap-4 flex-grow justify-center'>
-		{boxes}
-	</div>
-}
+	return <div className='flex gap-4 flex-grow justify-center'>{boxes}</div>;
+};

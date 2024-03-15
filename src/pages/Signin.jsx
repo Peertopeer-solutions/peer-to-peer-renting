@@ -14,7 +14,11 @@ import {
 import Joi from 'joi';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { PasswordInput, TextInput } from '../components/Form/Input';
+import {
+	FloatingLabelTextInput,
+	PasswordInput,
+	TextInput,
+} from '../components/Form/Input';
 import { routes } from '../components/Routing/Routes';
 import { auth } from '../firebase.config';
 
@@ -79,7 +83,7 @@ const Signin = () => {
 				{errors.root && (
 					<div className='text-red-400'>{errors.root.message}</div>
 				)}
-				<TextInput
+				<FloatingLabelTextInput
 					id='email'
 					label='Email'
 					options={register('email')}
