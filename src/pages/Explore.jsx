@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Listingitem from '../components/Listingitem';
 import SkeletonPost from '../components/Skeletons/SkeletonPost';
 import ContentWrapper from '../components/Layout/ContentWrapper';
-import { categories } from '../data';
+import { categories } from '../categoriesData';
 
 const CategoriesList = React.memo(() => {
 	return (
