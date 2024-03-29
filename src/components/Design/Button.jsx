@@ -1,16 +1,13 @@
-
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-const   LinkButton = ({ to, children, variant, className = '' }) => {
+const LinkButton = ({ to, children, variant, className = '' }) => {
 	let btnStyle = 'bg-white text-black hover:bg-blue-500 hover:text-white';
 	if (variant === 'text') btnStyle = 'text-gray-300 hover:text-lime-300';
 	return (
 		<Link to={to}>
 			<div
-				className={
-					`w-fit px-6 py-2 rounded-full text-lg font-semibold text-center tracking-wide hover:cursor-pointer ${btnStyle} ${className}`		
-				}
+				className={`w-fit px-6 py-2 rounded-full text-lg font-semibold text-center tracking-wide hover:cursor-pointer ${btnStyle} ${className}`}
 			>
 				{children}
 			</div>
@@ -18,7 +15,7 @@ const   LinkButton = ({ to, children, variant, className = '' }) => {
 	);
 };
 
-const Button = ({
+const ButtonOld = ({
 	children,
 	variant,
 	className,
@@ -62,13 +59,10 @@ const Button = ({
 // };
 const IconButton = ({ children, onClick, className }) => {
 	return (
-		<button
-			className={`text-md ${className}`}
-			onClick={onClick}
-		>
+		<button className={`text-md ${className}`} onClick={onClick}>
 			{children}
 		</button>
 	);
 };
 
-export { LinkButton, Button, IconButton };
+export { LinkButton, ButtonOld as Button, IconButton };

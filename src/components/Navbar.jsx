@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import SideNav from './SideNav';
 import { LinkButton } from './Design/Button';
 import { routes } from './Routing/Routes';
+import RadixAvatar from './RadixAvatar';
+import useSidePanel from '../data/zustand/sidePanelStore';
+import SidePanel from './UI/SidePanel';
+import useSideNavigation from '@src/hooks/useSideNavigation';
+import OpenSideNavigationButton from '@src/components/OpenSideNavigationButton';
 
 const Navbar = () => {
 	const auth = getAuth();
@@ -15,6 +20,10 @@ const Navbar = () => {
 	const [toogleNav, setToogleNav] = useState();
 	const [ProfileImage, setProfileImage] = useState(null);
 
+	const openSidePanel = useSidePanel((state) => state.actions.openSidePanel);
+	const closeSidePanel = useSidePanel((state) => state.actions.closeSidePanel);
+	const showSidePanel = useSidePanel((state) => state.open);
+	const { openSideNavigation } = useSideNavigation();
 	const pathMatchRoute = (route) => {
 		if (route === location.pathname) {
 			return true;
@@ -28,7 +37,7 @@ const Navbar = () => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setUser(user);
-			setProfileImage(user.photoURL);
+			setProfileImage(user?.photoURL);
 		});
 
 		return () => {
@@ -44,6 +53,7 @@ const Navbar = () => {
 
 	return (
 		<nav className=' w-[100%] mx-auto border-b-1 border-black fixed z-10 '>
+			<SidePanel open={showSidePanel} onOpenChange={closeSidePanel} />
 			<div className='  p-2 md:p-3 bg-white  border '>
 				<div className='flex items-center justify-between '>
 					<Link to='/'>
@@ -55,60 +65,25 @@ const Navbar = () => {
 							/>
 						</div>
 					</Link>
-
-					{user ? (
-						<div>
-							<div className='hidden md:flex space-x-3 items-center'>
-								<LinkButton to='/create-listing'>List item</LinkButton>
-								<Link></Link>
-								<LinkButton to='/profile/rentalrequests'>Requests</LinkButton>
-								<div
-									className='rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white'
-									onClick={handleToogle}
-								>
-									<img
-										className='rounded-full w-8 h-8'
-										src={ProfileImage}
-										alt=''
-									/>
-								</div>
-							</div>
-							<div
-								className='md:hidden rounded-full h-8 w-8 flex items-center justify-center cursor-pointer ring-2 ring-white'
-								onClick={handleToogle}
+					<div>
+						<div className='flex space-x-3 items-center'>
+							<LinkButton to='/create-listing' className='hidden md:block'>
+								List item
+							</LinkButton>
+							<Link></Link>
+							<LinkButton
+								to='/profile/rentalrequests'
+								className='hidden md:block'
 							>
-								<img
-									className='rounded-full'
-									src={ProfileImage}
-									alt='No image'
-								/>
-							</div>
-							{toogleNav && <SideNav />}
+								Requests
+							</LinkButton>
+							<OpenSideNavigationButton user={user} />
+							<div
+								className='flex cursor-pointer'
+								onClick={openSideNavigation}
+							></div>
 						</div>
-					) : (
-						!user && (
-							<>
-								<div className=' space-x-3 hidden md:flex'>
-									<Link
-										className=' hover:text-orange-500 p-1 mx-1 '
-										to='/howitworks'
-									>
-										How it works
-									</Link>
-									<Link
-										to={routes.signin}
-										className='bg-blue-600 text-white p-1 px-2 rounded-full'
-									>
-										Sign-In
-									</Link>
-								</div>
-								<div className='md:hidden'>
-									<Hamburger toggled={toogleNav} toggle={setToogleNav} />
-									{toogleNav && <SideNav />}
-								</div>
-							</>
-						)
-					)}
+					</div>
 				</div>
 			</div>
 		</nav>

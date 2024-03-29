@@ -52,6 +52,9 @@ export const routes = {
 	emailVerification: '/auth/verify',
 	home: '/',
 	createListing: '/create-listing',
+	profile: '/profile',
+	listings: '/profile/listings',
+	requestedItems: '/profile/requestedItems',
 };
 
 export const router = createBrowserRouter([

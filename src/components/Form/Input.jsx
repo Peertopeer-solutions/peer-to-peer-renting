@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { twMerge } from 'tailwind-merge';
 
 export function FloatingLabelTextInput({ id, label, error, options }) {
 	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-500';
@@ -17,7 +18,10 @@ export function FloatingLabelTextInput({ id, label, error, options }) {
 			/>
 			<label
 				htmlFor={id}
-				className='absolute text peer-focus:font-bold bg-transparent text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-2'
+				className={twMerge(
+					`absolute text peer-focus:font-bold bg-transparent text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-2`,
+					error && 'peer-focus:text-red-500'
+				)}
 			>
 				{label}
 			</label>
@@ -43,7 +47,32 @@ export function TextInput({ id, label, options, error }) {
 		</div>
 	);
 }
- 
+
+export function FloatingLabelPasswordInput({ id, label, error, options }) {
+	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-500';
+	return (
+		<div className='relative'>
+			<input
+				type='text'
+				id={id}
+				className={
+					'block px-4 pb-2.5 pt-4 w-full text-sm text-gray-900 rounded-lg border-2 peer outline-none ' +
+					borderColor
+				}
+				placeholder=' '
+				{...options}
+			/>
+			<label
+				htmlFor={id}
+				className='absolute text peer-focus:font-bold bg-transparent text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-2'
+			>
+				{label}
+			</label>
+			{error && <div className='text-red-400'>{error.message}</div>}
+		</div>
+	);
+}
+
 export function PasswordInput({ id, label, options, error }) {
 	const borderColor = error
 		? 'focus-within:border-red-300'

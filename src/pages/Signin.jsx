@@ -15,12 +15,13 @@ import Joi from 'joi';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import {
+	FloatingLabelPasswordInput,
 	FloatingLabelTextInput,
 	PasswordInput,
 	TextInput,
-} from '../components/Form/Input';
+} from '@src/components/Form/Input';
 import { routes } from '../components/Routing/Routes';
-import { auth } from '../firebase.config';
+import { auth } from '@src/firebase.config';
 
 const schema = Joi.object({
 	email: Joi.string()
@@ -83,7 +84,7 @@ const Signin = () => {
 				{errors.root && (
 					<div className='text-red-400'>{errors.root.message}</div>
 				)}
-				<FloatingLabelTextInput
+				<TextInput
 					id='email'
 					label='Email'
 					options={register('email')}

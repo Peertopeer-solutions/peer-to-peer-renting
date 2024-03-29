@@ -2,7 +2,6 @@ import { productsAction } from '../../store/products-slice';
 import { twMerge } from 'tailwind-merge';
 
 const PaginationItem = ({ isCurrentPage, onClick, children }) => {
-	console.log(onClick);
 	const selectedStyle = isCurrentPage ? 'bg-gray-300 hover:bg-gray-300' : '';
 	return (
 		<button
