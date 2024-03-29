@@ -1,36 +1,36 @@
-import {React} from 'react'
-import Datepicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import { React } from 'react';
+import Datepicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const DatePicker = ({setEndDate,setStartDate, startDate, endDate}) => {
+const DatePicker = ({ setEndDate, setStartDate, startDate, endDate }) => {
+	const today = new Date();
+	const minSelectableDate = new Date(
+		today.getFullYear(),
+		today.getMonth(),
+		today.getDate()
+	);
+	const onChange = (dates) => {
+		const [start, end] = dates;
+		setStartDate(start);
+		setEndDate(end);
+	};
 
-  const today = new Date();
-  const minSelectableDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  console.log(minSelectableDate)
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
-  console.log(startDate,endDate)
-  
+	return (
+		<div>
+			<div className=' '>
+				<p className=' pb-2'>Select tenure</p>
 
-  return (
-    <div>
-      <div className=" ">
-                <p className=" pb-2">Select tenure</p>
+				<Datepicker
+					selected={startDate}
+					onChange={onChange}
+					startDate={startDate}
+					endDate={endDate}
+					selectsRange
+					inline
+					minDate={minSelectableDate}
+				/>
 
-                <Datepicker
-                  selected={startDate}
-                  onChange={onChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  selectsRange
-                  inline
-                  minDate={minSelectableDate}
-                />
-    
-                {/* <Datepicker
+				{/* <Datepicker
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
                   selectsEnd
@@ -51,9 +51,9 @@ const DatePicker = ({setEndDate,setStartDate, startDate, endDate}) => {
                   calendarContainer={MyContainer}
                   
                 /> */}
-                </div>
-    </div>
-  )
-}
+			</div>
+		</div>
+	);
+};
 
-export default DatePicker
+export default DatePicker;
