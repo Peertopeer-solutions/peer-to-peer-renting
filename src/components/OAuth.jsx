@@ -19,7 +19,6 @@ const OAuth = () => {
 			const provider = new GoogleAuthProvider();
 			const result = await signInWithPopup(auth, provider);
 			const user = result.user;
-			console.log(user);
 			// Check for user
 			const docRef = doc(db, 'users', user.uid);
 			const docSnap = await getDoc(docRef);
@@ -34,8 +33,7 @@ const OAuth = () => {
 			}
 			navigate('/');
 		} catch (error) {
-			// console.log(error)
-			console.log(error.message);
+			console.error(error.message);
 			toast.error('Could not authorize with Google');
 		}
 	};
@@ -61,7 +59,6 @@ const OAuthV1 = () => {
 			const provider = new GoogleAuthProvider();
 			const result = await signInWithPopup(auth, provider);
 			const user = result.user;
-			console.log(user);
 			// Check for user
 			const docRef = doc(db, 'users', user.uid);
 			const docSnap = await getDoc(docRef);
@@ -76,8 +73,7 @@ const OAuthV1 = () => {
 			}
 			navigate(-1);
 		} catch (error) {
-			// console.log(error)
-			console.log(error.message);
+			console.error(error.message);
 			toast.error('Could not authorize with Google');
 		}
 	};

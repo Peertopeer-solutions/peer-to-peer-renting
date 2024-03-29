@@ -45,7 +45,6 @@ const CategoriesList = React.memo(() => {
 });
 
 const Explore = ({ listings, isLoading, error }) => {
-	console.log(listings);
 	const params = useParams();
 
 	if (error) {
