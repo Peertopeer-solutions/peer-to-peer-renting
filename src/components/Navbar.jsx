@@ -11,6 +11,7 @@ import useSidePanel from '../data/zustand/sidePanelStore';
 import SidePanel from './UI/SidePanel';
 import useSideNavigation from '@src/hooks/useSideNavigation';
 import OpenSideNavigationButton from '@src/components/OpenSideNavigationButton';
+import Row from '@src/components/Layout/Row';
 
 const Navbar = () => {
 	const auth = getAuth();
@@ -53,20 +54,16 @@ const Navbar = () => {
 
 	const userNavButtons = (
 		<>
-			<LinkButton to='/create-listing' className='hidden md:block'>
-				List item
-			</LinkButton>
+			<LinkButton to='/create-listing'>List item</LinkButton>
 			<Link></Link>
-			<LinkButton to='/profile/rentalrequests' className='hidden md:block'>
-				Requests
-			</LinkButton>
+			<LinkButton to='/profile/rentalrequests'>Requests</LinkButton>
 		</>
 	);
 
 	const noUserNavButtons = (
 		<>
 			<Link
-				className=' hover:text-gray-800 transition p-1 font-bold text-gray-600 '
+				className=' hover:text-gray-800 transition px-4 py-1 font-bold text-gray-600 '
 				to='/howitworks'
 			>
 				How It Works
@@ -96,7 +93,9 @@ const Navbar = () => {
 					</Link>
 					<div>
 						<div className='flex space-x-3 items-center'>
-							{!user ? noUserNavButtons : userNavButtons}
+							<Row className='gap-1 md:flex hidden'>
+								{!user ? noUserNavButtons : userNavButtons}
+							</Row>
 							<OpenSideNavigationButton user={user} />
 							<div
 								className='flex cursor-pointer'
