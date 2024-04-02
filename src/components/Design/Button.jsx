@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
 const LinkButton = ({ to, children, variant, className = '' }) => {
-	let btnStyle = 'bg-white text-black hover:bg-blue-500 hover:text-white';
+	let btnStyle = 'bg-white text-black hover:bg-blue-600 hover:text-white';
 	if (variant === 'text') btnStyle = 'text-gray-300 hover:text-lime-300';
 	return (
 		<Link to={to}>
-			<div
-				className={`w-fit px-6 py-2 rounded-full text-lg font-semibold text-center tracking-wide hover:cursor-pointer ${btnStyle} ${className}`}
+			<span
+				className={`w-fit px-4 py-2 transition rounded-full font-semibold text-center hover:cursor-pointer ${btnStyle} ${className}`}
 			>
 				{children}
-			</div>
+			</span>
 		</Link>
 	);
 };
