@@ -51,6 +51,35 @@ const Navbar = () => {
 		} else setToogleNav(true);
 	};
 
+	const userNavButtons = (
+		<>
+			<LinkButton to='/create-listing' className='hidden md:block'>
+				List item
+			</LinkButton>
+			<Link></Link>
+			<LinkButton to='/profile/rentalrequests' className='hidden md:block'>
+				Requests
+			</LinkButton>
+		</>
+	);
+
+	const noUserNavButtons = (
+		<>
+			<Link
+				className=' hover:text-gray-800 transition p-1 font-bold text-gray-600 '
+				to='/howitworks'
+			>
+				How It Works
+			</Link>
+			<Link
+				to={routes.signin}
+				className='bg-blue-500 hover:bg-blue-600 transition text-white px-4 py-1 rounded-full'
+			>
+				Sign In
+			</Link>
+		</>
+	);
+
 	return (
 		<nav className=' w-[100%] mx-auto border-b-1 border-black fixed z-10 '>
 			<SidePanel open={showSidePanel} onOpenChange={closeSidePanel} />
@@ -67,16 +96,7 @@ const Navbar = () => {
 					</Link>
 					<div>
 						<div className='flex space-x-3 items-center'>
-							<LinkButton to='/create-listing' className='hidden md:block'>
-								List item
-							</LinkButton>
-							<Link></Link>
-							<LinkButton
-								to='/profile/rentalrequests'
-								className='hidden md:block'
-							>
-								Requests
-							</LinkButton>
+							{!user ? noUserNavButtons : userNavButtons}
 							<OpenSideNavigationButton user={user} />
 							<div
 								className='flex cursor-pointer'
