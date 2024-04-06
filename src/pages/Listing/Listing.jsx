@@ -24,6 +24,8 @@ import PriceCard from './PriceCard';
 import { IoIosHeart, IoIosShare } from 'react-icons/io';
 import { BsHeart, BsShare } from 'react-icons/bs';
 import { routes } from '../../components/Routing/Routes';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
+import ScrollableArea from '@src/components/Layout/ScrollableArea';
 
 const Listing = () => {
 	const [displayImage, setDisplayImage] = useState(null);
@@ -117,21 +119,24 @@ const Listing = () => {
 									alt='img'
 								/>
 							</div>
-							<div className='flex justify-start mt-4 items-center  overflow-x-scroll space-x-2 mx-auto '>
-								{listing.imgUrls.map((index) => (
-									<button
-										key={index}
-										className='bg-gray-100 rounded-lg  my-2 overflow-hidden '
-										onClick={() => setDisplayImage(index)}
-									>
-										<img
-											className='object-cover  shadow-xl  w-[150px] aspect-[4/3]'
-											src={index}
-										/>
-									</button>
-								))}
+							<div className='rounded-md mt-2'>
+								<ScrollableArea orientation='horizontal'>
+									<div className='flex justify-start items-center space-x-2 mx-auto '>
+										{listing.imgUrls.map((index) => (
+											<button
+												key={index}
+												className='bg-gray-100 rounded-lg overflow-hidden '
+												onClick={() => setDisplayImage(index)}
+											>
+												<img
+													className='object-cover  shadow-xl  w-[150px] aspect-[4/3]'
+													src={index}
+												/>
+											</button>
+										))}
+									</div>
+								</ScrollableArea>
 							</div>
-
 							<div className='hidden md:block '>
 								<div className='flex flex-col space-y-2 leading-loose mb-4'>
 									<h1 className='text-[24px] font-semibold text-gray-900 '>

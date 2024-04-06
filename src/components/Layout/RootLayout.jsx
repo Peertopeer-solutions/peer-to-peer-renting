@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy, useCallback, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { FirebaseAuthProvider } from '../../FirebaseAuthContext';
@@ -8,6 +8,8 @@ import PageWrapper from './PageWrapper';
 import Banner from '../Design/Banner';
 
 import { useSelector } from 'react-redux';
+import SidePanel from '@src/components/UI/SidePanel';
+import useSidePanel from '@src/data/zustand/sidePanelStore';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
@@ -20,6 +22,7 @@ const RootLayout = () => {
 	return (
 		<>
 			<FirebaseAuthProvider>
+				<SidePanel />
 				{/* {isBannerVisible && (
 					<Banner
 						text='You might not be able to use few features as you have not verified your email address.'
