@@ -11,7 +11,7 @@ export default function useSideNavigation() {
 	const updateSheet = useSideSheet((state) => state.actions.updateSheet);
 
 	const openSideNavigation = useCallback(() => {
-		updateSheet(SIDE_NAVIGATION);
+		updateSheet(SIDE_NAVIGATION, { test: 'test' });
 		openPanel();
 	}, [updateSheet, openPanel]);
 

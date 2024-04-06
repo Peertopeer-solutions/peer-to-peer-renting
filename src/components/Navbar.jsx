@@ -21,9 +21,6 @@ const Navbar = () => {
 	const [toogleNav, setToogleNav] = useState();
 	const [ProfileImage, setProfileImage] = useState(null);
 
-	const openSidePanel = useSidePanel((state) => state.actions.openSidePanel);
-	const closeSidePanel = useSidePanel((state) => state.actions.closeSidePanel);
-	const showSidePanel = useSidePanel((state) => state.open);
 	const { openSideNavigation } = useSideNavigation();
 	const pathMatchRoute = (route) => {
 		if (route === location.pathname) {
@@ -79,7 +76,6 @@ const Navbar = () => {
 
 	return (
 		<nav className=' w-[100%] mx-auto border-b-1 border-black fixed z-10 '>
-			<SidePanel open={showSidePanel} onOpenChange={closeSidePanel} />
 			<div className='  p-2 md:p-3 bg-white  border '>
 				<div className='flex items-center justify-between '>
 					<Link to='/'>
