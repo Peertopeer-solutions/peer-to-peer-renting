@@ -9,6 +9,7 @@ import Row from '@src/components/Layout/Row';
 import Icon from '@src/components/Design/Icon';
 import { Icons } from '@src/constant/icons';
 import { motion, AnimatePresence } from 'framer-motion';
+import LoadingSpinner from '@src/components/Design/LoadingSpinner';
 
 export default function SidePanel({ children, open, onOpenChange }) {
 	return (
@@ -27,7 +28,7 @@ function SidePanelContent({ open }) {
 	return (
 		<AnimatePresence mode='sync'>
 			{!open ? null : (
-				<Dialog.Portal forceMount>
+				<Dialog.Portal forceMount={open}>
 					<Dialog.Overlay className='bg-black/30 fixed inset-0 z-50' />
 					<Dialog.Content asChild>
 						<motion.div
@@ -43,11 +44,11 @@ function SidePanelContent({ open }) {
 						>
 							<Row>
 								{/* <Dialog.Title>{'TITLE'}</Dialog.Title> */}
-								<Dialog.Close className='absolute p-1 text-gray-400 hover:text-gray-800 text-lg right-3 top-3'>
+								<Dialog.Close className='absolute p-1 text-gray-400 hover:text-gray-900 text-lg right-3 top-3 hover:bg-gray-200 rounded'>
 									<Icon name={Icons.Cross1} />
 								</Dialog.Close>
 							</Row>
-							<Suspense fallback={<Spinner />}>
+							<Suspense fallback={<LoadingSpinner />}>
 								<AsyncElement {...props} />
 							</Suspense>
 						</motion.div>

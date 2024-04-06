@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { auth, db } from '../../firebase.config';
 import { toast } from 'react-toastify';
@@ -100,22 +100,31 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 	// const [reviews, setReviews] = useState<ReviewDetail[]>([]);
 	// const [fetchingReviews, setFetchingReviews] = useState(false);
 	// const [likedReviews, setLikedReviews] = useState<string[]>([]);
-
 	const {
 		data: reviews,
 		isLoading,
 		error,
 	} = useQuery(['feedback', product.id], fetchReviews.bind(null, product.id));
+	const reviewsRef = useRef<typeof reviews>();
+
+	useEffect(() => {
+		if (!reviews) return;
+		reviewsRef.current = reviews;
+	});
+
+	const userId = auth.currentUser?.uid ?? 'no-user';
 	const { data: likedReviews, error: errorLikedReviews } = useQuery(
-		['liked-reviews', auth.currentUser?.uid ?? 'no-user'],
-		fetchLikedReviews.bind(null, auth.currentUser?.uid ?? 'no-user')
+		['liked-reviews', userId],
+		fetchLikedReviews.bind(null, userId)
 	);
+
 	const noReviewFallback = (
 		<Alert text='There are no reviews for this product.' />
 	);
-	const nonZeroReviews = reviews && reviews.length > 0;
-	const reviewsJsx = nonZeroReviews
-		? reviews.map((review) => (
+	const reviewsJsx = useMemo(() => {
+		if (isLoading) return <LoadingSpinner />;
+		return (
+			(reviews || reviewsRef.current)?.map((review) => (
 				<Review
 					profileImgUrl='https://placehold.co/512x512'
 					isLiked={likedReviews?.includes(review.id) ?? false}
@@ -126,8 +135,9 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 					stars={review.rating}
 					desc={review.desc}
 				/>
-		  ))
-		: noReviewFallback;
+			)) || noReviewFallback
+		);
+	}, [isLoading, reviews, reviewsRef.current]);
 	return (
 		<>
 			{createPortal(
@@ -158,7 +168,7 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 						</button>
 					</div>
 					<div className='flex flex-col mt-5'>
-						{isLoading ? <LoadingSpinner /> : reviewsJsx}
+						{reviewsJsx}
 
 						{/* <Review
 							author={{ name: 'Reinold', totalReviews: 4 }}
@@ -178,13 +188,13 @@ const ReviewList: FC<ReviewListProps> = ({ product }) => {
 							stars={4}
 						/> */}
 					</div>
-					{nonZeroReviews && (
+					{
 						<div className='mx-auto pt-4 text-center'>
-							<button className='md:w-1/3 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-								See all reviews
+							<button className='md:w-1/3 w-full transition bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+								See more reviews
 							</button>
 						</div>
-					)}
+					}
 				</div>
 			</div>
 		</>
