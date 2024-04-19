@@ -18,8 +18,9 @@ export default function SidePanel() {
 	const open = useSidePanel((state) => state.open);
 	const sidePanelHandler = useCallback(
 		(open) => (open ? openSidePanel() : closeSidePanel()),
-		[openSidePanel, closeSidePanel]
+		[openSidePanel, closeSidePanel, open]
 	);
+	console.log('open',)
 	return (
 		<Dialog.Root open={open} onOpenChange={sidePanelHandler}>
 			<Dialog.Trigger hidden />
@@ -34,10 +35,10 @@ function SidePanelContent({ open }) {
 	const AsyncElement = getAsyncElement(element);
 	console.log(props);
 	return (
-		<AnimatePresence>
+		<AnimatePresence mode='wait'>
 			{open && (
-				<Dialog.Portal forceMount>
-					<Dialog.Overlay className='bg-black/30 fixed inset-0 z-50' />
+				<Dialog.Portal forceMount container={document.getElementById('side-panel-root')} key='sidePanelPortal'>
+					<Dialog.Overlay className='bg-black/30 fixed inset-0 z-50'/>
 					<Dialog.Content
 						className='bg-white fixed top-0 right-0 h-full z-50 py-2 px-4 rounded-l-md shadow-lg'
 						style={{ width: 'min(95%, 22rem)' }}
@@ -51,6 +52,7 @@ function SidePanelContent({ open }) {
 								x: '15rem',
 								opacity: 0,
 							}}
+							key='sidePanelMotionDiv'
 						>
 							<Row>
 								{/* <Dialog.Title>{'TITLE'}</Dialog.Title> */}

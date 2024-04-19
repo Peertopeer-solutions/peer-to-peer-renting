@@ -10,6 +10,9 @@ import { IconButton, LinkButton } from '../Design/Button';
 import { TbUpload } from 'react-icons/tb';
 import { RxShare2 } from 'react-icons/rx';
 import { IoIosAdd, IoIosShare } from 'react-icons/io';
+import Icon from '@src/components/Design/Icon';
+import { Icons } from '@src/constant/icons';
+import RadixAvatar from '@src/components/RadixAvatar';
 
 const ProfileHeader = () => {
 	const authCtx = useContext(AuthContext);
@@ -53,11 +56,7 @@ const ProfileHeader = () => {
 
 			<div className='bg-gradient-to-l from-indigo-400 to-blue-500  text-white rounded-lg p-9 flex flex-col md:flex-row md:justify-between md:h-[300px] '>
 				<div className='flex flex-col space-y-3  items-center '>
-					<img
-						alt='Profile image'
-						src={auth.currentUser?.photoURL}
-						className='aspect-square w-24 rounded-full ring-4 ring-white  '
-					/>
+					<RadixAvatar imageUrl={auth.currentUser?.photoURL} name={auth.currentUser?.displayName} size='profile' ring/>
 					<div className='flex flex-col '>
 						<div className='relative z-0 '>
 							<form className='text-center'>
@@ -93,13 +92,11 @@ const ProfileHeader = () => {
 				<div className='flex flex-row justify-center space-x-4 m-3'>
 					<div>
 						<LinkButton to={'/create-listing'}>
-							{' '}
-							<IoIosAdd />
+							<Icon name={Icons.Plus} />
 						</LinkButton>
 					</div>
 					<div>
 						<LinkButton to={'/create-listing'}>
-							{' '}
 							<IoIosShare />
 						</LinkButton>
 					</div>

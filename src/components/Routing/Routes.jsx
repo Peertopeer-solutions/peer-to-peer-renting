@@ -3,12 +3,13 @@ import { createBrowserRouter } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundries/ErrorBoundry';
 
 import RootLayout from '../Layout/RootLayout';
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuthStatus from '../../hooks/useAuthStatus';
 import Spinner from '../Spinner';
 import AuthPage from '../../pages/AuthPage';
+// import Profile from '../../pages/Profile';
 import EmailVerification from '../../pages/EmailVerification';
 const UserListings = lazy(() => import('../ProfileComponents/UserListings'));
 const OrderConfirmation = lazy(() => import('../../pages/OrderConfirmation'));
@@ -149,7 +150,7 @@ export const router = createBrowserRouter([
 				children: [
 					{
 						path: '',
-						element: <Profile />,
+						element: <Suspense fallback={<Spinner />}><Profile /></ Suspense>,
 						errorElement: <ErrorBoundary />,
 
 						children: [
