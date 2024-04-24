@@ -45,7 +45,7 @@ const CreateListing = () => {
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMounted]);
-	const { register, handleSubmit, setValue, control, formState } = useForm();
+	const { register, handleSubmit, setValue, control, formState: { errors, isSubmitting } } = useForm();
 	const onSubmit = async (data) => {
 		if (selectedImg.length > 6) {
 			setLoading(false);
@@ -125,7 +125,7 @@ const CreateListing = () => {
 		navigate(`/${data.category}/${docRef.id}`);
 	};
 
-	const { errors } = formState;
+
 
 	const onUploadFile = (acceptedFiles) => {
 		// console.log(acceptedFiles);

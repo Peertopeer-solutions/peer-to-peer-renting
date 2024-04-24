@@ -1,7 +1,7 @@
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import Joi, { number } from 'joi';
+import Joi, { number, string } from 'joi';
 import { MobileNumber, OtpBox, TextInput } from '../components/Form/Input';
 import OAuth from '../components/OAuth';
 import { routes } from '../components/Routing/Routes';
@@ -14,10 +14,12 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase.config';
 
+
 const schema = Joi.object({
   number: Joi.string().length(10).label('Mobile Number'),
   otp: Joi.string().length(6).label('OTP'),
 });
+
 function captchaVerify() {
   if (window.recaptchaVerifier) {
     return window.recaptchaVerifier;
@@ -84,7 +86,7 @@ const EmailVerification = () => {
         {verifying ? (
           <TextInput label='OTP' options={register('otp')} error={errors.otp} />
         ) : (
-          <MobileNumber options={register('number')} error={errors.number} />
+          <MobileNumber label='Mobile number' options={register('number')} error={errors.number} />
         )}
         <div className='mt-2 flex flex-col gap-3'>
           {verifying ? (

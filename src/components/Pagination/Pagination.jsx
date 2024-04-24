@@ -25,12 +25,22 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
 			</PaginationItem>
 		);
 	}
+	const previousPage = () => {
+		if (currentPage > 1) {
+			dispatch(productsAction.setPage({ page: currentPage - 1 }));
+		}
+	}
+	const nextPage = () => {
+		if (currentPage < totalPages) {
+			dispatch(productsAction.setPage({ page: currentPage + 1 }));
+		}
+	}
 	return (
 		<div className='m-3 mx-auto max-w-max '>
 			<ul className='border flex border-gray-300 rounded overflow-hidden'>
-				<PaginationItem>Prev</PaginationItem>
+				<PaginationItem onClick = {previousPage}>Prev</PaginationItem>
 				{pages}
-				<PaginationItem>Next</PaginationItem>
+				<PaginationItem onClick = {nextPage} >Next</PaginationItem>
 			</ul>
 		</div>
 	);
