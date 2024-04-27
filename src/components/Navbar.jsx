@@ -12,6 +12,7 @@ import SidePanel from './UI/SidePanel';
 import useSideNavigation from '@src/hooks/useSideNavigation';
 import OpenSideNavigationButton from '@src/components/OpenSideNavigationButton';
 import Row from '@src/components/Layout/Row';
+import useRequestPanel from '@src/hooks/useRequestPanel';
 
 const Navbar = () => {
 	const auth = getAuth();
@@ -22,6 +23,7 @@ const Navbar = () => {
 	const [ProfileImage, setProfileImage] = useState(null);
 
 	const { openSideNavigation } = useSideNavigation();
+	const {openRequestPanel} = useRequestPanel();
 	const pathMatchRoute = (route) => {
 		if (route === location.pathname) {
 			return true;
@@ -53,7 +55,7 @@ const Navbar = () => {
 		<>
 			<LinkButton to='/create-listing'>List item</LinkButton>
 			<Link></Link>
-			<LinkButton to='/profile/rentalrequests'>Requests</LinkButton>
+			<button onClick={openRequestPanel} >Requests</button>
 		</>
 	);
 

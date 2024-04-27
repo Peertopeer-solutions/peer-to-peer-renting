@@ -35,7 +35,7 @@ function SidePanelContent({ open }) {
 	const AsyncElement = getAsyncElement(element);
 	console.log(props);
 	return (
-		<AnimatePresence mode='wait'>
+		<AnimatePresence>
 			{open && (
 				<Dialog.Portal forceMount container={document.getElementById('side-panel-root')} key='sidePanelPortal'>
 					<Dialog.Overlay className='bg-black/30 fixed inset-0 z-50'/>
