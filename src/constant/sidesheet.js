@@ -1,9 +1,7 @@
-import React from 'react';
-
 export const SIDE_PANELS = {
 	sideNavigation: '@src/components/SideNavigation',
-	test: '@src/components/Test',
-	notFound: '@src/pages/RentalRequests',
+	requestPanel: '@src/components/RequestPanel',
+	notFound: '@src/components/NotFoundSideNav',
 };
 export const SIDE_NAVIGATION = 'sideNavigation';
-export const TEST = 'test';
+export const REQUEST_PANEL = 'requestPanel';
