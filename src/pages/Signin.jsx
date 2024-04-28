@@ -22,6 +22,8 @@ import {
 } from '@src/components/Form/Input';
 import { routes } from '../components/Routing/Routes';
 import { auth } from '@src/firebase.config';
+import Modal from '@src/components/UI/Modal';
+import Forgotpassword from './Forgotpassword';
 
 const schema = Joi.object({
 	email: Joi.string()
@@ -31,6 +33,7 @@ const schema = Joi.object({
 });
 
 const Signin = () => {
+	const [forgotPassword, setForgotpassword] = useState(false)
 	const navigate = useNavigate();
 	const {
 		register,
@@ -98,7 +101,7 @@ const Signin = () => {
 				/>
 				<div className='flex justify-end my-1'>
 					<Link
-						to='/forgotpassword'
+						to={routes.forgotpassword}
 						className='text-sm text-blue-500 underline font-bold'
 					>
 						Forgot password?
@@ -130,100 +133,100 @@ const Signin = () => {
 	);
 };
 
-const SigninV1 = () => {
-	const [showPassword, setShowPassword] = useState(false);
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
-	const { email, password } = formData;
-	const navigate = useNavigate();
-	const onChange = (e) => {
-		setFormData((prevState) => ({
-			...prevState,
-			[e.target.id]: e.target.value,
-		}));
-	};
-	const onSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const auth = getAuth();
-			const userCredential = await signInWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
+// const SigninV1 = () => {
+// 	const [showPassword, setShowPassword] = useState(false);
+// 	const [formData, setFormData] = useState({
+// 		email: '',
+// 		password: '',
+// 	});
+// 	const { email, password } = formData;
+// 	const navigate = useNavigate();
+// 	const onChange = (e) => {
+// 		setFormData((prevState) => ({
+// 			...prevState,
+// 			[e.target.id]: e.target.value,
+// 		}));
+// 	};
+// 	const onSubmit = async (e) => {
+// 		e.preventDefault();
+// 		try {
+// 			const auth = getAuth();
+// 			const userCredential = await signInWithEmailAndPassword(
+// 				auth,
+// 				email,
+// 				password
+// 			);
 
-			if (userCredential.user) {
-				navigate('/');
-			}
-		} catch (error) {
-			toast.error('Wrong User Credentials');
-		}
-	};
-	return (
-		<PageWrapper>
-			{' '}
-			<div className='bg-gradient-to-l from-indigo-400 to-blue-500 md:border flex flex-col items-center justify-center max-w-fit p-9  rounded-xl  space-y-6  w-full  mx-auto md:h-[80vh] sm:text-[16px] md:text-xl '>
-				<header>
-					<p className='text-2xl font-bold text-white'>Welcome!</p>
-				</header>
-				<form onSubmit={onSubmit} className='space-y-2'>
-					<div className='flex items-center w-full space-x-2'>
-						<label htmlFor='email'>
-							<IoIosMail className='text-sm text-white' />
-						</label>
-						<input
-							type='email'
-							className='w-full p-1 text-sm text-black bg-white opacity-50 rounded-2xl'
-							placeholder='Email'
-							id='email'
-							value={email}
-							onChange={onChange}
-						/>
-					</div>
+// 			if (userCredential.user) {
+// 				navigate('/');
+// 			}
+// 		} catch (error) {
+// 			toast.error('Wrong User Credentials');
+// 		}
+// 	};
+// 	return (
+// 		<PageWrapper>
+// 			{' '}
+// 			<div className='bg-gradient-to-l from-indigo-400 to-blue-500 md:border flex flex-col items-center justify-center max-w-fit p-9  rounded-xl  space-y-6  w-full  mx-auto md:h-[80vh] sm:text-[16px] md:text-xl '>
+// 				<header>
+// 					<p className='text-2xl font-bold text-white'>Welcome!</p>
+// 				</header>
+// 				<form onSubmit={onSubmit} className='space-y-2'>
+// 					<div className='flex items-center w-full space-x-2'>
+// 						<label htmlFor='email'>
+// 							<IoIosMail className='text-sm text-white' />
+// 						</label>
+// 						<input
+// 							type='email'
+// 							className='w-full p-1 text-sm text-black bg-white opacity-50 rounded-2xl'
+// 							placeholder='Email'
+// 							id='email'
+// 							value={email}
+// 							onChange={onChange}
+// 						/>
+// 					</div>
 
-					<div className='flex items-center w-full space-x-2'>
-						<label htmlFor='password'>
-							<IoIosLock className='text-sm text-white' />
-						</label>
-						<div className='relative flex items-center justify-between w-full h-fit'>
-							<input
-								type={showPassword ? 'text' : 'password'}
-								className='w-full p-1 text-sm text-black bg-white opacity-50 rounded-2xl'
-								placeholder='Password'
-								id='password'
-								value={password}
-								onChange={onChange}
-							/>
-							<IoIosEye
-								className='absolute text-sm right-2 '
-								onClick={() => setShowPassword((prevState) => !prevState)}
-							/>
-						</div>
-					</div>
-					<div className='flex justify-between'>
-						<div className='flex items-center '>
-							<p className='text-sm font-bold text-white'> Sign In</p>
-							<button className=''>
-								<IoIosArrowForward className='text-sm text-white' />
-							</button>
-						</div>
-						<Link
-							to='/forgotpassword'
-							className='flex justify-center my-4 text-sm text-red-500'
-						>
-							Forgot Password{' '}
-						</Link>
-					</div>
-				</form>
-				<OAuth className='' />
-				<Link to={routes.signup} className='text-white'>
-					Sign Up Instead
-				</Link>
-			</div>
-		</PageWrapper>
-	);
-};
+// 					<div className='flex items-center w-full space-x-2'>
+// 						<label htmlFor='password'>
+// 							<IoIosLock className='text-sm text-white' />
+// 						</label>
+// 						<div className='relative flex items-center justify-between w-full h-fit'>
+// 							<input
+// 								type={showPassword ? 'text' : 'password'}
+// 								className='w-full p-1 text-sm text-black bg-white opacity-50 rounded-2xl'
+// 								placeholder='Password'
+// 								id='password'
+// 								value={password}
+// 								onChange={onChange}
+// 							/>
+// 							<IoIosEye
+// 								className='absolute text-sm right-2 '
+// 								onClick={() => setShowPassword((prevState) => !prevState)}
+// 							/>
+// 						</div>
+// 					</div>
+// 					<div className='flex justify-between'>
+// 						<div className='flex items-center '>
+// 							<p className='text-sm font-bold text-white'> Sign In</p>
+// 							<button className=''>
+// 								<IoIosArrowForward className='text-sm text-white' />
+// 							</button>
+// 						</div>
+// 						<Link
+							
+// 							className='flex justify-center my-4 text-sm text-red-500'
+// 						>
+// 							Forgot Password{' '}
+// 						</Link>
+// 					</div>
+// 				</form>
+// 				<OAuth className='' />
+// 				<Link to={routes.signup} className='text-white'>
+// 					Sign Up Instead
+// 				</Link>
+// 			</div>
+// 		</PageWrapper>
+// 	);
+// };
 
 export default Signin;

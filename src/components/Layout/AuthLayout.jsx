@@ -2,6 +2,7 @@ import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { routes } from '../Routing/Routes';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const AuthLayout = ({ children }) => {
 	return (
@@ -22,7 +23,10 @@ const AuthLayout = ({ children }) => {
 				<div className='flex mt-20'>{children}</div>
 			</div>
 			<div className='hidden md:block flex-grow bg-gradient-to-l from-indigo-400 to-blue-500 mx-2 rounded-lg'></div>
+			<ToastContainer />
+
 		</div>
+
 	);
 };
 

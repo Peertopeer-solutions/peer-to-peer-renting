@@ -31,6 +31,7 @@ export function FloatingLabelTextInput({ id, label, error, options }) {
 }
 
 export function TextInput({ id, label, options, error }) {
+	console.log(options)
 	const borderColor = error ? 'focus:border-red-300' : 'focus:border-blue-300';
 	return (
 		<div className='flex flex-col gap-1'>

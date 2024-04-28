@@ -7,7 +7,7 @@ const LinkButton = ({ to, children, variant, className = '' }) => {
 	return (
 		<Link to={to}>
 			<span
-				className={`w-fit px-4 py-2 transition rounded-full font-semibold text-center hover:cursor-pointer ${btnStyle} ${className}`}
+				className={`w-fit flex px-4 py-2 transition rounded-full font-semibold text-center hover:cursor-pointer ${btnStyle} ${className}`}
 			>
 				{children}
 			</span>

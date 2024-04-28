@@ -1,4 +1,4 @@
-import { SIDE_NAVIGATION } from '@src/constant/sidesheet';
+import { SIDE_NAVIGATION, TEST } from '@src/constant/sidesheet';
 import useSidePanel from '@src/data/zustand/sidePanelStore';
 import useSideSheet from '@src/data/zustand/sidesheetStore';
 import AuthContext from '@src/FirebaseAuthContext';
@@ -11,7 +11,7 @@ export default function useSideNavigation() {
 	const updateSheet = useSideSheet((state) => state.actions.updateSheet);
 
 	const openSideNavigation = useCallback(() => {
-		updateSheet(SIDE_NAVIGATION);
+		updateSheet(SIDE_NAVIGATION, { test: 'test' });
 		openPanel();
 	}, [updateSheet, openPanel]);
 
