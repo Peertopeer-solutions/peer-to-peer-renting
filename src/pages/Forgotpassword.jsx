@@ -37,7 +37,7 @@ const Forgotpassword = () => {
 		<div className='w-full'>
 			<div className='mb-8 gap-2 flex flex-col '>
 				<h1 className='text-3xl'>Forgot password</h1>
-				<h4 className='text-gray-500 text-sm'>Get a password reset link</h4>
+				<h4 className='text-gray-500 text-sm'>Get a password reset link.</h4>
 			</div>
 			<form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
 				{errors.root && (
