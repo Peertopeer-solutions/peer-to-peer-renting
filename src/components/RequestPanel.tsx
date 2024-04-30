@@ -8,6 +8,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import RentalRequestCard from './RentalRequestCard';
 import RentalRequestCardV2 from './RentalRequestCardV2';
+import Column from './Layout/Column';
 
 const RequestPanel = () => {
   const header = <Row className='px-2 py-1 items-center'>Your requests</Row>;
@@ -37,18 +38,18 @@ const RequestPanel = () => {
     requests?.length === 0 ? (
       <div>Empty</div>
     ) : (
-      <div className='overflow-scroll'>
+      <ScrollableArea>
         {requests?.map((request) => (
           <RentalRequestCardV2 request={request} />
         ))}
-      </div>
+      </ScrollableArea>
     );
 
   return (
-    <Box className='w-full'>
+    <Column className='h-full'>
       {header}
-      {content}
-    </Box>
+      <div className='flex-grow overflow-hidden'>{content}</div>
+    </Column>
   );
 };
 

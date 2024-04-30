@@ -83,7 +83,8 @@ function NavigationButton({ leadingIcon, text, navigateTo, onClick }) {
 	);
 }
 
-function getDateFromTimestamp(timestamp) {
+export function getDateFromTimestamp(timestamp) {
+	console.log(timestamp)
 	return new Date(Number.parseInt(timestamp));
 }
 

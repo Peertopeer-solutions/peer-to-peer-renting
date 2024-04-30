@@ -55,7 +55,7 @@ export type ProductDocument = {
   pincode: string;
   regularPrice: string;
   rentPeriod: string;
-  timestamp: string;
+  timestamp: Timestamp;
   title: string;
   userRef: string;
 };
