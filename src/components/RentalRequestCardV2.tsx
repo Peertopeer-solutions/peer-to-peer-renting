@@ -6,6 +6,9 @@ import LoadingSpinner from './Design/LoadingSpinner';
 import Box from './Layout/Box';
 import Row from './Layout/Row';
 import Column from './Layout/Column';
+import { getDateFromTimestamp } from './SideNavigation';
+import { Button } from './UI/Buttons';
+import { Icons } from '@src/constant/icons';
 
 type RentalRequestCardProps = {
   request: RentalRequest;
@@ -28,46 +31,26 @@ const RentalRequestCardV2: React.FC<RentalRequestCardProps> = ({ request }) => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  const { requestedBy, requestedProduct } = data!;
-  const str = JSON.stringify(request.id)
-  const uniqueRequestId = str.slice(-5,-1);
-  const options = { dateStyle: 'long' };
-  const date = new Date(request.timestamp?.seconds * 1000).toLocaleString('en-US', options);
-  const starDate =  new Date(request.startDate?.seconds * 1000).toLocaleString('en-US', options);
-  const endDate =  request.endDate.toDate();
-  console.log(endDate)
-  console.log(starDate)
-  return <Box className=' mb-1 rounded h-32'>
-     <Column className=' items-center'>
-      <div className='w-full rounded-lg border-2  bg-white '>
-        <div className='grid grid-cols-3 place-items-center'>
-        <img
-                className="object-contain aspect-[4/3] w-16 md:w-[100px] ml-1"
-                src={requestedProduct && requestedProduct.imgUrls[0]}
-                alt= {`${requestedProduct?.title}`}    
-            />
-          <div>
-            <p className='text-[20px] font-medium md:text-lg uppercase p-2'><span className='font-bold'>ID</span>: {uniqueRequestId}</p>
-            <p className='text-[15px] md:text-sm p-2'>{date}</p>
-          </div>
-          <div className='flex flex-col items-end'>
-          <p
-            className={`uppercase font-medium p-2 text-[20px] md:text-lg ${
-             request.status ==='pending'?'text-amber-400': request.status === 'approved' ? 'text-green-500' : 'text-red-500'
-            } `}
-          >
-            {request.status}
-          </p>
-          
-          </div>
-        </div>
-      </div>
-      
-        </Column>
-       
-
-        
-    </Box>;
+  const { requestedBy, requestedProduct: product } = data!;
+  return (
+    <Row className='border-2 mb-1 rounded h-32 overflow-hidden items-center'>
+      <img src={product.imgUrls[0]} className='object-contain w-24 h-24 mr-2' />
+      <Column className='h-full'>
+        <h1>{product.title}</h1>
+        <h2>
+          {getDateFromTimestamp(product.timestamp.seconds).toLocaleDateString(
+            'en-IN',
+            {
+              month: 'short',
+              day: '2-digit',
+              year: 'numeric',
+            }
+          )}
+        </h2>
+        <Button icon={Icons.ArrowRight}></Button>
+      </Column>
+    </Row>
+  );
 };
 
 export default RentalRequestCardV2;

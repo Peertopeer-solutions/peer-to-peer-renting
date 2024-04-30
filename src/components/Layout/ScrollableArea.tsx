@@ -15,8 +15,12 @@ const ScrollableArea: React.FC<ScrollAreaProps> = ({
 }) => {
   return (
     <RadixScrollArea.Root
-      className='h-fit w-full rounded-[inherit] overflow-hidden'
-      type='always'
+      className={
+        orientation === 'vertical'
+          ? 'h-full'
+          : 'h-fit' + ' w-full rounded-[inherit] overflow-hidden'
+      }
+      type='scroll'
     >
       <RadixScrollArea.Viewport className={'h-full w-full rounded-[inherit]'}>
         {children}

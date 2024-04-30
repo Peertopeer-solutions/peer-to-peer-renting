@@ -43,8 +43,7 @@ const Navbar = () => {
 		return () => {
 			unsubscribe();
 		};
-	}, []);
-
+	}, [])
 	const handleToogle = () => {
 		if (toogleNav) {
 			setToogleNav(false);
