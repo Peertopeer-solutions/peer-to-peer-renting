@@ -9,6 +9,8 @@ import Column from './Layout/Column';
 import { getDateFromTimestamp } from './SideNavigation';
 import { Button } from './UI/Buttons';
 import { Icons } from '@src/constant/icons';
+import { LinkButton } from './Design/Button';
+import Icon from './Design/Icon';
 
 type RentalRequestCardProps = {
   request: RentalRequest;
@@ -29,25 +31,29 @@ const RentalRequestCardV2: React.FC<RentalRequestCardProps> = ({ request }) => {
     return { requestedBy, requestedProduct };
   });
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner/>;
   }
-  const { requestedBy, requestedProduct: product } = data!;
+
+  const { requestedBy:user, requestedProduct: product } = data!;
   return (
-    <Row className='border-2 mb-1 rounded h-32 overflow-hidden items-center'>
-      <img src={product.imgUrls[0]} className='object-contain w-24 h-24 mr-2' />
-      <Column className='h-full'>
-        <h1>{product.title}</h1>
-        <h2>
+    <Row className='border-2 mb-1 rounded  overflow-hidden items-center justify-between p-3'>
+      <Column className='justify-center items-start  h-full space-y-3'>
+      <img src={product.imgUrls[0]} className='object-fit w-9 aspect-[4/3] mr-2' />
+      <h1 className=''>
           {getDateFromTimestamp(product.timestamp.seconds).toLocaleDateString(
             'en-IN',
             {
-              month: 'short',
+              month: 'long',
               day: '2-digit',
-              year: 'numeric',
             }
-          )}
-        </h2>
-        <Button icon={Icons.ArrowRight}></Button>
+          ) }
+        </h1>
+        </Column>
+      
+      <Column className=' h-full space-y-3'>
+        <h1 className='px-4'>{product.title}</h1>
+        
+        <LinkButton icon={Icons.ArrowRight} className='text-blue-700 text-md truncate py-0 '> Take action</LinkButton>
       </Column>
     </Row>
   );
