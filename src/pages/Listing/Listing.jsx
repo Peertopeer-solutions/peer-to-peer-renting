@@ -24,6 +24,8 @@ import PriceCard from './PriceCard';
 import { IoIosHeart, IoIosShare } from 'react-icons/io';
 import { BsHeart, BsShare } from 'react-icons/bs';
 import { routes } from '../../components/Routing/Routes';
+
+import Modal from '@src/components/UI/Modal'
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import ScrollableArea from '@src/components/Layout/ScrollableArea';
 
@@ -89,11 +91,9 @@ const Listing = () => {
 
 	return (
 		<>
-			{showRentalRequestForm && (
-				<div className='fixed inset-0  bg-black box-content opacity-60 z-10'>
-					hellos
-				</div>
-			)}
+			<Modal status={showRentalRequestForm}>
+			
+			</Modal>
 			{isLoading ? (
 				<div>
 					<SkeletonListing />
@@ -165,7 +165,9 @@ const Listing = () => {
 									: 'pt-6 space-y-6 font-bold pb-10 md:p-0 '
 							}
 						>
-							<div className=' '>
+							<div className={showRentalRequestForm
+									? ' '
+									: 'sticky top-0'}>
 								<PriceCard
 									listingId={listingId}
 									requestStatus={requestStatus}

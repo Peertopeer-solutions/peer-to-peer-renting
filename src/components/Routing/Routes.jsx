@@ -50,6 +50,7 @@ const PrivateRoute = () => {
 export const routes = {
 	signin: '/auth/sign-in',
 	signup: '/auth/sign-up',
+	forgotpassword: '/auth/forgot-password',
 	emailVerification: '/auth/verify',
 	home: '/',
 	createListing: '/create-listing',
@@ -193,6 +194,11 @@ export const router = createBrowserRouter([
 			{
 				path: 'verify',
 				element: <EmailVerification />,
+				errorElement: <ErrorBoundary />,
+			},
+			{
+				path: 'forgot-password',
+				element: <Forgotpassword/>,
 				errorElement: <ErrorBoundary />,
 			},
 		],

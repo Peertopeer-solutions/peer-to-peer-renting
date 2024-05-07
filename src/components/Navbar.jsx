@@ -94,10 +94,6 @@ const Navbar = () => {
 								{!user ? noUserNavButtons : userNavButtons}
 							</Row>
 							<OpenSideNavigationButton user={user} />
-							<div
-								className='flex cursor-pointer'
-								onClick={openSideNavigation}
-							></div>
 						</div>
 					</div>
 				</div>
