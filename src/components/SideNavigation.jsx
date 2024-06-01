@@ -63,10 +63,7 @@ function NavigationButton({ leadingIcon, text, navigateTo, onClick }) {
 	const onMouseLeave = () => setHover(false);
 	const icon = <NavigationButtonIcon icon={leadingIcon} hover={hover} />;
 	function onClickHandler() {
-		console.log(onClick);
-		if (onClick) {
-			onClick();
-		}
+		
 		closeSideNavigation();
 	}
 	return (

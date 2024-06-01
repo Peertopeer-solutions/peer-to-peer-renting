@@ -25,7 +25,7 @@ const RentalRequests = () => {
     const rentalRequestsRef = collection(db, 'rentalRequest');
     const q = query(
       rentalRequestsRef,
-      where('OwnerId', '==', auth.currentUser.uid),
+      where('ownerId', '==', auth.currentUser.uid),
       orderBy('timestamp', 'desc')
 
     );
@@ -69,9 +69,9 @@ const RentalRequests = () => {
   const handleAccept = async (request) => {
     try {
       const rentalRequestRef = doc(db, 'rentalRequest', request.id);
-      await updateDoc(rentalRequestRef, { status: 'approved' });
+      await updateDoc(rentalRequestRef, { status: 'accepted' });
       // Send notification to user
-      toast.success('Rental request approved!');
+      toast.success('Rental request accepted!');
       setRentalRequests((prevRequests) =>
         prevRequests.filter((req) => req.id !== request.id)
       );

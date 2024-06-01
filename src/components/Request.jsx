@@ -44,7 +44,7 @@ const Request = ({ listing, listingId, onClose, listingPrice }) => {
       try {
         const ref = collection(db, 'rentalRequest');
         const id = ctx.queryKey[1];
-        const q = query(ref);
+        const q = query(ref,where('productId', '==', id), where('status', '==', 'approved'), orderBy('startDate','asc'));
         //where('productId', '==', id), where('status', '==', 'accepted'), orderBy('startDate', 'asc')
         const snapshot = await getDocs(q);
         console.log('snapshot', snapshot);
@@ -95,7 +95,7 @@ const Request = ({ listing, listingId, onClose, listingPrice }) => {
         // // Create a new rental request document in Firestore
         await addDoc(collection(db, 'rentalRequest'), {
           userId: userId,
-          OwnerId: listing.userRef,
+          ownerId: listing.userRef,
           startDate: startDate,
           endDate: endDate,
           productId: listingId,

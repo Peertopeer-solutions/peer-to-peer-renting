@@ -57,6 +57,7 @@ export const routes = {
 	profile: '/profile',
 	listings: '/profile/listings',
 	requestedItems: '/profile/requestedItems',
+	RentalRequests: '/profile/rentalRequests',
 };
 
 export const router = createBrowserRouter([

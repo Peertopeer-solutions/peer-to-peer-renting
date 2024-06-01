@@ -1,6 +1,17 @@
 import * as RadixScrollArea from '@radix-ui/react-scroll-area';
 import React from 'react';
+import {styled} from '@stitches/react'
 
+const StyledViewport = styled(RadixScrollArea.Viewport, {
+  // Your existing styles
+  width: '100%',
+  height: '100%',
+  borderRadius: 'inherit',
+
+  "> div[style]": {
+    display: 'block !important',
+  },
+});
 type ScrollAreaProps = {
   children: React.ReactNode;
   orientation?: 'vertical' | 'horizontal';
@@ -17,14 +28,14 @@ const ScrollableArea: React.FC<ScrollAreaProps> = ({
     <RadixScrollArea.Root
       className={
         orientation === 'vertical'
-          ? 'h-full'
-          : 'h-fit' + ' w-full rounded-[inherit] overflow-hidden'
+          ? 'h-full '
+          : 'h-fit' + ' w-full rounded-[inherit] '
       }
       type='scroll'
     >
-      <RadixScrollArea.Viewport className={'h-full w-full rounded-[inherit]'}>
+      <StyledViewport className=' h-full w-full rounded-[inherit] '>
         {children}
-      </RadixScrollArea.Viewport>
+      </StyledViewport>
       <RadixScrollArea.Scrollbar
         orientation={orientation}
         className='flex select-none p-0.5 bg-gray-100 touch-none data-[orientation=vertical]:w-[10px] data-[orientation=horizontal]:h-[10px] data-[orientation=horizontal]:flex-col'
