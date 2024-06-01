@@ -9,5 +9,7 @@ export const mergeBookedDates = (rentalRequests: RentalRequest[]) => {
       startDate: request.startDate.toDate(),
       endDate: request.endDate.toDate(),
     }))
+    console.log(bookedDates)
 return bookedDates || [];
 };
+

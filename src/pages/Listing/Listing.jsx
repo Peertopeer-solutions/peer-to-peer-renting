@@ -48,6 +48,7 @@ const Listing = () => {
 		}
 	};
 
+	//dont fetch document get a count from the server 
 	useEffect(() => {
 		const checkExistingRequest = async () => {
 			const rentalRequestsRef = collection(db, 'rentalRequest');
@@ -143,7 +144,7 @@ const Listing = () => {
 										Description
 									</h1>
 									<p className='text-gray-700 font-normal whitespace-pre-line'>
-										Great as always, item returned as borrowed
+										{listing.description}
 									</p>
 								</div>
 								<div className=' text-[32px] font-semibold space-y-2'>

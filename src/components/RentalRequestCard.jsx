@@ -45,6 +45,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
   const starDate =  new Date(rentals.startDate?.seconds * 1000).toLocaleString('en-US', options);
   const endDate =  new Date(rentals.endDate?.seconds * 1000).toLocaleString('en-US', options);
 
+
   return (
     <div className='flex flex-col items-center'>
       <div className='w-full rounded-lg shadow-md  bg-white '>
@@ -61,13 +62,13 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
           <div className='flex flex-col items-end'>
           <p
             className={`uppercase font-medium p-2 text-[20px] md:text-lg ${
-             rentals.status ==='pending'?'text-amber-400': rentals.status === 'approved' ? 'text-green-500' : 'text-red-500'
+             rentals.status ==='pending'?'text-amber-400': rentals.status === 'accepted' ? 'text-green-500' : 'text-red-500'
             } `}
           >
             {rentals.status}
           </p>
           {
-            rentals.status === "approved" && !handleAccept ? <Link to={`/order/${request.id}/${rentals.productId}`} className='p-1 text-white font-light text-[15px] md:text-sm truncate bodrer-1 bg-blue-700 m-1 rounded-2xl'>Complete order</Link> : <p className='invisible p-2 text-[10px] md:text-sm'>Something</p>
+            rentals.status === "accepted" && !handleAccept ? <Link to={`/order/${request.id}/${rentals.productId}`} className='p-1 text-white font-light text-[15px] md:text-sm truncate bodrer-1 bg-blue-700 m-1 rounded-2xl'>Complete order</Link> : <p className='invisible p-2 text-[10px] md:text-sm'>Something</p>
           
           }
           </div>
@@ -111,7 +112,7 @@ const RentalRequestCard = ({request,rentals,handleAccept,handleDeny}) => {
             </div>
             : <p
             className={`uppercase font-medium p-2  ${
-             rentals.status =='pending'?'text-amber-400': rentals.status === 'approved' ? 'text-green-500' : 'text-red-500'
+             rentals.status =='pending'?'text-amber-400': rentals.status === 'accepted' ? 'text-green-500' : 'text-red-500'
             } font-bold`}
           >
             {rentals.status}

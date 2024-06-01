@@ -2,13 +2,13 @@ import Icon from '@src/components/Design/Icon';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-const LinkButton = ({ to, children, variant, className = '' , icon}) => {
+const LinkButton = ({ to, children, variant, className = '' , icon, onClick}) => {
 	let btnStyle = 'bg-white text-black hover:bg-blue-600 hover:text-white';
 	if (variant === 'text') btnStyle = 'text-gray-300 hover:text-lime-300';
 	return (
-		<Link to={to}>
+		<Link to={to} onClick={onClick}>
 			<span
-				className={`w-fit flex px-4 py-2 transition rounded-full font-semibold text-center hover:cursor-pointer ${btnStyle} ${className}`}
+				className={`${btnStyle} ${className} w-fit flex items-center px-4 py-2 transition rounded-full font-semibold text-center hover:cursor-pointer `}
 			>
 				<Icon name={icon} className='text-lg mr-2'/>
 				{children}

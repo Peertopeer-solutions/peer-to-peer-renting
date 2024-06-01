@@ -12,6 +12,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from '@src/components/Design/LoadingSpinner';
 import useSidePanel from '@src/data/zustand/sidePanelStore';
 import ScrollableArea from '@src/components/Layout/ScrollableArea';
+import SidePanelSkeleton from '../Skeletons/SkeletonSidePanel';
+import SkeletonSidePanel from '../Skeletons/SkeletonSidePanel';
 
 export default function SidePanel() {
   const openSidePanel = useSidePanel((state) => state.actions.openSidePanel);
@@ -65,8 +67,8 @@ function SidePanelContent({ open }) {
                   <Icon name={Icons.Cross1} />
                 </Dialog.Close>
               </Row>
-
-              <Suspense fallback={<LoadingSpinner />}>
+              
+              <Suspense fallback={<SkeletonSidePanel />}>
                 <AsyncElement {...props} />
               </Suspense>
             </motion.div>

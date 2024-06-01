@@ -20,6 +20,10 @@
 .skeleton.text {
   height: 0.75rem;
 }
+.skeleton.circle {
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+}
 
 .skeleton.width-100 {
   width: 100%;
@@ -34,6 +38,15 @@
 .skeleton.width-20 {
   width: 20%;
 }
+.skeleton.width-10 {
+  width: 10%;
+}
+.skeleton.width-5 {
+  width: 5%;
+}
+.skeleton.width-10 {
+  width: 10%;
+}
 .skeleton.height-100 {
   height: 100%;
 }
@@ -46,6 +59,9 @@
 }
 .skeleton.height-20 {
   height: 20%;
+}
+.skeleton.height-10 {
+  height: 10%;
 }
 
 .skeleton.profile-circle {
